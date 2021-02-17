@@ -1,0 +1,18 @@
+.banner-cover {
+    background-image: url("../images/dummy.jpg");
+    height: 90vh;
+    background-position: center;
+    background-size: cover;
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0% 100%);
+}
+.banner-content {
+    height: 90vh;
+}
+
+.bg-fluid {
+    background-image: url("../images/dummy.jpg");
+    /* height: 90vh; */
+    background-position: center;
+    background-size: cover;
+    /* clip-path: polygon(0 0, 100% 0, 100% 75%, 0% 100%); */
+}
