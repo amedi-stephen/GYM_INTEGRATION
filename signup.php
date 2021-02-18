@@ -10,32 +10,28 @@
             <h4 class="card-subtittle text-muted">Sign Up</h4>
         </div>
         <div class="card-body">
-            <form action="" method="post">
+            <form action="includes/signup.inc.php" method="post">
                 <div class="form-group">
-                    <label for="uname">Username</label>
-                    <input type="text" name="" id="" class="form-control">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="uname">Email</label>
-                    <input type="email" name="" id="" class="form-control">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="uname">Password</label>
-                    <input type="password" name="" id="" class="form-control">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="uname">Repeat Password</label>
-                    <input type="password" name="" id="" class="form-control">
+                    <label for="confirm_pwd">Repeat Password</label>
+                    <input type="password" name="confirm_pwd" id="confirmPwd" class="form-control">
                 </div>
-                <button class="btn btn-primary">Sign Up <i class="fa fa-arrow-right"></i></button>
+                <button class="btn btn-primary" name="submitSignup" id="btnSignup">Sign Up <i class="fa fa-arrow-right"></i></button>
             </form>
         </div>
     </div>
 </div>
-
-<script>
-    console.log("Hello World");
-</script>
 
 <?php 
     require "footer.php";
