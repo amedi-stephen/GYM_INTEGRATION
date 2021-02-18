@@ -53,11 +53,12 @@ if(isset($_POST["submitSignup"])) {
 
                 header("Location: ../signup.php?signup=success");
                 exit();
+
+                // i need to close the prepared statement and db connection
             }
         }
     }
 
-    
 } else {
     header("Location: ../signup.php");
     exit();
