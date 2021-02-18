@@ -29,7 +29,32 @@ if(isset($_POST["submitSignup"])) {
         header("Location: ../signup.php?error=checkpassword&username=".$username."&email=".$email);
         exit();
     } else {
-        echo "Your signup is successful";
+        $checkUserQuery = "SELECT user_name FROM users WHERE user_name='$username'";
+        $result_UserQuery = $DBconnection->query($checkUserQuery);
+        $result_checkUserRows = $result_UserQuery->num_rows;
+        var_dump($result_checkUserRows);
+        if($result_checkUserRows > 0) {
+            header("Location: ../signup.php?error=userexists");
+            exit();
+        } else {
+            $insertUserQuery = "INSERT INTO users(user_name, user_email, user_password) VALUES(?, ?, ?)";
+            // $result_insertUserQuery = $DBconnection->query($insertUserQuery);
+
+            $stmt_insertUserQuery = $DBconnection->stmt_init();
+            // var_dump($stmt_insertUserQuery);
+            if(!$stmt_insertUserQuery->prepare($insertUserQuery)) {
+                var_dump($stmt_insertUserQuery);
+                header("Location: ../signup.php?error=notprepared");
+                exit();
+            } else {
+                $encryptedPwd = password_hash($password, PASSWORD_DEFAULT);
+                $stmt_insertUserQuery->bind_param("sss", $username, $email, $encryptedPwd);
+                $stmt_insertUserQuery->execute();
+
+                header("Location: ../signup.php?signup=success");
+                exit();
+            }
+        }
     }
 
     
