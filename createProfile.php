@@ -13,7 +13,6 @@
                 while($row = $RESULT_selectUser->fetch_assoc()) {
                     if(isset($_SESSION["userID"])) {
                         if($_SESSION["userID"] == $row["user_id"]) {
-                            // echo "Logged in as user #".$_SESSION["userID"];
                             echo "
                             <div class='card-header'>
                                 <h2 class='card-title'>Create Your Profile</h2>
@@ -34,17 +33,6 @@
                 } 
             }
         ?>
-        <!-- <div class="card-header">
-            <h2 class="card-title">Create Your Profile</h2>
-            <h4 class="card-subtittle text-muted">Hello John, you can now edit your profile</h4>
-        </div> -->
-        <!-- <div class="card-body">
-            <div class="form-group mb-4">
-                <fieldset>
-                    <label class="control-label" for="readOnlyInput">Username</label>
-                    <input class="form-control" id="readOnlyInput" type="text" placeholder="John" readonly="">
-                </fieldset>
-            </div> -->
             <form action="includes/createProfile.inc.php" method="post" enctype="multipart/form-data">
             <div class="container">
                 <!-- <img src="images/blank-profile-picture-973460_1280.webp" alt="..." class="img-thumbnail"> -->
@@ -52,13 +40,13 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputFile">File input</label>
-                <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="file">
                 <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
             </div>
             <div class="form-group mb-4 custom-control custom-radio">
-                <label for="">Gender</label> <br>
-                Male: <input type="radio" id="chooseMale" name="male">
-                Female: <input type="radio" name="female" id="chooseFemale">
+                <label for="gender">Choose your gender</label> <br>
+                Male: <input type="radio" id="chooseMale" name="gender" value="male">
+                Female: <input type="radio" name="gender" id="chooseFemale" value="female">
             </div>
             <div class="form-group mb-4">
                 <label for="userInfo">Tell us a little about yourself</label>
@@ -78,21 +66,21 @@
                 <div class="form-group mb-4">
                     <label for="fitnessActivities">Select your fitness activities. Press command or control when clicking to select multiple items</label>
                     <select multiple="" class="form-control" id="fitnessActivities" name="fitnessActivities">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                        <option>Cardio</option>
+                        <option>Jogging</option>
+                        <option>Riding bike</option>
+                        <option>Dancing</option>
                         <option>5</option>
                     </select>
                 </div>
                 <div class="form-group mb-4">
                     <label for="gymLikables">Select your favorable Gym features</label>
                     <select multiple="" class="form-control" id="gymLikables" name="gymLikables">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option>Boxing</option>
+                        <option>Karate</option>
+                        <option>Muai Tai</option>
+                        <option>kick boxing</option>
+                        <option>air conditioning</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary" name="submitProfile" id="btnProfile">Create <i class="fa fa-user"></i></button>
