@@ -29,7 +29,7 @@ if(isset($_POST["submitLogin"])) {
                     $_SESSION["userID"] = $row["user_id"];
                     $_SESSION["username"] = $row["user_name"];
 
-                    header("Location: ../login.php?login=success");
+                    header("Location: ../createProfile.php?login=success");
                     exit();
                 } else {
                     header("Location: ../login.php?error=wrongPwd");

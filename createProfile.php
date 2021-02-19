@@ -1,21 +1,50 @@
 <?php 
+    require "includes/dbh.inc.php";
     require "navbar.php";
 ?>
 
 <div class="container mt-4">
 
     <div class="card">
-        <div class="card-header">
+        <?php
+            $QUERY_selectUser = "SELECT * FROM users";
+            $RESULT_selectUser = $DBconnection->query($QUERY_selectUser);
+            if($RESULT_selectUser->num_rows > 0) {
+                while($row = $RESULT_selectUser->fetch_assoc()) {
+                    if(isset($_SESSION["userID"])) {
+                        if($_SESSION["userID"] == $row["user_id"]) {
+                            // echo "Logged in as user #".$_SESSION["userID"];
+                            echo "
+                            <div class='card-header'>
+                                <h2 class='card-title'>Create Your Profile</h2>
+                                <h4 class='card-subtittle text-muted'>Hello ".$row["user_name"].", you can now edit your profile</h4>
+                            </div>
+                            <div class='card-body'>
+                                <div class='form-group mb-4'>
+                                <fieldset>
+                                    <label class='control-label' for='readOnlyInput'>Username</label>
+                                    <input class='form-control' id='readOnlyInput' type='text' placeholder='".$row["user_name"]."' readonly=''>
+                                </fieldset>
+                            </div>
+                            ";
+                        } else {
+                            // all the staff if the user has not logged in
+                        }
+                    }
+                } 
+            }
+        ?>
+        <!-- <div class="card-header">
             <h2 class="card-title">Create Your Profile</h2>
             <h4 class="card-subtittle text-muted">Hello John, you can now edit your profile</h4>
-        </div>
-        <div class="card-body">
+        </div> -->
+        <!-- <div class="card-body">
             <div class="form-group mb-4">
                 <fieldset>
                     <label class="control-label" for="readOnlyInput">Username</label>
                     <input class="form-control" id="readOnlyInput" type="text" placeholder="John" readonly="">
                 </fieldset>
-            </div>
+            </div> -->
             <form action="includes/createProfile.inc.php" method="post" enctype="multipart/form-data">
             <div class="container">
                 <!-- <img src="images/blank-profile-picture-973460_1280.webp" alt="..." class="img-thumbnail"> -->

@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,27 +16,39 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-        <a class="navbar-brand" href="index.php"><i class="fa fa-location-arrow"></i> Gym Navigator</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbrColor01">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Services<span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-            <div class="float-right">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-link" href="login.php">Log In</a>
+    <?php
+        if(isset($_SESSION["userID"])) {
+            echo "
+                <img src='images/blank-profile-picture-973460_1280.webp' style='width: 50px; height: 50px; border-radius: 50%;'>
+                <span class='text-info'>Steve</span>
+                <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarColor01' aria-controls='navbarColor01' aria-expanded='false' aria-label='Toggle navigation'>
+                    <span class='navbar-toggler-icon'></span>
+                </button>
+                <div class='collapse navbar-collapse' id='navbrColor01'>
+                    <ul class='navbar-nav mr-auto'>
+                        <li class='nav-item active'></li>
+                    </ul>
+                    <div class='float-right'>
+                        <ul class='navbar-nav mr-auto'>
+                        <li class='nav-item'>
+                        <button class='btn btn-outline-warning' type='submit' name='submit_logout'>Log out</button>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-link" href="signup.php">Sign Up</a>
+            ";
+        } else {
+            echo "
+                <a class='navbar-brand' href='index.php'><i class='fa fa-location-arrow'></i> Gym Navigator</a>
+                <li class='nav-item'>
+                        <a class='nav-link btn btn-link' href='login.php'>Log In</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-link" href="employeeSignup.php">Employee Benefit</a>
+                    <li class='nav-item'>
+                        <a class='nav-link btn btn-link' href='signup.php'>Sign Up</a>
                     </li>
+                    <li class='nav-item'>
+                        <a class='nav-link btn btn-link' href='employeeSignup.php'>Employee Benefit</a>
+                    </li>
+            ";
+        }
+?>
                 </ul>
             </div>
         </div>

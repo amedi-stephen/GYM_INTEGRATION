@@ -48,7 +48,7 @@ if(isset($_POST["submitSignup"])) {
                 $stmt_insertUserQuery->bind_param("sss", $username, $email, $encryptedPwd);
                 $stmt_insertUserQuery->execute();
 
-                header("Location: ../signup.php?signup=success");
+                header("Location: ../login.php?signup=success");
                 exit();
 
                 // i need to close the prepared statement and db connection
