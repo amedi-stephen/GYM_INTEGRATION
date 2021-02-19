@@ -1,15 +1,32 @@
-function signupValidate() {
+function signupValidate(e) {
+
     const username = document.getElementById("username").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const confirmPwd = document.getElementById("confirmPwd").value;
 
-    if(username === "" || email === "" || password === "" || confirmPwd === "") {
-        const formGroups = document.querySelectorAll("form .form-group");
-        const formControls = document.querySelectorAll(".form-group .form-control");
+    const formGroups = document.querySelectorAll("form .form-group");
+    const formControls = document.querySelectorAll(".form-group .form-control");
 
+    formGroups.forEach(formGroup => {
+        if(username === "" || email === "" || password === "" || confirmPwd === "") {
+            e.preventDefault();
+            formGroup.classList.add("has-danger");
+        } else {
+            formGroup.classList.remove("has-danger");
+        }
+        
+    });
 
-    }
+    formControls.forEach(formControl => {
+        if(username === "" || email === "" || password === "" || confirmPwd === "") {
+            e.preventDefault();
+            formControl.classList.add("is-invalid");
+        } else {
+            formControl.classList.remove("is-invalid");
+        }
+        
+    });
 }
 
 function togglePassword() {
@@ -20,8 +37,6 @@ function togglePassword() {
         password.type = "password";
     }
 }
-
-signupValidate();
 
 document.getElementById("formSignup").addEventListener("submit", signupValidate); 
 document.getElementById("togglePassword").addEventListener("change", togglePassword);
