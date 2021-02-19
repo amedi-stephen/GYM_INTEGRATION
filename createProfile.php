@@ -16,7 +16,7 @@
                     <input class="form-control" id="readOnlyInput" type="text" placeholder="John" readonly="">
                 </fieldset>
             </div>
-            <form action="includes/signup.inc.php" method="post" enctype="multipart/form-data">
+            <form action="includes/createProfile.inc.php" method="post" enctype="multipart/form-data">
             <div class="container">
                 <!-- <img src="images/blank-profile-picture-973460_1280.webp" alt="..." class="img-thumbnail"> -->
                 <img src="images/blank-profile-picture-973460_1280.webp" alt="..." style="width: 200px; height: 200px;">
@@ -28,22 +28,27 @@
             </div>
             <div class="form-group mb-4 custom-control custom-radio">
                 <label for="">Gender</label> <br>
-                Male: <input type="radio" id="customRadio2" name="customRadio">
-                Female: <input type="radio" name="" id="">
+                Male: <input type="radio" id="chooseMale" name="male">
+                Female: <input type="radio" name="female" id="chooseFemale">
             </div>
             <div class="form-group mb-4">
-                <label for="exampleTextarea">Tell us a little about yourself</label>
-                <textarea class="form-control" id="exampleTextarea" rows="3" spellcheck="false"></textarea>
+                <label for="userInfo">Tell us a little about yourself</label>
+                <textarea class="form-control" id="userInfo" rows="3" spellcheck="false" name="userInfo"></textarea>
             </div>
 
                 <div class="form-group mb-4">
-                    <label for="email">What is your main goal in fitness?</label>
-                    <input type="email" name="email" id="email" class="form-control">
+                    <label for="fitnessGoal">What is your main goal in fitness?</label>
+                    <input type="fitnessGoal" name="fitnessGoal" id="fitnessGoal" class="form-control">
                     <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                 </div>
                 <div class="form-group mb-4">
-                    <label for="exampleSelect2">Select your fitness activities. Press command or control when clicking to select multiple items</label>
-                    <select multiple="" class="form-control" id="exampleSelect2">
+                    <label for="fitnessDuration">You want to achieve this goal in how many months</label>
+                    <input type="number" name="fitnessDuration" id="fitnessDuration" class="form-control">
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+                <div class="form-group mb-4">
+                    <label for="fitnessActivities">Select your fitness activities. Press command or control when clicking to select multiple items</label>
+                    <select multiple="" class="form-control" id="fitnessActivities" name="fitnessActivities">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -52,8 +57,8 @@
                     </select>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="exampleSelect2">Select your favorable Gym features</label>
-                    <select multiple="" class="form-control" id="exampleSelect2">
+                    <label for="gymLikables">Select your favorable Gym features</label>
+                    <select multiple="" class="form-control" id="gymLikables" name="gymLikables">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -61,12 +66,10 @@
                         <option>5</option>
                     </select>
                 </div>
-                <button class="btn btn-primary" name="submitSignup" id="btnSignup">Create <i class="fa fa-user"></i></button>
+                <button type="submit" class="btn btn-primary" name="submitProfile" id="btnProfile">Create <i class="fa fa-user"></i></button>
             </form>
         </div>
     </div>
 </div>
 
-<?php 
-    require "footer.php";
-?>
+<script src="js/app.js"></script>

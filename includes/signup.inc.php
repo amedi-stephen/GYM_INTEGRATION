@@ -38,10 +38,7 @@ if(isset($_POST["submitSignup"])) {
             exit();
         } else {
             $insertUserQuery = "INSERT INTO users(user_name, user_email, user_password) VALUES(?, ?, ?)";
-            // $result_insertUserQuery = $DBconnection->query($insertUserQuery);
-
             $stmt_insertUserQuery = $DBconnection->stmt_init();
-            // var_dump($stmt_insertUserQuery);
             if(!$stmt_insertUserQuery->prepare($insertUserQuery)) {
                 var_dump($stmt_insertUserQuery);
                 header("Location: ../signup.php?error=notprepared");

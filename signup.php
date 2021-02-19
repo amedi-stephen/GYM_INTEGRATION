@@ -34,12 +34,10 @@
                     <label for="confirm_pwd">Repeat Password</label>
                     <input type="password" name="confirm_pwd" id="confirmPwd" class="form-control">
                 </div>
-                <button class="btn btn-primary" name="submitSignup" id="btnSignup">Sign Up <i class="fa fa-arrow-right"></i></button>
+                <button type="submit" class="btn btn-primary" name="submitSignup" id="btnSignup">Sign Up <i class="fa fa-arrow-right"></i></button>
             </form>
         </div>
     </div>
 </div>
 
-<?php 
-    require "footer.php";
-?>
+<script src="js/app.js"></script>
