@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include "includes/dbh.inc.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,47 +14,77 @@
     <title>GYM NAVIGATOR</title>
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
     <?php
+         $QUERY_selectUser = "SELECT * FROM users";
+         $RESULT_selectUser = $DBconnection->query($QUERY_selectUser);
+         if($RESULT_selectUser->num_rows > 0) {
+            if(isset($_SESSION["userID"])) {
+                while($row = $RESULT_selectUser->fetch_assoc()) {
+                    if($_SESSION["userID"] == $row["user_id"]) {
+                        $userid = $row["user_id"];
+                        $QUERY_image = "SELECT * FROM profileimg WHERE user_id='$userid'";
+                        $RESULT_image = $DBconnection->query($QUERY_image);
+                        while($row_image = $RESULT_image->fetch_assoc()) {
+                            echo "
+                            <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
+                            <div class='container'>";
+
+                        if($row_image["img_status"] == 0) {
+                            echo "<img src='uploads/profile".$userid.".jpg' style='width: 50px; height: 50px; border-radius: 50%;'>";
+                        } else {
+                            echo "<img src='uploads/default.webp' style='width: 50px; height: 50px; border-radius: 50%;'>";
+                        }
+                        echo "
+                            <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarColor01'
+                                aria-controls='navbarColor01' aria-expanded='false' aria-label='Toggle navigation'>
+                                <span class='navbar-toggler-icon'></span>
+                            </button>
+                
+                            <div class='collapse navbar-collapse' id='navbarColor01'>
+                                <ul class='navbar-nav mr-auto'>
+                                    <li class='nav-item dropdown'>
+                                        <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button'
+                                            aria-haspopup='true' aria-expanded='false'></a>
+                                        <div class='dropdown-menu'>
+                                            <a class='dropdown-item' href='#'>Action</a>
+                                            <a class='dropdown-item' href='#'>Another action</a>
+                                            <a class='dropdown-item' href='#'>Something else here</a>
+                                            <div class='dropdown-divider'></div>
+                                            <a class='dropdown-item' href='#'>Separated link</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <form class='form-inline my-2 my-lg-0' action='includes/logout.inc.php'>
+                                    <button class='btn btn-outline-warning' type='submit' name='submit_logout'>Log out</button>
+                                </form>
+                            </div>
+                    </nav>
+                    </div>
+                        ";
+                        }
+                        
+                    }
+                }
+            } else {
+                echo "
+                <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
+                <div class='container'>
+                    <a class='navbar-brand' href='index.php'><i class='fa fa-location-arrow'></i> Gym Navigator</a>
         
-        if(isset($_SESSION["userID"])) {
-            echo "
-                <img src='images/blank-profile-picture-973460_1280.webp' style='width: 50px; height: 50px; border-radius: 50%;'>
-                <span class='text-info'>Steve</span>
-                <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarColor01' aria-controls='navbarColor01' aria-expanded='false' aria-label='Toggle navigation'>
-                    <span class='navbar-toggler-icon'></span>
-                </button>
-                <div class='collapse navbar-collapse' id='navbrColor01'>
-                    <ul class='navbar-nav mr-auto'>
-                        <li class='nav-item active'></li>
-                    </ul>
-                    <div class='float-right'>
-                        <ul class='navbar-nav mr-auto'>
+                    <ul class='navbar-nav my-2 my-lg-0'>
                         <li class='nav-item'>
-                        <form action='includes/logout.inc.php' action='post'>
-                            <button class='btn btn-outline-warning' type='submit' name='submit_logout'>Log out</button>
-                        </form>
-                    </li>
-            ";
-        } else {
-            echo "
-                <a class='navbar-brand' href='index.php'><i class='fa fa-location-arrow'></i> Gym Navigator</a>
-                <li class='nav-item'>
-                        <a class='nav-link btn btn-link' href='login.php'>Log In</a>
-                    </li>
-                    <li class='nav-item'>
-                        <a class='nav-link btn btn-link' href='signup.php'>Sign Up</a>
-                    </li>
-                    <li class='nav-item'>
-                        <a class='nav-link btn btn-link' href='employeeSignup.php'>Employee Benefit</a>
-                    </li>
-            ";
-        }
-?>
-                </ul>
-            </div>
-        </div>       
-    </div>
-</nav>
+                            <a class='nav-link btn btn-link' href='signup.php'>Sign Up</a>
+                        </li>
+                        <li class='nav-item'>
+                            <a class='nav-link btn btn-link' href='login.php'>Log In</a>
+                        </li>
+                        <li class='nav-item'>
+                            <a class='nav-link btn btn-link' href='employeeSignup.php'>Employee Benefit</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+                ";
+            }
+         }
+    ?>

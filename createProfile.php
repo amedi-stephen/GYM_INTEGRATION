@@ -7,31 +7,31 @@
 
     <div class="card">
         <?php
-            $QUERY_selectUser = "SELECT * FROM users";
-            $RESULT_selectUser = $DBconnection->query($QUERY_selectUser);
-            if($RESULT_selectUser->num_rows > 0) {
-                while($row = $RESULT_selectUser->fetch_assoc()) {
-                    if(isset($_SESSION["userID"])) {
-                        if($_SESSION["userID"] == $row["user_id"]) {
-                            echo "
-                            <div class='card-header'>
-                                <h2 class='card-title'>Create Your Profile</h2>
-                                <h4 class='card-subtittle text-muted'>Hello ".$row["user_name"].", you can now edit your profile</h4>
-                            </div>
-                            <div class='card-body'>
-                                <div class='form-group mb-4'>
-                                <fieldset>
-                                    <label class='control-label' for='readOnlyInput'>Username</label>
-                                    <input class='form-control' id='readOnlyInput' type='text' placeholder='".$row["user_name"]."' readonly=''>
-                                </fieldset>
-                            </div>
-                            ";
-                        } else {
-                            // all the staff if the user has not logged in
-                        }
-                    }
-                } 
-            }
+            // $QUERY_selectUser = "SELECT * FROM users";
+            // $RESULT_selectUser = $DBconnection->query($QUERY_selectUser);
+            // if($RESULT_selectUser->num_rows > 0) {
+            //     while($row = $RESULT_selectUser->fetch_assoc()) {
+            //         if(isset($_SESSION["userID"])) {
+            //             if($_SESSION["userID"] == $row["user_id"]) {
+            //                 echo "
+            //                 <div class='card-header'>
+            //                     <h2 class='card-title'>Create Your Profile</h2>
+            //                     <h4 class='card-subtittle text-muted'>Hello ".$row["user_name"].", you can now edit your profile</h4>
+            //                 </div>
+            //                 <div class='card-body'>
+            //                     <div class='form-group mb-4'>
+            //                     <fieldset>
+            //                         <label class='control-label' for='readOnlyInput'>Username</label>
+            //                         <input class='form-control' id='readOnlyInput' type='text' placeholder='".$row["user_name"]."' readonly=''>
+            //                     </fieldset>
+            //                 </div>
+            //                 ";
+            //             } else {
+            //                 // all the staff if the user has not logged in
+            //             }
+            //         }
+            //     } 
+            // }
         ?>
         <form action="includes/upload.inc.php" method="post" enctype="multipart/form-data">
             <div class="container">
@@ -66,7 +66,7 @@
             <div class="form-group">
                 <label for="exampleInputFile">File input</label>
                 <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="file">
-                <button type="submit" class="btn btn-primary">Upload</button>
+                <button type="submit" class="btn btn-primary" name="submit_upload">Upload</button>
             </div>
         </form>
             <form action="includes/createProfile.inc.php" method="post">

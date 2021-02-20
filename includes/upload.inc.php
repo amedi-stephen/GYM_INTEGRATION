@@ -4,7 +4,8 @@ session_start();
 include "dbh.inc.php";
 $userSessionId = $_SESSION["userID"];
 
-$file = $_FILES["file"];
+if(isset($_POST["submit_upload"])) {
+    $file = $_FILES["file"];
     $filename = $_FILES["file"]["name"];
     $fileTmpName = $_FILES["file"]["tmp_name"];
     $fileSize = $_FILES["file"]["size"];
@@ -28,7 +29,17 @@ $file = $_FILES["file"];
                 header("Location: ../createProfile.php?upload=success");
                 exit();
 
-                echo "Image uploaded successfully";
+                // echo "Image uploaded successfully";
+            } else {
+                header("Location: ../createProfile.php?error=checksize");
+                exit();
             }
+        } else {
+            header("Location: ../createProfile.php?error=fileerror");
+            exit();
         }
+    } else {
+        header("Location: ../createProfile.php?error=checkfiletype");
+        exit();
     }
+}
