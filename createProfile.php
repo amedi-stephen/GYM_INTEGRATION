@@ -35,8 +35,33 @@
         ?>
         <form action="includes/upload.inc.php" method="post" enctype="multipart/form-data">
             <div class="container">
-                <!-- <img src="images/blank-profile-picture-973460_1280.webp" alt="..." class="img-thumbnail"> -->
-                <img src="images/blank-profile-picture-973460_1280.webp" alt="..." style="width: 200px; height: 200px;">
+                <?php
+                    $QUERY_allUsers = "SELECT * FROM users";
+                    $RESULT_allUsers = $DBconnection->query($QUERY_allUsers);
+                    if($RESULT_allUsers->num_rows > 0) {
+                        while($row = $RESULT_allUsers->fetch_assoc()) {
+                            if(isset($_SESSION["userID"])) {
+                                if($_SESSION["userID"] == $row["user_id"]) {
+                                    $userid = $row["user_id"];
+                                    $QUERY_image = "SELECT * FROM profileimg WHERE user_id='$userid'";
+                                    $RESULT_image = $DBconnection->query($QUERY_image);
+                                    while($row_image = $RESULT_image->fetch_assoc()) {
+                                        if($row_image["img_status"] == 0) {
+                                            // echo "<img src='uploads/profile'".$userid."'jpg' style='width: 200px; height: 200px;'>";
+                                            echo "<img src='uploads/profile".$userid.".jpg' style='width: 200px; height: 200px;'>";
+                                        } else {
+                                            echo "<img src='uploads/default.webp'  style='width: 200px; height: 200px;'>";
+                                        }
+                                    }
+                                }
+                            }
+                        } 
+                    } else {
+                        echo "error occured";
+                    }
+                ?>
+                <!-- <img src="images/blank-profile-picture-973460_1280.webp" alt="..." style="width: 200px; height: 200px;"> -->
+                <!-- <img src="dummy.jph" alt="" srcset=""> -->
             </div>
             <div class="form-group">
                 <label for="exampleInputFile">File input</label>

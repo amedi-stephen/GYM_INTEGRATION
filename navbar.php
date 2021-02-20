@@ -17,6 +17,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
     <?php
+        
         if(isset($_SESSION["userID"])) {
             echo "
                 <img src='images/blank-profile-picture-973460_1280.webp' style='width: 50px; height: 50px; border-radius: 50%;'>
@@ -31,7 +32,9 @@
                     <div class='float-right'>
                         <ul class='navbar-nav mr-auto'>
                         <li class='nav-item'>
-                        <button class='btn btn-outline-warning' type='submit' name='submit_logout'>Log out</button>
+                        <form action='includes/logout.inc.php' action='post'>
+                            <button class='btn btn-outline-warning' type='submit' name='submit_logout'>Log out</button>
+                        </form>
                     </li>
             ";
         } else {
@@ -51,7 +54,6 @@
 ?>
                 </ul>
             </div>
-        </div>
-        
+        </div>       
     </div>
 </nav>

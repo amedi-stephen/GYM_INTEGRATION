@@ -22,10 +22,10 @@ $file = $_FILES["file"];
                 $fileLocation = '../uploads/'.$modifiedFilename;
 
                 move_uploaded_file($fileTmpName, $fileLocation);
-                $QUERY_UpdateImg = "UPDATE profileimg SET status = 0 WHERE user_id='$adminSessID'";
-                $RESULT_queryUpdateImg = $conn->query($QUERY_UpdateImg);
+                $QUERY_UpdateImg = "UPDATE profileimg SET img_status = 0 WHERE user_id='$userSessionId'";
+                $RESULT_queryUpdateImg = $DBconnection->query($QUERY_UpdateImg);
 
-                header("Location: ../admin/profile.php?upload=success");
+                header("Location: ../createProfile.php?upload=success");
                 exit();
 
                 echo "Image uploaded successfully";
