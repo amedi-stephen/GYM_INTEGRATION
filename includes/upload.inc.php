@@ -1,0 +1,34 @@
+<?php
+
+session_start();
+include "dbh.inc.php";
+$userSessionId = $_SESSION["userID"];
+
+$file = $_FILES["file"];
+    $filename = $_FILES["file"]["name"];
+    $fileTmpName = $_FILES["file"]["tmp_name"];
+    $fileSize = $_FILES["file"]["size"];
+    $fileError = $_FILES["file"]["error"];
+    $fileType = $_FILES["file"]["type"];
+
+    $fileToArray = explode(".", $filename);
+    $fileExtension = strtolower(end($fileToArray));
+    $allowedFilesTypes = array("jpg", "jpeg", "png", "pdf");
+
+    if(in_array($fileExtension, $allowedFilesTypes)) {
+        if($fileError === 0) {
+            if($fileSize < 2097152) {
+                $modifiedFilename = "profile".$userSessionId.".".$fileExtension;
+                $fileLocation = '../uploads/'.$modifiedFilename;
+
+                move_uploaded_file($fileTmpName, $fileLocation);
+                $QUERY_UpdateImg = "UPDATE profileimg SET status = 0 WHERE user_id='$adminSessID'";
+                $RESULT_queryUpdateImg = $conn->query($QUERY_UpdateImg);
+
+                header("Location: ../admin/profile.php?upload=success");
+                exit();
+
+                echo "Image uploaded successfully";
+            }
+        }
+    }

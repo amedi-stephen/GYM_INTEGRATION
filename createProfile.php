@@ -33,7 +33,7 @@
                 } 
             }
         ?>
-            <form action="includes/createProfile.inc.php" method="post" enctype="multipart/form-data">
+        <form action="includes/upload.inc.php" method="post" enctype="multipart/form-data">
             <div class="container">
                 <!-- <img src="images/blank-profile-picture-973460_1280.webp" alt="..." class="img-thumbnail"> -->
                 <img src="images/blank-profile-picture-973460_1280.webp" alt="..." style="width: 200px; height: 200px;">
@@ -41,8 +41,11 @@
             <div class="form-group">
                 <label for="exampleInputFile">File input</label>
                 <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="file">
-                <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+                <button type="submit" class="btn btn-primary">Upload</button>
             </div>
+        </form>
+            <form action="includes/createProfile.inc.php" method="post">
+            <h4 class="text-primary badge-light p-2">Fill in the following details</h4>
             <div class="form-group mb-4 custom-control custom-radio">
                 <label for="gender">Choose your gender</label> <br>
                 Male: <input type="radio" id="chooseMale" name="gender" value="male">

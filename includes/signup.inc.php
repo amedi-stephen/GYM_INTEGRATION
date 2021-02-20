@@ -48,6 +48,18 @@ if(isset($_POST["submitSignup"])) {
                 $stmt_insertUserQuery->bind_param("sss", $username, $email, $encryptedPwd);
                 $stmt_insertUserQuery->execute();
 
+                $QUERY_users = "SELECT * FROM users WHERE user_name='$username' AND user_email='$email'";
+                $RESULT_users = $DBconnection->query($QUERY_users);
+                if($RESULT_users->num_rows > 0) {
+                    while($row = $RESULT_users->fetch_assoc()) {
+                        $userid = $row["user_id"];
+                        $QUERY_insertToProfileimg = "INSERT INTO profileimg(user_id, img_status) VALUES('$userid', 1)";
+                        $RESULT_insertToProfileimg = $DBconnection->query($QUERY_insertToProfileimg);
+                    }
+                } else {
+                    echo "an error occured";
+                }
+
                 header("Location: ../login.php?signup=success");
                 exit();
 
