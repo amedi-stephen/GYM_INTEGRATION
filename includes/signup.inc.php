@@ -47,6 +47,7 @@ if(isset($_POST["submitSignup"])) {
                 $encryptedPwd = password_hash($password, PASSWORD_DEFAULT);
                 $stmt_insertUserQuery->bind_param("sss", $username, $email, $encryptedPwd);
                 $stmt_insertUserQuery->execute();
+                $stmt_insertUserQuery->close();
 
                 $QUERY_users = "SELECT * FROM users WHERE user_name='$username' AND user_email='$email'";
                 $RESULT_users = $DBconnection->query($QUERY_users);
