@@ -18,21 +18,20 @@ if(isset($_POST["submitProfile"])) {
         $QUERY_join = "SELECT * FROM users";
         $result = $DBconnection->query($QUERY_join);
         while($row = $result->fetch_assoc()) {
-            // var_dump($row);
             if(isset($_SESSION["userID"])) {
                 $userid = $row["user_id"];
-                // var_export($_SESSION["userID"]);
                 if($_SESSION["userID"] == $userid) {
-                    var_dump($row["user_id"]);
-                    $QUERY = "INSERT INTO userprofiles(user_id, userProfiles_goal, userProfiles_text, userProfiles_activities, userProfiles_preferrables, userProfile_gender, userProfile_goalduration)
-                        VALUES('$userid', '$fitnessGoal', '$userInfo', '$fitnessActivities', '$gymLikables', '$gender', '$fitnessDuration')";
-                    $result_insert = $DBconnection->query($QUERY);
-                    var_dump($result_insert);
+                    foreach($fitnessActivities as $activity) {
+                        foreach($gymLikables as $like) {
+                            $QUERY = "INSERT INTO userprofiles(user_id, userProfiles_goal, userProfiles_text, userProfiles_activities, userProfiles_preferrables, userProfile_gender, userProfile_goalduration)
+                                VALUES('$userid', '$fitnessGoal', '$userInfo', '$activity', '$like', '$gender', '$fitnessDuration')";
+                            $result_insert = $DBconnection->query($QUERY);
+                            var_dump($result_insert);
+                        }
+                    }
                 }
             }
         }
-        // var_dump($result);
-
     }
 } else {
     header("Location: ../createProfile.php");

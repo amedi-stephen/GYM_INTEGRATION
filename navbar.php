@@ -1,9 +1,10 @@
 <?php
-    session_start();
-    include "includes/dbh.inc.php";
+session_start();
+include "includes/dbh.inc.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,24 +14,25 @@
     <link rel="stylesheet" href="fontawesome/css/all.min.css" />
     <title>GYM NAVIGATOR</title>
 </head>
+
 <body>
     <?php
-         $QUERY_selectUser = "SELECT * FROM users";
-         $RESULT_selectUser = $DBconnection->query($QUERY_selectUser);
-         if($RESULT_selectUser->num_rows > 0) {
-            if(isset($_SESSION["userID"])) {
-                while($row = $RESULT_selectUser->fetch_assoc()) {
-                    if($_SESSION["userID"] == $row["user_id"]) {
-                        $userid = $row["user_id"];
-                        $QUERY_image = "SELECT * FROM profileimg WHERE user_id='$userid'";
-                        $RESULT_image = $DBconnection->query($QUERY_image);
-                        while($row_image = $RESULT_image->fetch_assoc()) {
-                            echo "
+    $QUERY_selectUser = "SELECT * FROM users";
+    $RESULT_selectUser = $DBconnection->query($QUERY_selectUser);
+    if ($RESULT_selectUser->num_rows > 0) {
+        if (isset($_SESSION["userID"])) {
+            while ($row = $RESULT_selectUser->fetch_assoc()) {
+                if ($_SESSION["userID"] == $row["user_id"]) {
+                    $userid = $row["user_id"];
+                    $QUERY_image = "SELECT * FROM profileimg WHERE user_id='$userid'";
+                    $RESULT_image = $DBconnection->query($QUERY_image);
+                    while ($row_image = $RESULT_image->fetch_assoc()) {
+                        echo "
                             <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
                             <div class='container'>";
 
-                        if($row_image["img_status"] == 0) {
-                            echo "<img src='uploads/profile".$userid.".jpg' style='width: 50px; height: 50px; border-radius: 50%;'>";
+                        if ($row_image["img_status"] == 0) {
+                            echo "<img src='uploads/profile" . $userid . ".jpg' style='width: 50px; height: 50px; border-radius: 50%;'>";
                         } else {
                             echo "<img src='uploads/default.webp' style='width: 50px; height: 50px; border-radius: 50%;'>";
                         }
@@ -43,14 +45,12 @@
                             <div class='collapse navbar-collapse' id='navbarColor01'>
                                 <ul class='navbar-nav mr-auto'>
                                     <li class='nav-item dropdown'>
-                                        <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button'
-                                            aria-haspopup='true' aria-expanded='false'></a>
+                                        <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='javascript:void(0)' role='button' aria-haspopup='true' aria-expanded='false'>MENU</a>
                                         <div class='dropdown-menu'>
-                                            <a class='dropdown-item' href='#'>Action</a>
-                                            <a class='dropdown-item' href='#'>Another action</a>
-                                            <a class='dropdown-item' href='#'>Something else here</a>
-                                            <div class='dropdown-divider'></div>
-                                            <a class='dropdown-item' href='#'>Separated link</a>
+                                        <a class='dropdown-item' href='createProfile.php'><i class='far fa-user'></i> View Profile</a>
+                                        <a class='dropdown-item' href='#'><i class='fa fa-cog'></i> Settings</a>
+                                        <div class='dropdown-divider'></div>
+                                        <form class='dropdown-item' action='includes/logout.inc.php' method='post'><i class='fa fa-sign-out-alt'></i> Log Out</form>
                                         </div>
                                     </li>
                                 </ul>
@@ -61,12 +61,11 @@
                     </nav>
                     </div>
                         ";
-                        }
-                        
                     }
                 }
-            } else {
-                echo "
+            }
+        } else {
+            echo "
                 <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
                 <div class='container'>
                     <a class='navbar-brand' href='index.php'><i class='fa fa-location-arrow'></i> Gym Navigator</a>
@@ -85,6 +84,6 @@
                 </div>
             </nav>
                 ";
-            }
-         }
+        }
+    }
     ?>

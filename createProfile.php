@@ -1,56 +1,59 @@
-<?php 
-    require "includes/dbh.inc.php";
-    require "navbar.php";
+<?php
+require "includes/dbh.inc.php";
+require "navbar.php";
 ?>
 
 <div class="container mt-4">
 
     <div class="card">
-        <form action="includes/upload.inc.php" method="post" enctype="multipart/form-data">
-            <div class="container">
-                <?php
+        <div class="container">
+
+
+            <form action="includes/upload.inc.php" method="post" enctype="multipart/form-data">
+                <div class="container">
+                    <?php
                     $QUERY_allUsers = "SELECT * FROM users";
                     $RESULT_allUsers = $DBconnection->query($QUERY_allUsers);
-                    if($RESULT_allUsers->num_rows > 0) {
-                        while($row = $RESULT_allUsers->fetch_assoc()) {
-                            if(isset($_SESSION["userID"])) {
-                                if($_SESSION["userID"] == $row["user_id"]) {
+                    if ($RESULT_allUsers->num_rows > 0) {
+                        while ($row = $RESULT_allUsers->fetch_assoc()) {
+                            if (isset($_SESSION["userID"])) {
+                                if ($_SESSION["userID"] == $row["user_id"]) {
                                     $userid = $row["user_id"];
                                     $QUERY_image = "SELECT * FROM profileimg WHERE user_id='$userid'";
                                     $RESULT_image = $DBconnection->query($QUERY_image);
-                                    while($row_image = $RESULT_image->fetch_assoc()) {
-                                        if($row_image["img_status"] == 0) {
+                                    while ($row_image = $RESULT_image->fetch_assoc()) {
+                                        if ($row_image["img_status"] == 0) {
                                             // echo "<img src='uploads/profile'".$userid."'jpg' style='width: 200px; height: 200px;'>";
-                                            echo "<img src='uploads/profile".$userid.".jpg' style='width: 200px; height: 200px;'>";
+                                            echo "<img src='uploads/profile" . $userid . ".jpg' class='p-4' style='width: 200px; height: 200px;'>";
                                         } else {
-                                            echo "<img src='uploads/default.webp'  style='width: 200px; height: 200px;'>";
+                                            echo "<img src='uploads/default.webp' class='p-4' style='width: 200px; height: 200px;'>";
                                         }
                                     }
                                 }
                             }
-                        } 
+                        }
                     } else {
                         echo "error occured";
                     }
-                ?>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputFile">File input</label>
-                <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="file">
-                <button type="submit" class="btn btn-primary" name="submit_upload">Upload</button>
-            </div>
-        </form>
+                    ?>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">File input</label>
+                    <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="file">
+                    <button type="submit" class="btn btn-primary" name="submit_upload">Upload</button>
+                </div>
+            </form>
             <form action="includes/createProfile.inc.php" method="post">
-            <h4 class="text-primary badge-light p-2">Fill in the following details</h4>
-            <div class="form-group mb-4 custom-control custom-radio">
-                <label for="gender">Choose your gender</label> <br>
-                Male: <input type="radio" id="chooseMale" name="gender" value="male">
-                Female: <input type="radio" name="gender" id="chooseFemale" value="female">
-            </div>
-            <div class="form-group mb-4">
-                <label for="userInfo">Tell us a little about yourself</label>
-                <textarea class="form-control" id="userInfo" rows="3" spellcheck="false" name="userInfo"></textarea>
-            </div>
+                <h4 class="text-primary badge-light p-2">Fill in the following details</h4>
+                <div class="form-group mb-4 custom-control custom-radio">
+                    <label for="gender">Choose your gender</label> <br>
+                    Male: <input type="radio" id="chooseMale" name="gender" value="male">
+                    Female: <input type="radio" name="gender" id="chooseFemale" value="female">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="userInfo">Tell us a little about yourself</label>
+                    <textarea class="form-control" id="userInfo" rows="3" spellcheck="false" name="userInfo"></textarea>
+                </div>
 
                 <div class="form-group mb-4">
                     <label for="fitnessGoal">What is your main goal in fitness?</label>
@@ -64,7 +67,7 @@
                 </div>
                 <div class="form-group mb-4">
                     <label for="fitnessActivities">Select your fitness activities. Press command or control when clicking to select multiple items</label>
-                    <select multiple="" class="form-control" id="fitnessActivities" name="fitnessActivities">
+                    <select multiple="multiple_activities" class="form-control" id="fitnessActivities" name="fitnessActivities[]">
                         <option>Cardio</option>
                         <option>Jogging</option>
                         <option>Riding bike</option>
@@ -74,7 +77,7 @@
                 </div>
                 <div class="form-group mb-4">
                     <label for="gymLikables">Select your favorable Gym features</label>
-                    <select multiple="" class="form-control" id="gymLikables" name="gymLikables">
+                    <select multiple="multiple_likables" class="form-control" id="gymLikables" name="gymLikables[]">
                         <option>Boxing</option>
                         <option>Karate</option>
                         <option>Muai Tai</option>
@@ -87,5 +90,12 @@
         </div>
     </div>
 </div>
+</div>
 
 <script src="js/app.js"></script>
+
+<?php
+    require "footer.php";
+?>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
