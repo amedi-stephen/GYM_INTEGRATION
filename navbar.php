@@ -47,10 +47,13 @@ include "includes/dbh.inc.php";
                                     <li class='nav-item dropdown'>
                                         <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='javascript:void(0)' role='button' aria-haspopup='true' aria-expanded='false'>MENU</a>
                                         <div class='dropdown-menu'>
+                                        <a class='dropdown-item' href='dashboard.php'><i class='fa fa-clipboard'></i> Dashboard</a>
                                         <a class='dropdown-item' href='createProfile.php'><i class='far fa-user'></i> View Profile</a>
                                         <a class='dropdown-item' href='#'><i class='fa fa-cog'></i> Settings</a>
                                         <div class='dropdown-divider'></div>
-                                        <form class='dropdown-item' action='includes/logout.inc.php' method='post'><i class='fa fa-sign-out-alt'></i> Log Out</form>
+                                        <form class='dropdown-item' action='includes/logout.inc.php' method='post'>
+                                            <i class='fa fa-sign-out-alt'></i> Log Out
+                                        </form>
                                         </div>
                                     </li>
                                 </ul>

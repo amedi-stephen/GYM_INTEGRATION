@@ -14,9 +14,12 @@
     <div class="row">
         <div class="col-lg-4">
         <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h3 class="card-title">Filter your results</h3>
-                <h1>+</h1>
+            <div class="card-header">
+                <h3 class="card-title">
+                    Filter your results
+                    <span class="float-right" id="display">+</span>
+                    <span class="float-right" id="hide">-</span>
+                </h3>
             </div>
             <div class="card-body">
                 <form action="" method="post">
@@ -194,3 +197,9 @@
     </div>
     
 </div>
+
+<script>
+    $(document).ready(function) {
+        
+    }
+</script>
