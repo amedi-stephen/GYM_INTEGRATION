@@ -58,7 +58,7 @@ require "navbar.php";
 
                 <div class="form-group mb-4">
                     <label for="fitnessGoal">What is your main goal in fitness?</label>
-                    <input type="fitnessGoal" name="fitnessGoal" id="fitnessGoal" class="form-control">
+                    <input type="text" name="fitnessGoal" id="fitnessGoal" class="form-control">
                     <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                 </div>
                 <div class="form-group mb-4">

@@ -34,6 +34,10 @@
                     <li class="nav-item">
                         <a href="#" class="nav-link">Notifications<span class="badge badge-success badge-pill nav-pills">3</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Gallery</a>
+                    </li>
+                    
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
 
@@ -43,4 +47,6 @@
         </div>
 
     </nav>
+
+
 </body>

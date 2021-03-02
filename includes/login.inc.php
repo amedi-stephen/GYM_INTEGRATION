@@ -21,10 +21,10 @@ if(isset($_POST["submitLogin"])) {
             $result_loginQuery = $stmt_loginQuery->get_result();
             if($row = $result_loginQuery->fetch_assoc()) {
                 $verifyPassword = password_verify($password, $row["user_password"]);
-                if(verifyPassword == false) {
+                if($verifyPassword == false) {
                     header("Location: ../login.php?error=wrongPwd");
                     exit();
-                } else if(verifyPassword == true) {
+                } else if($verifyPassword == true) {
                     session_start();
                     $_SESSION["userID"] = $row["user_id"];
                     $_SESSION["username"] = $row["user_name"];

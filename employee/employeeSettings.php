@@ -31,7 +31,10 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Notifications <span class="badge badge-success badge-pill nav-pills">3</span></a>
+                        <a href="#" class="nav-link">Notifications<span class="badge badge-success badge-pill nav-pills">3</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Gallery</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
@@ -42,4 +45,87 @@
         </div>
 
     </nav>
+
+    <div class="card mt-4 container">
+        <div class="container">
+            <form action="includes/upload.inc.php" method="post" enctype="multipart/form-data" class="mt-4">
+            <img src="../images/dummy.jpg" alt="" srcset="" style="width: 100px; height: 100px;">
+                <div class="container">
+                    <div class="form-group">
+                        <label for="exampleInputFile">File input</label>
+                        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="file">
+                        <button type="submit" class="btn btn-primary" name="submit_upload">Upload</button>
+                    </div>
+                </div>
+            </form>
+            <form action="includes/createProfile.inc.php" method="post">
+                <h4 class="text-primary badge-light p-2">Fill in the following details</h4>
+                
+
+                <div class="form-group mb-4">
+                    <label for="gym_name">Name of Gym</label>
+                    <input type="text" name="gym_name" id="gymName" class="form-control">
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+                <div class="form-group mb-4">
+                    <label for="phone">Phone</label>
+                    <input type="text" name="phone" id="phoneNumber" class="form-control">
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+                <div class="form-group mb-4">
+                    <label for="address">Address</label>
+                    <input type="text" name="address" id="addressDetails" class="form-control">
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+                <div class="form-group mb-4">
+                    <label for="town_name">Town Location</label>
+                    <input type="text" name="town_name" id="townName" class="form-control">
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+                <div class="form-group mb-4">
+                    <label for="classes">Select the classes your gym offers. Press command or control when clicking to select multiple items</label>
+                    <select multiple="multiple_classes" class="form-control" id="gymClasses" name="classes[]">
+                        <option>Cardio</option>
+                        <option>Jogging</option>
+                        <option>Riding bike</option>
+                        <option>Dancing</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="equipments">Select the equipments your gym has. Press command or control when clicking to select multiple items</label>
+                    <select multiple="multiple_equipments" class="form-control" id="gymEquipments" name="equipments[]">
+                        <option>Rowing machine</option>
+                        <option>Elliptic machines</option>
+                        <option>Riding bike</option>
+                        <option>Dancing</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="amenities">Select Amenities your gym offers</label>
+                    <select multiple="multiple_amenities" class="form-control" id="gymAmenities" name="amenities[]">
+                        <option>Boxing</option>
+                        <option>Karate</option>
+                        <option>Muai Tai</option>
+                        <option>kick boxing</option>
+                        <option>air conditioning</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="open">Opening Hours</label>
+                    <input type="text" name="open" id="openedAt" class="form-control" placeholders="Opening Hours">
+                </div>
+                <div class="form-group">
+                    <label for="close">Closing Hours</label>
+                    <input type="text" name="close" id="closedAt" class="form-control" placeholders="Closing Hours">
+                </div>
+                <div class="form-group">
+                    <label for="max_capacity">Full Capacity</label>
+                    <input type="number" name="max_capacity" id="maxCap" class="form-control" placeholders="Opening Hours">
+                </div>
+                <button type="submit" class="btn btn-primary" name="submit_gym" id="btnProfile">Submit Details <i class="fa fa-user"></i></button>
+            </form>
+        </div>
+    </div>
 </body>

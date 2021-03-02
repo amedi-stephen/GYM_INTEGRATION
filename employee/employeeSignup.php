@@ -28,20 +28,20 @@
         <h1 class="display-2 text-uppercase">Welcome to employee</h1>
         <h4 class="display-4 text-capitalize">Lorem ipsum dolor sit ame.</h4>
         <div class="d-flex justify-content-center mt-4">
-            <form action="" method="post" style="width: 60%;">
+            <form action="../includes/employeeSignup.inc.php" method="post" style="width: 60%;">
                 <div class="form-group">
-                    <input type="text" name="" id="" class="form-control form-control-lg" placeholder="Email">
+                    <input type="text" name="mail" id="" class="form-control form-control-lg" placeholder="Email">
                 </div>
                 <div class="form-group">
-                    <input type="text" name="" id="" class="form-control form-control-lg" placeholder="Name of your gym">
+                    <input type="text" name="company" id="" class="form-control form-control-lg" placeholder="Name of your gym">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="" id="" class="form-control form-control-lg" placeholder="Password">
+                    <input type="password" name="pwd" id="" class="form-control form-control-lg" placeholder="Password">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="" id="" class="form-control form-control-lg" placeholder="Repeat password">
+                    <input type="password" name="re-pwd" id="" class="form-control form-control-lg" placeholder="Repeat password">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                <button type="submit" class="btn btn-primary btn-block" name="submit_signup">Sign Up</button>
                 <p class="text-muted">Already signed up? <a href="#">Log in</a></p>
             </form>
         </div>

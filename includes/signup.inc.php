@@ -32,7 +32,7 @@ if(isset($_POST["submitSignup"])) {
         $checkUserQuery = "SELECT user_name FROM users WHERE user_name='$username'";
         $result_UserQuery = $DBconnection->query($checkUserQuery);
         $result_checkUserRows = $result_UserQuery->num_rows;
-        var_dump($result_checkUserRows);
+        // var_dump($result_checkUserRows);
         if($result_checkUserRows > 0) {
             header("Location: ../signup.php?error=userexists");
             exit();
