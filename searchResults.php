@@ -4,11 +4,11 @@ require "navbar.php";
 
 <div class="container mt-4">
     <h2 class="display-4 text-center text-primary">Search Results</h2>
-    <form action="" method="post" class="mb-4">
+    <form action="searchResults.php" method="post" class="mb-4">
         <h4>Search Again</h4>
         <div class="form-inline">
             <input type="text" name="" id="" class="form-control form-control-lg">
-            <button class="btn btn-outline-primary btn-lg">Search</button>
+            <button class="btn btn-outline-primary btn-lg" name="btn_search">Search</button>
         </div>
     </form>
     <div class="row">
@@ -161,41 +161,51 @@ require "navbar.php";
                 </div>
             </div>
         </div>
+
         <div class="search col-lg-8">
-            <h3 class="text-primary badge-light p-4">Results for Gyms in Nairobi</h3>
-            <div class="d-flex">
-                <div class="card mr-2">
-                    <div class="card-header">
-                        <div class="card-title">Ultra Fit Gym - <span class="text-muted">Nairobi</span></div>
-                    </div>
-                    <div class="card-body">
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium non quam minus nam quibusdam, consectetur, sed voluptatibus esse ipsa doloribus eius porro quis atque dicta? Ex quo libero beatae qui!</p>
-                        <button class="btn btn-outline-primary">View Gym</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Ultra Fit Gym - <span class="text-muted">Nairobi</span></div>
-                    </div>
-                    <div class="card-body">
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium non quam minus nam quibusdam, consectetur, sed voluptatibus esse ipsa doloribus eius porro quis atque dicta? Ex quo libero beatae qui!</p>
-                        <!-- <button class="btn btn-outline-primary">View Gym</button> -->
-                        <a href="viewGym.php" class="btn btn-outline-primary">View Gym</a>
-                    </div>
-                </div>
+            <?php
 
 
-                <!-- <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Ultra Fit Gym - <span class="text-muted">Nairobi</span></div>
-                    </div>
-                    <div class="card-body">
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium non quam minus nam quibusdam, consectetur, sed voluptatibus esse ipsa doloribus eius porro quis atque dicta? Ex quo libero beatae qui!</p>
-                        <button class="btn btn-outline-primary">View Gym</button>
-                    </div>
-                </div> -->
-            </div>
+            include "includes/dbh.inc.php";
+
+            if (isset($_POST["btn_search"])) {
+                $search = $DBconnection->real_escape_string($_POST["search"]);
+                $QUERY_search = "SELECT * FROM gyms WHERE town LIKE '%$search%' OR gym_name LIKE '%$search%'";
+                $result_search = $DBconnection->query($QUERY_search);
+                $row_results = $result_search->num_rows;
+
+
+                echo '<h3 class="text-primary badge-light p-4">There are ' . $row_results . ' results</h3>';
+
+                echo '<div class="d-flex">';
+                if ($row_results > 0) {
+                    while ($row = $result_search->fetch_assoc()) {
+
+                        echo '
+                                
+                                <div class="card mr-2">
+                                    <div class="card-header">
+                                        <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>' . $row["address"] . '</p>
+                                        <a href="viewGym.php" class="btn btn-outline-primary">View Gym</a>
+                                    </div>
+                                </div>
+                            
+                                ';
+                    }
+                } else {
+                    echo "no gym or town in our database but keep in touch as more gyms are being discovered!";
+                }
+
+                echo '</div>';
+            }
+            ?>
+
+
         </div>
+
     </div>
 
 </div>
