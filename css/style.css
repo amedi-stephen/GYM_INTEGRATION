@@ -1,37 +1,57 @@
 .banner-cover {
-    background-image: url("../images/dummy.jpg");
-    height: 90vh;
-    background-position: center;
-    background-size: cover;
-    clip-path: polygon(0 0, 100% 0, 100% 75%, 0% 100%);
+  background-image: url("../images/dummy.jpg");
+  height: 90vh;
+  background-position: center;
+  background-size: cover;
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 0% 100%);
 }
 .banner-content {
-    height: 90vh;
+  height: 90vh;
 }
 
 .bg-fluid {
-    background-image: url("../images/dummy.jpg");
-    /* height: 90vh; */
-    background-position: center;
-    background-size: cover;
-    /* clip-path: polygon(0 0, 100% 0, 100% 75%, 0% 100%); */
+  background-image: url("../images/dummy.jpg");
+  /* height: 90vh; */
+  background-position: center;
+  background-size: cover;
+  /* clip-path: polygon(0 0, 100% 0, 100% 75%, 0% 100%); */
 }
 
 .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
-    z-index: 1;
-  }
-  
-  .dropdown:hover .dropdown-menu {
-    display: block;
-  }
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.filter-section {
+  display: none;
+}
+
+.minus-icon {
+  display: none;
+}
+
+.show-filters .filter-section {
+  display: block;
+}
+
+.show-filters .minus-icon {
+  display: inline;
+}
+
+.show-filters .plus-icon {
+  display: none;
+}
