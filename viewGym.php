@@ -14,31 +14,31 @@
             <div class="service-gender mb-4">
                     <h3 class="badge-light p-2">Gender</h3>
                     <ul class="list-group">
-                        <li class="list-item">For both male and female</li>
+                        <li class="list-group-item">For both male and female</li>
                     </ul>
                 </div>
                 <div class="service-amenities mb-4">
                     <h3 class="badge-light p-2">Amenities</h3>
                     <ul class="list-group">
-                        <li class="list-item">lskfs</li>
-                        <li class="list-item">lskfs</li>
-                        <li class="list-item">lskfs</li>
+                        <li class="list-group-item">lskfs</li>
+                        <li class="list-group-item">lskfs</li>
+                        <li class="list-group-item">lskfs</li>
                     </ul>
                 </div>
                 <div class="service-classes mb-4">
                     <h3 class="badge-light p-2">Classes</h3>
                     <ul class="list-group">
-                        <li class="list-item">lskfs</li>
-                        <li class="list-item">lskfs</li>
-                        <li class="list-item">lskfs</li>
+                        <li class="list-group-item">lskfs</li>
+                        <li class="list-group-item">lskfs</li>
+                        <li class="list-group-item">lskfs</li>
                     </ul>
                 </div>
                 <div class="service-equipments mb-4">
                     <h3 class="badge-light p-2">Equipments</h3>
                     <ul class="list-group">
-                        <li class="list-item">lskfs</li>
-                        <li class="list-item">lskfs</li>
-                        <li class="list-item">lskfs</li>
+                        <li class="list-group-item">lskfs</li>
+                        <li class="list-group-item">lskfs</li>
+                        <li class="list-group-item">lskfs</li>
                     </ul>
                 </div>
                 
