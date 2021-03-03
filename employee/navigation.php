@@ -47,14 +47,14 @@ include "../includes/dbh.inc.php";
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">MENU</a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Dashboard</a>
-                                            <a class="dropdown-item" href="#">Settings</a>
+                                            <a class="dropdown-item" href="employeeDashboard.php">Dashboard</a>
+                                            <a class="dropdown-item" href="employeeSettings.php">Settings</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Log Out</a>
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">Notifications<span class="badge badge-success badge-pill nav-pills">3</span></a>
+                                        <a href="notifications.php" class="nav-link">Notifications<span class="badge badge-success badge-pill nav-pills">3</span></a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#" class="nav-link">Gallery</a>
