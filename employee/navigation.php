@@ -1,3 +1,7 @@
+<?php
+session_start();
+include "../includes/dbh.inc.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,3 +13,21 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <title>Employee</title>
 </head>
+
+<body>
+    <?php
+    $query = "SELECT * FROM employees";
+    $result = $DBconnection->query($query);
+    if ($result->num_rows > 0) {
+        if (isset($_SESSION['employerID'])) {
+            while ($row = $result->fetch_assoc()) {
+                if ($_SESSION['employerID'] == $row['employer_id']) {
+                    // echo "#" . $row['employer_id'];
+                    
+                }
+            }
+        } else {
+            echo "Not set";
+        }
+    }
+    ?>

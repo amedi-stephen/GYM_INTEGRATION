@@ -1,6 +1,6 @@
 <?php
-session_start();
-include "includes/dbh.inc.php";
+    session_start();
+    include "includes/dbh.inc.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
