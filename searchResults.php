@@ -189,7 +189,7 @@ require "navbar.php";
                                     </div>
                                     <div class="card-body">
                                         <p>' . $row["address"] . '</p>
-                                        <a href="viewGym.php" class="btn btn-outline-primary">View Gym</a>
+                                        <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary">View Gym</a>
                                     </div>
                                 </div>
                             

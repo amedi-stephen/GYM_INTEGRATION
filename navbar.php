@@ -62,8 +62,7 @@
                                 </form>
                             </div>
                     </nav>
-                    </div>
-                        ";
+                    </div>";
                     }
                 }
             }
@@ -81,7 +80,7 @@
                             <a class='nav-link btn btn-link' href='login.php'>Log In</a>
                         </li>
                         <li class='nav-item'>
-                            <a class='nav-link btn btn-link' href='employee/employeeSignup.php'>Employee Benefit</a>
+                            <a class='nav-link btn btn-link' href='employee/employeeSignup.php'>Employer Benefit</a>
                         </li>
                     </ul>
                 </div>
