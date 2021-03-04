@@ -1,7 +1,5 @@
 <?php
 require 'includes/dbh.inc.php';
-// echo "Hello there";
-
 require "navbar.php";
 ?>
 
@@ -74,8 +72,14 @@ require "navbar.php";
                     </li>
                     
                 </ul>
-            </div>
-            <button type="button" class="btn btn-primary disabled" title="Only logged in users can book">Register</button>
+            </div>';
+            if (!isset($_SESSION['userID'])) {
+                echo '<button class="btn btn-primary disabled mb-4" title="Only logged in users can book">Book their program</button>';
+            } else {
+                echo '<button class="btn btn-primary mb-4 modal-btn">Book their program</button>';
+            }
+
+            echo '
         </div>
     </div>
             ';
@@ -83,9 +87,10 @@ require "navbar.php";
         $result->free_result();
         $DBconnection->close();
     } else {
-        echo "no getted staff";
+        echo "no got staff";
     }
     ?>
+
     <div class="comment-section col-md-4">
         <div class="card">
             <div class="card-header">
@@ -142,3 +147,53 @@ require "navbar.php";
 </div>
 
 </div>
+
+<div class="modal-overlay mb-4">
+
+    <div class="modal-container container bg-light p-4" style="width: 40%;">
+        <div class="header p-2">
+            <h3 class="d-inline">Book a session</h3>
+            <button class="float-right close-btn btn btn-danger btn-sm">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+
+        <div class="modal-content">
+            <form action="" class="d-flex flex-column justify-content-center align-items-center">
+                <div class="form-group">
+                    <input type="text" name="" id="" class="form-control" placeholder="Class">
+                </div>
+                <div class="form-group">
+                    <select name="session" class="form-control">
+                        <option value="" class="form-control">9-4 session</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="" class="form-control">
+                </div>
+
+                <button class="btn btn-primary btn-block">Book</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const openBtn = document.querySelector(".modal-btn");
+    const modalOverlay = document.querySelector(".modal-overlay");
+    const closeBtn = document.querySelector(".close-btn");
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+
+    function openModal() {
+        modalOverlay.classList.add('open-modal');
+    }
+
+    function closeModal() {
+        modalOverlay.classList.remove('open-modal');
+    }
+</script>
