@@ -22,7 +22,6 @@ include "../includes/dbh.inc.php";
         if (isset($_SESSION['employerID'])) {
             while ($row = $result->fetch_assoc()) {
                 if ($_SESSION['employerID'] == $row['employer_id']) {
-                    // echo "#" . $row['employer_id'];
                     $employerid = $row['employer_id'];
                     $imageQuery = "SELECT * FROM employerimage WHERE employer_id='$employerid'";
                     $imageResult = $DBconnection->query($imageQuery);
@@ -31,7 +30,7 @@ include "../includes/dbh.inc.php";
                         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                             <div class="container">';
                         if ($rowImage["eimage_status"] == 0) {
-                            echo "<img src='../uploads/employer/dp" . $employerid . ".jpg' style='width: 50px; height: 50px; border-radius: 50%;'>";
+                            echo "<img src='../uploads/employer/profile" . $employerid . ".jpg' style='width: 50px; height: 50px; border-radius: 50%;'>";
                         } else {
                             echo "<img src='../uploads/default.webp' style='width: 50px; height: 50px; border-radius: 50%;'>";
                         }
@@ -57,7 +56,7 @@ include "../includes/dbh.inc.php";
                                         <a href="notifications.php" class="nav-link">Notifications<span class="badge badge-success badge-pill nav-pills">3</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">Gallery</a>
+                                        <a href="employeeGallery.php" class="nav-link">Gallery</a>
                                     </li>
                                     
                                 </ul>

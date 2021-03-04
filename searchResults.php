@@ -180,9 +180,7 @@ require "navbar.php";
                 echo '<div class="d-flex">';
                 if ($row_results > 0) {
                     while ($row = $result_search->fetch_assoc()) {
-
-                        echo '
-                                
+                        echo '    
                                 <div class="card mr-2">
                                     <div class="card-header">
                                         <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
@@ -200,6 +198,8 @@ require "navbar.php";
                 }
 
                 echo '</div>';
+            } else {
+                echo "search button not executed";
             }
             ?>
 

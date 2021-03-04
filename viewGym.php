@@ -13,7 +13,6 @@ require "navbar.php";
         $result = $DBconnection->query($query);
 
         if ($gym = $result->fetch_assoc()) {
-            // print_r(unserialize($gym['amenities']));
             echo '
             <h2 class="display-4 text-primary text-center">' . $gym['gym_name'] . '</h2>
             <div class="row">
@@ -42,27 +41,39 @@ require "navbar.php";
             </div>
             <div class="service-classes mb-4">
                 <h3 class="badge-light p-2">Classes</h3>';
-                $classesArr = unserialize($gym['classes']);
-                foreach ($classesArr as $key => $class) {
-                    echo '
+            $classesArr = unserialize($gym['classes']);
+            foreach ($classesArr as $key => $class) {
+                echo '
                     <ul class="list-group">
                     <li class="list-group-item">' . $class . '</li> 
                 </ul>
                     ';
-                }
-                echo '
+            }
+            echo '
             </div>
             <div class="service-equipments mb-4">
                 <h3 class="badge-light p-2">Equipments</h3>';
-                $equipArr = unserialize($gym['equipments']);
-                foreach ($equipArr as $key => $equip) {
-                    echo '
-                    <ul class="list-group">
-                    <li class="list-group-item">' . $equip . '</li> 
-                </ul>
-                    ';
-                }
+            $equipArr = unserialize($gym['equipments']);
+            foreach ($equipArr as $key => $equip) {
                 echo '
+                    <ul class="list-group">
+                        <li class="list-group-item">' . $equip . '</li> 
+                    </ul>
+                    ';
+            }
+            echo '
+            <h3 class="badge-light p-2 mt-4">Other Details</h3>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Opening hours
+                        <span class="badge badge-primary badge-pill"> ' . $gym['opened_at'] . ' - ' . $gym['closed_at'] . '</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Maximum capacity per session
+                        <span class="badge badge-primary badge-pill">' . $gym['full_capacity'] . '</span>
+                    </li>
+                    
+                </ul>
             </div>
             <button type="button" class="btn btn-primary disabled" title="Only logged in users can book">Register</button>
         </div>
@@ -75,48 +86,6 @@ require "navbar.php";
         echo "no getted staff";
     }
     ?>
-    <!-- <h2 class="display-4 text-primary text-center">Ultra Fit Gym</h2> -->
-    <!-- <div class="row">
-    
-        <div class="gym-section col-md-8">
-            <div class="d-flex">
-                <img src="images/dummy.jpg" style="width:300px; height: 300px;" class="mr-2">
-                <img src="images/dummy.jpg" style="width:300px; height: 300px;">
-            </div>
-            <div class="services mt-4">
-                <div class="service-gender mb-4">
-                    <h3 class="badge-light p-2">Gender</h3>
-                    <ul class="list-group">
-                        <li class="list-group-item">For both male and female</li>
-                    </ul>
-                </div>
-                <div class="service-amenities mb-4">
-                    <h3 class="badge-light p-2">Amenities</h3>
-                    <ul class="list-group">
-                        <li class="list-group-item">lskfs</li>
-                        <li class="list-group-item">lskfs</li>
-                        <li class="list-group-item">lskfs</li>
-                    </ul>
-                </div>
-                <div class="service-classes mb-4">
-                    <h3 class="badge-light p-2">Classes</h3>
-                    <ul class="list-group">
-                        <li class="list-group-item">lskfs</li>
-                        <li class="list-group-item">lskfs</li>
-                        <li class="list-group-item">lskfs</li>
-                    </ul>
-                </div>
-                <div class="service-equipments mb-4">
-                    <h3 class="badge-light p-2">Equipments</h3>
-                    <ul class="list-group">
-                        <li class="list-group-item">lskfs</li>
-                        <li class="list-group-item">lskfs</li>
-                        <li class="list-group-item">lskfs</li>
-                    </ul>
-                </div>
-                <button type="button" class="btn btn-primary disabled" title="Only logged in users can book">Register</button>
-            </div>
-        </div> -->
     <div class="comment-section col-md-4">
         <div class="card">
             <div class="card-header">

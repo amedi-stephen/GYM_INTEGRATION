@@ -4,11 +4,11 @@ require "navbar.php";
 ?>
 
 <div class="container mt-4">
-    <form action="">
+    <form action="searchResults.php" method="post">
         <div class=" d-flex justify-content-center">
             <div class="form-inline">
                 <input type="text" name="search" class="form-control form-control-lg" placeholder="Search for gyms">
-                <button type="submit" class="btn btn-primary btn-lg">Search</button>
+                <button type="submit" class="btn btn-primary btn-lg" name="btn_search">Search</button>
             </div>
         </div>
     </form>

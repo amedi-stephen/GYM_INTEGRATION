@@ -17,13 +17,39 @@
 
     <div class="card mt-4 container">
         <div class="container">
-            <form action="includes/upload.inc.php" method="post" enctype="multipart/form-data" class="mt-4">
-            <img src="../images/dummy.jpg" alt="" srcset="" style="width: 100px; height: 100px;">
+            <form action="../includes/employeedp.inc.php" method="post" enctype="multipart/form-data" class="mt-4">
+            <?php
+                    $query = "SELECT * FROM employees";
+                    $result = $DBconnection->query($query);
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            if (isset($_SESSION["employerID"])) {
+                                if ($_SESSION["employerID"] == $row["employer_id"]) {
+                                    $employerid = $row["employer_id"];
+                                    $sql = "SELECT * FROM employerimage WHERE employer_id='$employerid'";
+                                    $sqlResult = $DBconnection->query($sql);
+                                    while ($image = $sqlResult->fetch_assoc()) {
+                                        if ($image["eimage_status"] == 0) {
+                                            
+                                            
+                                            echo "<img src='../uploads/employer/profile" . $employerid . ".jpg' class='p-4' style='width: 200px; height: 200px;'>";
+                                        } else {
+                                            echo "<img src='../uploads/default.webp' class='p-4' style='width: 200px; height: 200px;'>";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        echo "error occured";
+                    }
+                    ?>
+            <!-- <img src="../images/dummy.jpg" alt="" srcset="" style="width: 100px; height: 100px;"> -->
                 <div class="container">
-                    <div class="form-group">
+                    <div class="form-group mt-4">
                         <label for="exampleInputFile">File input</label>
-                        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="file">
-                        <button type="submit" class="btn btn-primary" name="submit_upload">Upload</button>
+                        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="img_upload">
+                        <button type="submit" class="btn btn-primary" name="upload_img">Upload</button>
                     </div>
                 </div>
             </form>

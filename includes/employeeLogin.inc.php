@@ -28,7 +28,7 @@ if (isset($_POST["employee_login"])) {
                 } else if ($verifyPwd == true) {
                     session_start();
                     $_SESSION["employerID"] = $row["employer_id"];
-                    $_SESSION["mail"] = $row["user_name"];
+                    $_SESSION["mail"] = $row["employer_email"];
 
                     header("Location: ../employee/employeeDashboard.php");
                     exit();
