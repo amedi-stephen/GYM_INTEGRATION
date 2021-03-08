@@ -8,66 +8,68 @@ include "navigation.php";
         <h4>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias, a.</h4>
     </div>
     <div class="resource-body">
-        <h4>Fill in the following details</h4>
-        <form action="" method="post" style="width: 60%;" class="bg-light">
-            <div class="form-group">
-                <label for="schedule_name">Name of schedule</label>
-                <input type="text" name="schedule_name" class="form-control">
-            </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <form action="" method="post" style="width: 60%;" class="bg-light p-4">
+                <h4>Fill in the following details</h4>
+                <div class="form-group mb-4">
+                    <label for="schedule_name"><strong>Name of schedule:</strong></label>
+                    <input type="text" name="schedule_name" placeholder="Schedule Name" class="form-control">
+                </div>
 
-            <div class="form-check">
-                
-                <label class="form-check-label mr-4">
-                    <input class="form-check-input" type="checkbox">
-                    Sunday
-                </label>
+                <div class="form-group mb-4">
+                    <label><strong>Days of the week on which the resource is available:</strong></label> <br>
+                    <label class="form-check-label mr-4 ml-4">
+                        <input class="form-check-input" type="checkbox">
+                        Sunday
+                    </label>
 
-                <label class="form-check-label mr-4">
-                    <input class="form-check-input" type="checkbox">
-                    Monday
-                </label>
+                    <label class="form-check-label mr-4">
+                        <input class="form-check-input" type="checkbox">
+                        Monday
+                    </label>
 
-                <label class="form-check-label mr-4">
-                    <input class="form-check-input" type="checkbox">
-                    Tuesday
-                </label>
+                    <label class="form-check-label mr-4">
+                        <input class="form-check-input" type="checkbox">
+                        Tuesday
+                    </label>
 
-                <label class="form-check-label mr-4">
-                    <input class="form-check-input" type="checkbox">
-                    Wednesday
-                </label>
+                    <label class="form-check-label mr-4">
+                        <input class="form-check-input" type="checkbox">
+                        Wednesday
+                    </label>
 
-                <label class="form-check-label mr-4">
-                    <input class="form-check-input" type="checkbox">
-                    Thursday
-                </label>
+                    <label class="form-check-label mr-4">
+                        <input class="form-check-input" type="checkbox">
+                        Thursday
+                    </label>
 
-                <label class="form-check-label mr-4">
-                    <input class="form-check-input" type="checkbox">
-                    Friday
-                </label>
+                    <label class="form-check-label mr-4">
+                        <input class="form-check-input" type="checkbox">
+                        Friday
+                    </label>
 
-                <label class="form-check-label mr-4">
-                    <input class="form-check-input" type="checkbox">
-                    Saturday
-                </label>
-            </div>
+                    <label class="form-check-label mr-4">
+                        <input class="form-check-input" type="checkbox">
+                        Saturday
+                    </label>
+                </div>
 
-            <div class="form-group">
-                opening hours<br><br>
-                <label for="schedule_from">From</label>
-                <input type="time" name="schedule_from">
-                <label for="schedule_to">From</label>
-                <input type="time" name="schedule_to">
-            </div>
+                <label><strong>Opening Hours:</strong></label><br>
+                <div class="form-inline mb-4">
+                    <label for="schedule_from"><strong>From: </strong></label>
+                    <input type="time" name="schedule_from" class="form-control mr-4">
+                    <label for="schedule_to"><strong>To: </strong></label>
+                    <input type="time" name="schedule_to" class="form-control">
+                </div>
 
-            <div class="form-group">
-                <label for="start">When can appointments start</label>
-                <input type="date" name="date" id="">
-            </div>
+                <div class="form-group mb-4">
+                    <label for="start"><strong>When can the appointment start:</strong></label>
+                    <input type="date" name="date" class="form-control">
+                </div>
 
-            <button type="submit">Submit schedule</button>
-            <p class="text-muted">Go to <a href="capacity.php">capacity planning</a> instead</p>
-        </form>
+                <button type="submit" class="btn btn-primary mb-4">Submit schedule</button>
+                <p class="text-muted">Use <a href="capacity.php">capacity planning</a> instead</p>
+            </form>
+        </div>
     </div>
 </div>

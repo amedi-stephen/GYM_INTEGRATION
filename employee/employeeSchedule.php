@@ -13,6 +13,7 @@
             <p>Capacity scheduling Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum repellendus dolore sequi ipsum velit accusantium?</p>
             <a href="resource.php" class="btn btn-outline-primary btn-lg">resource schedule</a>
             <a href="capacity.php" class="btn btn-outline-primary btn-lg">planning schedule</a>
+            <a href="viewSchedules.php" class="btn btn-outline-primary btn-lg">view your schedules</a>
         </div>
     </div>
 </div>
