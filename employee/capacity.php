@@ -8,44 +8,47 @@ include "navigation.php";
         <h4>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias, a.</h4>
     </div>
     <div class="capacity-body">
-        <h4>Fill in the following details</h4>
-        <form action="" method="post">
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" name="title">
-            </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <form action="" method="post" style="width: 60%;" class="bg-light p-4">
+                <h4>Fill in the following details</h4>
+                <div class="form-group mb-4">
+                    <label for="title"><strong>Title: </strong></label>
+                    <input type="text" name="title" class="form-control" placeholder="Enter title">
+                </div>
 
-            <div class="form-group">
-                <label for="title">From</label>
-                <input type="time" name="title">
-                <label for="title">To</label>
-                <input type="time" name="title">
-            </div>
+                <div class="form-inline mb-4">
+                    <label for="title"><strong>From: </strong></label>
+                    <input type="time" name="title" class="form-control mr-4">
+                    <label for="title"><strong>To: </strong></label>
+                    <input type="time" name="title" class="form-control">
+                </div>
 
-            <div class="form-group">
-                <label for="price">Price</label>
-                <input type="text" name="price">
-            </div>
+                <div class="form-group mb-4">
+                    <label for="price"><strong>Price: </strong></label>
+                    <input type="text" name="price" class="form-control">
+                </div>
 
-            <div class="form-group">
-                <label for="description">Title</label>
-                <textarea name="description" cols="30" rows="10" style="resize: none"></textarea>
-            </div>
+                <div class="form-group mb-4">
+                    <label for="description"><strong>Description:</strong></label>
+                    <textarea name="description" class="form-control" rows="3" style="resize: none"></textarea>
+                </div>
 
-            <div class="form-group">
-                <select name="repeat">
-                    <option value="daily">Daily</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="monthly">Monthly</option>
-                </select>
-            </div>
+                <div class="form-group mb-4">
+                    <label for="repeat"><strong>Repeat</strong></label>
+                    <select name="repeat" class="form-control">
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="capacity">Capacity</label>
-                <input type="number" name="capacity">
-            </div>
+                <div class="form-group mb-4">
+                    <label for="capacity"><strong>Capacity:</strong></label>
+                    <input type="number" name="capacity" class="form-control">
+                </div>
 
-            <button type="submit" name="submit_capacity">Create Schedule</button>
-        </form>
+                <button type="submit" name="submit_capacity" class="btn btn-primary">Create Schedule</button>
+            </form>
+        </div>
     </div>
 </div>
