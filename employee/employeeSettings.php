@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <title>Employee</title>
-</head>
-
-<body>
     <?php
-        require "navigation.php";
+        include "navigation.php";
     ?>
 
     <div class="card mt-4 container">
@@ -44,7 +31,6 @@
                         echo "error occured";
                     }
                     ?>
-            <!-- <img src="../images/dummy.jpg" alt="" srcset="" style="width: 100px; height: 100px;"> -->
                 <div class="container">
                     <div class="form-group mt-4">
                         <label for="exampleInputFile">File input</label>
@@ -54,7 +40,7 @@
                 </div>
             </form>
             <form action="../includes/employeeProfile.inc.php" method="post">
-                <h4 class="text-primary badge-light p-2">Fill in the following details</h4>
+                <h4 class="text-primary badge-light p-2 text-capitalize text-center">register your company</h4>
                 
 
                 <div class="form-group mb-4">

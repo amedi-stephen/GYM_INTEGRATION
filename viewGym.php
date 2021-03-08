@@ -159,24 +159,7 @@ require "navbar.php";
         </div>
 
         <div class="modal-content">
-            <form action="" class="d-flex flex-column justify-content-center align-items-center">
-                <div class="form-group">
-                    <input type="text" name="" id="" class="form-control" placeholder="Class">
-                </div>
-                <div class="form-group">
-                    <select name="session" class="form-control">
-                        <option value="" class="form-control">9-4 session</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="" class="form-control">
-                </div>
-
-                <button class="btn btn-primary btn-block">Book</button>
-            </form>
+            <!-- surf the internet and come up with booking details -->
         </div>
     </div>
 </div>

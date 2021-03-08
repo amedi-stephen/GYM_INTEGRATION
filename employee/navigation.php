@@ -58,6 +58,12 @@ include "../includes/dbh.inc.php";
                                     <li class="nav-item">
                                         <a href="employeeGallery.php" class="nav-link">Gallery</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="employeeGallery.php" class="nav-link">Your Team</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="employeeSchedule.php" class="nav-link">Schedules</a>
+                                    </li>
                                     
                                 </ul>
                                 <form class="form-inline my-2 my-lg-0" action="../includes/employeeLogout.inc.php" method="post">
