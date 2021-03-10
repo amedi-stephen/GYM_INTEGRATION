@@ -1,5 +1,6 @@
 <?php
 include "navigation.php";
+include '../includes/processSchedule.inc.php';
 ?>
 
 <div class="container">
@@ -9,46 +10,49 @@ include "navigation.php";
     </div>
     <div class="capacity-body">
         <div class="d-flex justify-content-center align-items-center">
-            <form action="" method="post" style="width: 60%;" class="bg-light p-4">
+        <?php
+            echo "
+            <form action='".setCapacity($DBconnection)."' method='post' style='width: 60%;' class='bg-light p-4'>
                 <h4>Fill in the following details</h4>
-                <div class="form-group mb-4">
-                    <label for="title"><strong>Title: </strong></label>
-                    <input type="text" name="title" class="form-control" placeholder="Enter title">
+                <div class='form-group mb-4'>
+                    <label for='title'><strong>Title: </strong></label>
+                    <input type='text' name='title' class='form-control' placeholder='Enter title'>
                 </div>
 
-                <div class="form-inline mb-4">
-                    <label for="title"><strong>From: </strong></label>
-                    <input type="time" name="title" class="form-control mr-4">
-                    <label for="title"><strong>To: </strong></label>
-                    <input type="time" name="title" class="form-control">
+                <div class='form-inline mb-4'>
+                    <label for='capacity_from'><strong>From: </strong></label>
+                    <input type='date' name='capacity_from' class='form-control mr-4'>
+                    <label for='capacity_to'><strong>To: </strong></label>
+                    <input type='date' name='capacity_to' class='form-control'>
                 </div>
 
-                <div class="form-group mb-4">
-                    <label for="price"><strong>Price: </strong></label>
-                    <input type="text" name="price" class="form-control">
+                <div class='form-group mb-4'>
+                    <label for='price'><strong>Price: </strong></label>
+                    <input type='text' name='price' class='form-control'>
                 </div>
 
-                <div class="form-group mb-4">
-                    <label for="description"><strong>Description:</strong></label>
-                    <textarea name="description" class="form-control" rows="3" style="resize: none"></textarea>
+                <div class='form-group mb-4'>
+                    <label for='description'><strong>Description:</strong></label>
+                    <textarea name='description' class='form-control' rows='3' style='resize: none'></textarea>
                 </div>
 
-                <div class="form-group mb-4">
-                    <label for="repeat"><strong>Repeat</strong></label>
-                    <select name="repeat" class="form-control">
-                        <option value="daily">Daily</option>
-                        <option value="weekly">Weekly</option>
-                        <option value="monthly">Monthly</option>
+                <div class='form-group mb-4'>
+                    <label for='repeat'><strong>Repeat</strong></label>
+                    <select name='repeat' class='form-control'>
+                        <option value='daily'>Daily</option>
+                        <option value='weekly'>Weekly</option>
+                        <option value='monthly'>Monthly</option>
                     </select>
                 </div>
 
-                <div class="form-group mb-4">
-                    <label for="capacity"><strong>Capacity:</strong></label>
-                    <input type="number" name="capacity" class="form-control">
+                <div class='form-group mb-4'>
+                    <label for='capacity'><strong>Capacity:</strong></label>
+                    <input type='number' name='capacity' class='form-control'>
                 </div>
 
-                <button type="submit" name="submit_capacity" class="btn btn-primary">Create Schedule</button>
-            </form>
+                <button type='submit' name='submit_capacity' class='btn btn-primary'>Create Schedule</button>
+            </form>";
+        ?>
         </div>
     </div>
 </div>

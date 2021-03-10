@@ -1,5 +1,4 @@
 <?php
-// date_default_timezone_set('Africa/Nairobi');
 include "navigation.php";
 include '../includes/processSchedule.inc.php';
 ?>
