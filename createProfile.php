@@ -23,8 +23,6 @@ require "navbar.php";
                                     $RESULT_image = $DBconnection->query($QUERY_image);
                                     while ($row_image = $RESULT_image->fetch_assoc()) {
                                         if ($row_image["img_status"] == 0) {
-                                            
-                                            // echo "<img src='uploads/profile'".$userid."'jpg' style='width: 200px; height: 200px;'>";
                                             echo "<img src='uploads/profile" . $userid . ".jpg' class='p-4' style='width: 200px; height: 200px;'>";
                                         } else {
                                             echo "<img src='uploads/default.webp' class='p-4' style='width: 200px; height: 200px;'>";

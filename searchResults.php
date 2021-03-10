@@ -177,11 +177,11 @@ require "navbar.php";
 
                 echo '<h3 class="text-primary badge-light p-4">There are ' . $row_results . ' results</h3>';
 
-                echo '<div class="d-flex">';
+                echo '<div class="container bg-dark p-2 d-flex flex-wrap justify-content-between">';
                 if ($row_results > 0) {
                     while ($row = $result_search->fetch_assoc()) {
                         echo '    
-                                <div class="card mr-2">
+                                <div class="card mb-4 " style = "flex-grow: 4;">
                                     <div class="card-header">
                                         <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
                                     </div>
@@ -189,9 +189,67 @@ require "navbar.php";
                                         <p>' . $row["address"] . '</p>
                                         <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary">View Gym</a>
                                     </div>
-                                </div>
-                            
-                                ';
+                                </div>';
+                        echo '    
+                                <div class="card mb-4 " style = "flex-grow: 4;">
+                                    <div class="card-header">
+                                        <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>' . $row["address"] . '</p>
+                                        <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary">View Gym</a>
+                                    </div>
+                                </div>';
+                        echo '    
+                                <div class="card mb-4 " style = "flex-grow: 4;">
+                                    <div class="card-header">
+                                        <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>' . $row["address"] . '</p>
+                                        <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary">View Gym</a>
+                                    </div>
+                                </div>';
+                        echo '    
+                                <div class="card mb-4 " style = "flex-grow: 4;">
+                                    <div class="card-header">
+                                        <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>' . $row["address"] . '</p>
+                                        <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary">View Gym</a>
+                                    </div>
+                                </div>';
+                        echo '    
+                                <div class="card mb-4 " style = "flex-grow: 4;">
+                                    <div class="card-header">
+                                        <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>' . $row["address"] . '</p>
+                                        <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary">View Gym</a>
+                                    </div>
+                                </div>';
+                        echo '    
+                                <div class="card mb-4 " style = "flex-grow: 4;">
+                                    <div class="card-header">
+                                        <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>' . $row["address"] . '</p>
+                                        <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary">View Gym</a>
+                                    </div>
+                                </div>';
+                        echo '    
+                                <div class="card mb-4 " style = "flex-grow: 4;">
+                                    <div class="card-header">
+                                        <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>' . $row["address"] . '</p>
+                                        <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary">View Gym</a>
+                                    </div>
+                                </div>';
                     }
                 } else {
                     echo "no gym or town in our database but keep in touch as more gyms are being discovered!";
