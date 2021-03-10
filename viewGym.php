@@ -1,6 +1,7 @@
 <?php
-require 'includes/dbh.inc.php';
-require "navbar.php";
+include 'includes/dbh.inc.php';
+include "navbar.php";
+include 'includes/processSchedule.inc.php';
 ?>
 
 <div class="container mt-4">
@@ -73,6 +74,7 @@ require "navbar.php";
                     
                 </ul>
             </div>';
+            
             if (!isset($_SESSION['userID'])) {
                 echo '<button class="btn btn-primary disabled mb-4" title="Only logged in users can book">Book their program</button>';
             } else {
@@ -81,8 +83,7 @@ require "navbar.php";
 
             echo '
         </div>
-    </div>
-            ';
+    </div>';
         }
         $result->free_result();
         $DBconnection->close();
@@ -163,6 +164,10 @@ require "navbar.php";
         </div>
     </div>
 </div>
+
+<?php
+    getCapacityuser($DBconnection);
+?>
 
 <script>
     const openBtn = document.querySelector(".modal-btn");

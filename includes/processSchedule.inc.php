@@ -100,10 +100,13 @@ function getCapacityEmployee($DBconnection) {
 
 function getResourceEmployee($DBconnection) {
     $sql = "SELECT * FROM employees 
-        INNER JOIN resource_schedule ON employees.employer_id = resource_schedule.employer_id";
+        JOIN resource_schedule ON employees.employer_id = resource_schedule.employer_id
+        JOIN users ON users.user_id = resource_schedule.user_id";
     $result = $DBconnection->query($sql);
-    echo "<div class='container d-flex justify-content-around flex-wrap p-2 bg-dark mt-4 mb-4'>";
+    var_dump($result);
+    echo "<div class='container d-flex justify-content-around flex-wrap p-2 bg-light mt-4 mb-4'>";
     while($row = $result->fetch_assoc()) {
+        var_export($row);
         if(isset($_SESSION['employerID'])) {
             if($_SESSION['employerID'] == $row['employer_id']) {
                 echo "
@@ -118,9 +121,7 @@ function getResourceEmployee($DBconnection) {
                                 <li class='list-group-item'>" . $day . "</li> 
                             </ul>";
                             }
-                            // <p class='small'>".$row['resource_workdays']."</p>
                             echo "
-                            
                         </div>
                     </div>";
             }
@@ -128,3 +129,7 @@ function getResourceEmployee($DBconnection) {
     }
 }
 
+function getCapacityuser($DBconnection) {
+    $sql = "SELECT * FROM users
+        INNER JOIN capacity_schedule ON employees.employer_id = capacity_schedule.employer_id";
+}
