@@ -1,5 +1,4 @@
 <?php
-include 'includes/dbh.inc.php';
 include "navbar.php";
 include 'includes/processSchedule.inc.php';
 ?>
@@ -16,16 +15,15 @@ include 'includes/processSchedule.inc.php';
             <h2 class="display-4 text-primary text-center">' . $gym['gym_name'] . '</h2>
             <div class="row">
     
-        <div class="gym-section col-md-8">
-            <div class="d-flex">
-                <img src="images/dummy.jpg" style="width:300px; height: 300px;" class="mr-2">
-                <img src="images/dummy.jpg" style="width:300px; height: 300px;">
-            </div>
-            <div class="services mt-4">
-            
-            <div class="service-amenities mb-4">
-                <h3 class="badge-light p-2">Amenities</h3>
-                ';
+                <div class="gym-section col-md-8">
+                    <div class="d-flex">
+                        <img src="images/dummy.jpg" style="width:300px; height: 300px;" class="mr-2">
+                        <img src="images/dummy.jpg" style="width:300px; height: 300px;">
+                    </div>
+                    <div class="services mt-4">
+                    
+                    <div class="service-amenities mb-4">
+                        <h3 class="badge-light p-2">Amenities</h3>';
             $amenitiesArr = unserialize($gym['amenities']);
             foreach ($amenitiesArr as $key => $item) {
                 echo '
@@ -74,6 +72,7 @@ include 'includes/processSchedule.inc.php';
                     
                 </ul>
             </div>';
+            
             
             if (!isset($_SESSION['userID'])) {
                 echo '<button class="btn btn-primary disabled mb-4" title="Only logged in users can book">Book their program</button>';
@@ -164,10 +163,10 @@ include 'includes/processSchedule.inc.php';
         </div>
     </div>
 </div>
-
 <?php
-    getCapacityuser($DBconnection);
+    getResourceUser($DBconnection);
 ?>
+
 
 <script>
     const openBtn = document.querySelector(".modal-btn");

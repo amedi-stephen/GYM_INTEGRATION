@@ -25,9 +25,14 @@ if (isset($_POST['submit_gym'])) {
             header('Location: ../employee/employeeSettings.php?error=gymnametaken');
             exit();
         } else {
-            $insertsql = "INSERT INTO gyms(gym_name, phone, address, town, classes, equipments, amenities, opened_at, closed_at, full_capacity) 
-                VALUES('$company', '$phone', '$address', '$town', '$classes', '$equipments', '$amenities', '$openedAt', '$closedAt', '$maxCapacity')";
-            $resultInsert = $DBconnection->query($insertsql);
+            $sql = "SELECT * FROM resource_schedule";
+            $result = $DBconnection->query($sql);
+            while ($row = $result->fetch_assoc()) {
+                $resourceID = $row['resource_id'];
+                $insertsql = "INSERT INTO gyms(resource_id, gym_name, phone, address, town, classes, equipments, amenities, opened_at, closed_at, full_capacity) 
+                    VALUES('$resourceID', '$company', '$phone', '$address', '$town', '$classes', '$equipments', '$amenities', '$openedAt', '$closedAt', '$maxCapacity')";
+                $resultInsert = $DBconnection->query($insertsql);
+            }
 
             header('Location: ../employee/employeeSettings.php?status=success');
             exit();
