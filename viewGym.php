@@ -85,7 +85,6 @@ include 'includes/processSchedule.inc.php';
     </div>';
         }
         $result->free_result();
-        $DBconnection->close();
     } else {
         echo "no got staff";
     }

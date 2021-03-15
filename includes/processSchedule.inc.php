@@ -145,6 +145,8 @@ function getResourceUser($DBconnection)
             } else {
                 echo "No record found";
             }
+            $result->free_result();
+            $DBconnection->close();
         }
     }
 }
