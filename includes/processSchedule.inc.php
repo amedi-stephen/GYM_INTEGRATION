@@ -134,13 +134,41 @@ function getResourceEmployee($DBconnection)
 
 function getResourceUser($DBconnection)
 {
-    if (isset($_GET['id'])) {
-        $sql = "SELECT * FROM users";
+    if(isset($_GET['id'])) {
+        $sql = "SELECT * FROM gyms JOIN resource_schedule ON gyms.resource_id = resource_schedule.resource_id";
         $result = $DBconnection->query($sql);
         if ($result) {
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    var_dump($row);
+                    echo "
+                    <div class='container-fluid'>
+                    <h3 class='badge-light p-2 mt-4'>Sessions</h3>
+                        <table class='table'>
+                            <thead>
+                                <tr>
+                                    <th scope='col'>#</th>
+                                    <th scope='col'>Resource Name</th>
+                                    <th scope='col'>Starting Date</th>
+                                    <th scope='col'>Opening hrs</th>
+                                    <th scope='col'>Closing hrs</th>
+                                    <th scope='col'>Book Session</th>
+                                <tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope='row'>1</th>
+                                    <td>".$row['resource_name']."</td>
+                                    <td>".$row['start_appointment']."</td>
+                                    <td>".$row['opening_hrs']."</td>
+                                    <td>".$row['closing_hrs']."</td>
+                                    <td>
+                                        <a href='javascript:void(0)' class='btn btn-primary btn-sm modal-btn'>Book</a>
+                                    </td>
+                                <tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    ";
                 }
             } else {
                 echo "No record found";
@@ -148,5 +176,22 @@ function getResourceUser($DBconnection)
             $result->free_result();
             $DBconnection->close();
         }
+    }
+}
+
+function bookResource($DBconnection) {
+    if(isset($_POST['book_resource'])) {
+        $sql = "SELECT * FROM resource_schedule";
+        $result = $DBconnection->query($sql);
+        while($row = $result->fetch_assoc()) {
+            $userid = $row['user_id'];
+            $resourceid = $row['resource_id'];
+            if($userid == 0) {
+                $query = "UPDATE resource_schedule SET user_id = '$userid' WHERE resource_id='$resourceid'";
+                $result = $DBconnection->query($query);
+                echo "successfuly booked resource";
+            }
+        }
+        header("Location: ../viewGym.php");
     }
 }

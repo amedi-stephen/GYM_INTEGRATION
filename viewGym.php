@@ -71,14 +71,10 @@ include 'includes/processSchedule.inc.php';
                     </li>
                     
                 </ul>
-            </div>';
+            </div>
+            ';
             
-            
-            if (!isset($_SESSION['userID'])) {
-                echo '<button class="btn btn-primary disabled mb-4" title="Only logged in users can book">Book their program</button>';
-            } else {
-                echo '<button class="btn btn-primary mb-4 modal-btn">Book their program</button>';
-            }
+            getResourceUser($DBconnection);
 
             echo '
         </div>
@@ -159,12 +155,10 @@ include 'includes/processSchedule.inc.php';
 
         <div class="modal-content">
             <!-- surf the internet and come up with booking details -->
+            <p>some classic model shit</p>
         </div>
     </div>
 </div>
-<?php
-    getResourceUser($DBconnection);
-?>
 
 
 <script>
