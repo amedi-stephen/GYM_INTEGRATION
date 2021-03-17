@@ -26,7 +26,7 @@ function setResource($DBconnection)
 
                             $query = "INSERT INTO resource_schedule (employer_id, resource_name, resource_workdays, opening_hrs, closing_hrs, start_appointment) 
                                 VALUES ('$employerNo', '$scheduleName', '$checkWeek', '$scheduleFrom', '$scheduleTo', '$date')";
-                            $insertResult = $DBconnection->query($query);
+                            $DBconnection->query($query);
                             header('Location: ../employee/resource.php?status=success');
                             exit();
                         }
@@ -189,7 +189,7 @@ function reserveResource($DBconnection) {
                 header("Location: ../viewGym.php?error=emptyfields");
                 exit();
             } else {
-                $query = "SELECT * FROM gyms";
+                $query = "SELECT * FROM gyms INNER JOIN resource_schedule ON gyms.gym_id = resource_schedule.resource_id INNER JOIN resource_members ON resource_members.resource_id = resource_schedule.resource_id";
                 $sequel = $DBconnection->query($query);
                 if($sequel->num_rows > 0) {
                     while($row = $sequel->fetch_assoc()) {

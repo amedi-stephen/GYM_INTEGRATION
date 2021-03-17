@@ -9,29 +9,35 @@ include "navigation.php";
         use num_rows to count the number of notifications
         use vanilla js to reduce the viewed notifications
     -->
+    <?php
+    //  TODO:
+        // resource schedule name
+        // floated on the left are viewed icons, set priority and delete
+        // on the card footer, it should show the date.
+        // this means we need to add the created_at in our resource_members table columns
+    echo "
     <h4>5 Tasks</h4>
-    <div class="card mb-4">
-        <!-- TODO:
-        resource schedule name
-        floated on the left are viewed icons, set priority and delete
-        on the card footer, it should show the date.
-        this means we need to add the created_at in our resource_members table columns
-     -->
-        <div class="card-body container">
-            <h5 class="card-title d-inline">
-                How to beast > <span class="text-muted">Resource schedule</span>
+    <div class='card mb-4'>
+        
+    
+        <div class='card-body container'>
+            <h5 class='card-title d-inline'>
+                How to beast > <span class='text-muted'>Resource schedule</span>
             </h5>
-            <div class="float-right">
-                <a role="button" data-toggle="tooltip" data-placement="top" title="mark as seen"><i class="fa fa-eye mr-4 text-primary"></i></a>
-                <a type="button" data-toggle="tooltip" data-placement="top" title="set as priority"><i class="fa fa-flag mr-4 text-primary"></i></a>
-                <a type="button" data-toggle="tooltip" data-placement="top" title="delete"><i class="fa fa-trash text-danger"></i></a>
+            <div class='float-right'>
+                <a role='button' data-toggle='tooltip' data-placement='top' title='mark as seen'><i class='fa fa-check mr-4 text-primary'></i></a>
+                <a type='button' data-toggle='tooltip' data-placement='top' title='set as priority'><i class='fa fa-flag mr-4 text-primary'></i></a>
+                <a type='button' data-toggle='tooltip' data-placement='top' title='delete'><i class='fa fa-trash text-danger'></i></a>
             </div>
         </div>
-        <div class="card-footer text-muted">
+        <div class='card-footer text-muted'>
             05/06/2020
-        </div>
+        </div>";
+        ?>
     </div>
 </div>
+
+
 
 <!-- FIXME: 
 tooltips in bootstrap still not working
