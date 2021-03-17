@@ -162,7 +162,7 @@ function getResourceUser($DBconnection)
                                     <td>".$row['opening_hrs']."</td>
                                     <td>".$row['closing_hrs']."</td>
                                     <td>
-                                        <a href='javascript:void(0)' class='btn btn-primary btn-sm modal-btn'>Book</a>
+                                        <a href='javascript:void(0)' class='btn btn-primary btn-sm modal-btn'>Book session</a>
                                     </td>
                                 <tr>
                             </tbody>
@@ -174,24 +174,37 @@ function getResourceUser($DBconnection)
                 echo "No record found";
             }
             $result->free_result();
-            $DBconnection->close();
         }
     }
 }
 
-function bookResource($DBconnection) {
-    if(isset($_POST['book_resource'])) {
-        $sql = "SELECT * FROM resource_schedule";
-        $result = $DBconnection->query($sql);
-        while($row = $result->fetch_assoc()) {
-            $userid = $row['user_id'];
-            $resourceid = $row['resource_id'];
-            if($userid == 0) {
-                $query = "UPDATE resource_schedule SET user_id = '$userid' WHERE resource_id='$resourceid'";
-                $result = $DBconnection->query($query);
-                echo "successfuly booked resource";
+function reserveResource($DBconnection) {
+    if(isset($_POST['resource_reserve'])) {
+        
+        if(isset($_GET['id'])) {
+            $name = $DBconnection->real_escape_string($_POST['name']);
+            $phone = $DBconnection->real_escape_string($_POST['number']);
+
+            if(empty($name) || empty($phone)) {
+                header("Location: ../viewGym.php?error=emptyfields");
+                exit();
+            } else {
+                $query = "SELECT * FROM gyms";
+                $sequel = $DBconnection->query($query);
+                if($sequel->num_rows > 0) {
+                    while($row = $sequel->fetch_assoc()) {
+                        if($_GET['id'] == $row['gym_id']) {
+                            $gotID = $_GET['id'];
+                            $sql = "INSERT INTO resource_members(gym_id, booked_members, phone) VALUES('$gotID', '$name', '$phone')";
+                            $DBconnection->query($sql);
+
+                            echo "success";
+                        }
+                    }
+                } else {
+                    echo "no records found!";
+                }
             }
         }
-        header("Location: ../viewGym.php");
     }
 }

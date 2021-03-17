@@ -73,7 +73,7 @@ include 'includes/processSchedule.inc.php';
                 </ul>
             </div>
             ';
-            
+
             getResourceUser($DBconnection);
 
             echo '
@@ -154,8 +154,19 @@ include 'includes/processSchedule.inc.php';
         </div>
 
         <div class="modal-content">
-            <!-- surf the internet and come up with booking details -->
-            <p>some classic model shit</p>
+        <?php
+            echo "<form class='container' method='post' action='".reserveResource($DBconnection)."'>
+                <div class='form-group'>
+                    <label for='name'>Full Name</label>
+                    <input type='text' name='name' id='fullName' class='form-control'>
+                </div>
+                <div class='form-group'>
+                    <label for='number'>Phone Number</label>
+                    <input type='text' name='number' id='phoneNumber' class='form-control'>
+                </div>
+                <button type='submit' name='resource_reserve' class='btn btn-primary mb-2'>Create Rerservation</button>
+            </form>";
+            ?>
         </div>
     </div>
 </div>
@@ -168,6 +179,7 @@ include 'includes/processSchedule.inc.php';
 
     openBtn.addEventListener('click', openModal);
     closeBtn.addEventListener('click', closeModal);
+
 
     function openModal() {
         modalOverlay.classList.add('open-modal');
