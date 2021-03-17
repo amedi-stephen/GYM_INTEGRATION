@@ -11,6 +11,7 @@ include "../includes/dbh.inc.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../fontawesome/css/all.css">
     <title>Employee</title>
 </head>
 
@@ -53,7 +54,7 @@ include "../includes/dbh.inc.php";
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="notifications.php" class="nav-link">Notifications<span class="badge badge-success badge-pill nav-pills">3</span></a>
+                                        <a href="employeeNotifications.php" class="nav-link">Notifications<span class="badge badge-success badge-pill nav-pills">3</span></a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="employeeGallery.php" class="nav-link">Gallery</a>

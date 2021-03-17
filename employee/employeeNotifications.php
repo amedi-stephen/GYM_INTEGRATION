@@ -17,14 +17,14 @@ include "navigation.php";
         on the card footer, it should show the date.
         this means we need to add the created_at in our resource_members table columns
      -->
-        <div class="card-body">
+        <div class="card-body container">
             <h5 class="card-title d-inline">
                 How to beast > <span class="text-muted">Resource schedule</span>
             </h5>
             <div class="float-right">
-                <a href="javascript:void(0)" type="button" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-eye mr-4"></i></a>
-                <a href="javascript:void(0)"><i class="fa fa-flag mr-4"></i></a>
-                <a href="javascript:void(0)"><i class="fa fa-trash text-danger"></i></a>
+                <a role="button" data-toggle="tooltip" data-placement="top" title="mark as seen"><i class="fa fa-eye mr-4 text-primary"></i></a>
+                <a type="button" data-toggle="tooltip" data-placement="top" title="set as priority"><i class="fa fa-flag mr-4 text-primary"></i></a>
+                <a type="button" data-toggle="tooltip" data-placement="top" title="delete"><i class="fa fa-trash text-danger"></i></a>
             </div>
         </div>
         <div class="card-footer text-muted">
@@ -33,11 +33,17 @@ include "navigation.php";
     </div>
 </div>
 
+<!-- FIXME: 
+tooltips in bootstrap still not working
+fixed the above problem, now the tooltip is disturbing after being hovered
+ -->
+
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../js/jquery-3.5.1.min.js"></script>
 
 <script>
     $(document).ready(function() {
-    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-});
+        $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+        console.log("hello world");
+    });
 </script>
