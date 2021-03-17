@@ -75,7 +75,7 @@ include 'includes/processSchedule.inc.php';
             ';
     ?>
             <div class='container-fluid'>
-                <h3 class='badge-light p-2 mt-4'>Sessions</h3>
+                <h3 class='badge-light p-2 mt-4'>Resource sessions</h3>
                 <table class='table'>
                     <thead>
                         <tr>
@@ -111,22 +111,37 @@ include 'includes/processSchedule.inc.php';
                         } else {
                             echo "No record found";
                         }
-                        // $result->free_result();
                     }
                 }
 
-                echo '
+                echo "
             </tbody>
             </table>
         </div>
+        
         </div>
-    </div>';
+    </div>";
             }
             $result->free_result();
         } else {
             echo "no got staff";
         }
                 ?>
+
+<div class='container-fluid'>
+                <h3 class='badge-light p-2 mt-4'>Sessions</h3>
+                <table class='table'>
+                    <thead>
+                        <tr>
+                            <th scope='col'>Resource Name</th>
+                            <th scope='col'>Starting Date</th>
+                            <th scope='col'>Opening hrs</th>
+                            <th scope='col'>Closing hrs</th>
+                            <th scope='col'>Book Session</th>
+                        <tr>
+                    </thead>
+                    <tbody>
+
 
                 <div class="comment-section col-md-4">
                     <div class="card">
@@ -182,7 +197,6 @@ include 'includes/processSchedule.inc.php';
                 </div>
 
             </div>
-
 </div>
 
 <div class="modal-overlay mb-4">

@@ -6,36 +6,47 @@ include "navigation.php";
 </div>
 <div class="container border-right border-left mt-4 bg-light p-4">
     <!-- TODO: 
-        use num_rows to count the number of notifications
         use vanilla js to reduce the viewed notifications
     -->
     <?php
     //  TODO:
-        // resource schedule name
-        // floated on the left are viewed icons, set priority and delete
-        // on the card footer, it should show the date.
-        // this means we need to add the created_at in our resource_members table columns
-        // $sql = "SELECT * FROM resource_schedules";
+    // this means we need to add the created_at in our resource_members table columns
+    $sql = "SELECT * FROM resource_schedule";
+    $result = $DBconnection->query($sql);
+    $resultRows = $result->num_rows;
+    echo "<h4>" . $resultRows . " Tasks</h4>";
+    // TODO: put a margin bottom width at the bottom of the card
+    // TODO: create a date column in resource_schedule to dynamically insert where we need the date
     echo "
-    <h4>5 Tasks</h4>
-    <div class='card mb-4'>
-        
-    
-        <div class='card-body container'>
-            <h5 class='card-title d-inline'>
-                How to beast > <span class='text-muted'>Resource schedule</span>
-            </h5>
-            <div class='float-right'>
-                <a role='button' data-toggle='tooltip' data-placement='top' title='mark as seen'><i class='fa fa-check mr-4 text-primary'></i></a>
-                <a type='button' data-toggle='tooltip' data-placement='top' title='set as priority'><i class='fa fa-flag mr-4 text-primary'></i></a>
-                <a type='button' data-toggle='tooltip' data-placement='top' title='delete'><i class='fa fa-trash text-danger'></i></a>
-            </div>
-        </div>
-        <div class='card-footer text-muted'>
-            05/06/2020
-        </div>";
-        ?>
-    </div>
+    <div class='card mb-4'>";
+    while ($row = $result->fetch_assoc()) {
+        $query = "SELECT * FROM employees";
+        $sequel = $DBconnection->query($query);
+        while ($gym = $sequel->fetch_assoc()) {
+            if (isset($_SESSION['employerID'])) {
+                if ($_SESSION['employerID'] == $row['employer_id']) {
+                    echo "
+                    <div class='card-body container'>
+                        <h5 class='card-title d-inline text-primary text-capitalize'>
+                            ".$row['resource_name']."
+                        </h5>
+                        <div class='float-right'>
+                            <a role='button' data-toggle='tooltip' data-placement='top' title='mark as seen'><i class='fa fa-check mr-4 text-primary'></i></a>
+                            <a type='button' data-toggle='tooltip' data-placement='top' title='set as priority'><i class='fa fa-flag mr-4 text-primary'></i></a>
+                            <a type='button' data-toggle='tooltip' data-placement='top' title='delete'><i class='fa fa-trash text-danger'></i></a>
+                        </div>
+                    </div>
+                    <div class='card-footer text-muted'>
+                        05/06/2020
+                    </div>";
+                }
+            }
+        }
+    }
+
+
+    ?>
+</div>
 </div>
 
 
@@ -50,7 +61,9 @@ fixed the above problem, now the tooltip is disturbing after being hovered
 
 <script>
     $(document).ready(function() {
-        $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+        $("body").tooltip({
+            selector: '[data-toggle=tooltip]'
+        });
         console.log("hello world");
     });
 </script>

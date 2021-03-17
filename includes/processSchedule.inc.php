@@ -132,52 +132,6 @@ function getResourceEmployee($DBconnection)
     }
 }
 
-function getResourceUser($DBconnection)
-{
-    // if(isset($_GET['id'])) {
-    //     $sql = "SELECT * FROM resource_schedule";
-    //     $result = $DBconnection->query($sql);
-    //     if ($result) {
-    //         if ($result->num_rows > 0) {
-    //             while ($row = $result->fetch_assoc()) {
-    //                 echo "
-    //                 <div class='container-fluid'>
-    //                 <h3 class='badge-light p-2 mt-4'>Sessions</h3>
-    //                     <table class='table'>
-    //                         <thead>
-    //                             <tr>
-    //                                 <th scope='col'>#</th>
-    //                                 <th scope='col'>Resource Name</th>
-    //                                 <th scope='col'>Starting Date</th>
-    //                                 <th scope='col'>Opening hrs</th>
-    //                                 <th scope='col'>Closing hrs</th>
-    //                                 <th scope='col'>Book Session</th>
-    //                             <tr>
-    //                         </thead>
-    //                         <tbody>
-    //                             <tr>
-    //                                 <th scope='row'>1</th>
-    //                                 <td>".$row['resource_name']."</td>
-    //                                 <td>".$row['start_appointment']."</td>
-    //                                 <td>".$row['opening_hrs']."</td>
-    //                                 <td>".$row['closing_hrs']."</td>
-    //                                 <td>
-    //                                     <a href='javascript:void(0)' class='btn btn-primary btn-sm modal-btn'>Book session</a>
-    //                                 </td>
-    //                             <tr>
-    //                         </tbody>
-    //                     </table>
-    //                 </div>
-    //                 ";
-    //             }
-    //         } else {
-    //             echo "No record found";
-    //         }
-    //         $result->free_result();
-    //     }
-    // }
-}
-
 function reserveResource($DBconnection) {
     if(isset($_POST['resource_reserve'])) {
         
@@ -189,16 +143,16 @@ function reserveResource($DBconnection) {
                 header("Location: ../viewGym.php?error=emptyfields");
                 exit();
             } else {
-                $query = "SELECT * FROM gyms";
-                // $query = "SELECT * FROM gyms INNER JOIN resource_schedule ON gyms.resource_id = resource_schedule.resource_id";
+                // $query = "SELECT * FROM gyms";
+                // FIXME: the form is not being submitted to the database
+                $query = "SELECT * FROM gyms 
+                    INNER JOIN resource_schedule ON gyms.resource_id = resource_schedule.resource_id";
                 $sequel = $DBconnection->query($query);
                 if($sequel->num_rows > 0) {
                     while($row = $sequel->fetch_assoc()) {
                         var_dump($row['gym_id']);
                         if($_GET['id'] == $row['gym_id']) {
-                            // var_export($row['resource_id']);
                             $gotID = $_GET['id'];
-                            echo $gotID;
                             $resourceid = $row['resource_id'];
                             echo $resourceid;
                             $sql = "INSERT INTO resource_members(gym_id, resource_id, booked_members, phone) VALUES('$gotID', '$resourceid', '$name', '$phone')";
