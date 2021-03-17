@@ -73,73 +73,115 @@ include 'includes/processSchedule.inc.php';
                 </ul>
             </div>
             ';
+    ?>
+            <div class='container-fluid'>
+                <h3 class='badge-light p-2 mt-4'>Sessions</h3>
+                <table class='table'>
+                    <thead>
+                        <tr>
+                            <th scope='col'>Resource Name</th>
+                            <th scope='col'>Starting Date</th>
+                            <th scope='col'>Opening hrs</th>
+                            <th scope='col'>Closing hrs</th>
+                            <th scope='col'>Book Session</th>
+                        <tr>
+                    </thead>
+                    <tbody>
+                <?php
+                if (isset($_GET['id'])) {
+                    $sql = "SELECT * FROM resource_schedule";
+                    $result = $DBconnection->query($sql);
+                    if ($result) {
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                // TODO: the other buttons are not showing the modal
+                                echo "
+                                        <tr>
+                                            <td>" . $row['resource_name'] . "</td>
+                                            <td>" . $row['start_appointment'] . "</td>
+                                            <td>" . $row['opening_hrs'] . "</td>
+                                            <td>" . $row['closing_hrs'] . "</td>
+                                            <td>
+                                                <a href='javascript:void(0)' class='btn btn-primary btn-sm modal-btn'>Book session</a>
+                                            </td>
+                                        <tr>
+                             
+                            ";
+                            }
+                        } else {
+                            echo "No record found";
+                        }
+                        // $result->free_result();
+                    }
+                }
 
-            getResourceUser($DBconnection);
-
-            echo '
+                echo '
+            </tbody>
+            </table>
+        </div>
         </div>
     </div>';
+            }
+            $result->free_result();
+        } else {
+            echo "no got staff";
         }
-        $result->free_result();
-    } else {
-        echo "no got staff";
-    }
-    ?>
+                ?>
 
-    <div class="comment-section col-md-4">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Comments</h3>
-            </div>
-            <div class="card-body">
-                <ul class="media-list">
-                    <li class="media mb-2">
-                        <a href="#" class="pull-left">
-                            <img src="/uploads/caspar-camille-rubin-89xuP-XmyrA-unsplash.jpg" width="45" height="45" class="mr-2">
-                        </a>
-                        <div class="media-body">
-                            <p>This Gym equal sucks!</p>
-                            <strong class="media-heading">
-                                Steve
-                            </strong>
-                            <small class="text-muted">A minute ago</small>
+                <div class="comment-section col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Comments</h3>
                         </div>
-                    </li>
-                    <hr>
-                    <li class="media mb-4">
-                        <a href="#" class="pull-left">
-                            <img src="images/dummy.jpg" width="45" height="45" class="mr-2">
-                        </a>
-                        <div class="media-body">
-                            <p>Always crowded with no air conditioning</p>
-                            <strong class="media-heading">
-                                Jane
-                            </strong>
-                            <small class="text-muted">A minute ago</small>
+                        <div class="card-body">
+                            <ul class="media-list">
+                                <li class="media mb-2">
+                                    <a href="#" class="pull-left">
+                                        <img src="/uploads/caspar-camille-rubin-89xuP-XmyrA-unsplash.jpg" width="45" height="45" class="mr-2">
+                                    </a>
+                                    <div class="media-body">
+                                        <p>This Gym equal sucks!</p>
+                                        <strong class="media-heading">
+                                            Steve
+                                        </strong>
+                                        <small class="text-muted">A minute ago</small>
+                                    </div>
+                                </li>
+                                <hr>
+                                <li class="media mb-4">
+                                    <a href="#" class="pull-left">
+                                        <img src="images/dummy.jpg" width="45" height="45" class="mr-2">
+                                    </a>
+                                    <div class="media-body">
+                                        <p>Always crowded with no air conditioning</p>
+                                        <strong class="media-heading">
+                                            Jane
+                                        </strong>
+                                        <small class="text-muted">A minute ago</small>
+                                    </div>
+                                </li>
+                            </ul>
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <label for="name"><strong>Name:</strong></label>
+                                    <input type="text" name="name" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name"><strong>Email:</strong></label>
+                                    <input type="email" name="email" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="comment"><strong>Comment:</strong></label>
+                                    <textarea name="comment" class="form-control"></textarea>
+                                </div>
+                                <button class="btn btn-primary mb-4 disabled">Post Comment <i class="fa fa-comment"></i></button>
+                            </form>
                         </div>
-                    </li>
-                </ul>
-                <form action="" method="post">
-                    <div class="form-group">
-                        <label for="name"><strong>Name:</strong></label>
-                        <input type="text" name="name" class="form-control">
                     </div>
-                    <div class="form-group">
-                        <label for="name"><strong>Email:</strong></label>
-                        <input type="email" name="email" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="comment"><strong>Comment:</strong></label>
-                        <textarea name="comment" class="form-control"></textarea>
-                    </div>
-                    <button class="btn btn-primary mb-4 disabled">Post Comment <i class="fa fa-comment"></i></button>
-                </form>
+
+                </div>
+
             </div>
-        </div>
-
-    </div>
-
-</div>
 
 </div>
 
@@ -154,8 +196,8 @@ include 'includes/processSchedule.inc.php';
         </div>
 
         <div class="modal-content">
-        <?php
-            echo "<form class='container' method='post' action='".reserveResource($DBconnection)."'>
+            <?php
+            echo "<form class='container' method='post' action='" . reserveResource($DBconnection) . "'>
                 <div class='form-group'>
                     <label for='name'>Full Name</label>
                     <input type='text' name='name' id='fullName' class='form-control'>

@@ -15,6 +15,7 @@ include "navigation.php";
         // floated on the left are viewed icons, set priority and delete
         // on the card footer, it should show the date.
         // this means we need to add the created_at in our resource_members table columns
+        // $sql = "SELECT * FROM resource_schedules";
     echo "
     <h4>5 Tasks</h4>
     <div class='card mb-4'>
