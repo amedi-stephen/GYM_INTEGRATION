@@ -1,6 +1,6 @@
 <?php
-
 include "dbh.inc.php";
+
 
 function setResource($DBconnection)
 {
@@ -132,14 +132,57 @@ function getResourceEmployee($DBconnection)
     }
 }
 
-function reserveResource($DBconnection) {
-    if(isset($_POST['resource_reserve'])) {
-        
-        if(isset($_GET['id'])) {
+function reserveCapacity($DBconnection)
+{
+    if (isset($_POST['submit_capacity'])) {
+        if (isset($_GET['id'])) {
+            $name = $DBconnection->real_escape_string($_POST['uid']);
+            $date = $DBconnection->real_escape_string($_POST['date']);
+
+            // TODO: 
+            // A query that selects all employers then grab the employer id and store in a variable
+            // a query that inserts the values to capacity members including the employerid
+            // the same logic should be done in resource_schedule
+            // what about capacity_id, how will we get it
+
+            $sql = "SELECT * FROM employees INNER JOIN capacity_schedule ON employees.employer_id = capacity_schedule.capacity_id";
+            $result = $DBconnection->query($sql) or die($DBconnection->error);
+            if ($result->num_rows > 0) {
+                while ($record = $result->fetch_assoc()) {
+                    $usersql = "SELECT * FROM users";
+                    $sequel = $DBconnection->query($usersql);
+                    while ($row = $sequel->fetch_assoc()) {
+                        if (isset($_SESSION['userID'])) {
+                            if ($_SESSION['userID'] == $row['user_id']) {
+                                $employerid = $record['employer_id'];
+                                $capacityid = $record['capacity_id'];
+                                $query = "INSERT INTO capacity_members(employer_id, capacity_id, member_name, date) 
+                                    VALUES('$employerid', '$capacityid', '$name', '$date')";
+                                $DBconnection->query($query);
+
+                                echo "successfully reserved";
+                            } else {
+                                // echo "not logged in as user #" . $_SESSION['userID'];
+                            }
+                        } else {
+                            echo "not logged in at all";
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+function reserveResource($DBconnection)
+{
+    if (isset($_POST['resource_reserve'])) {
+
+        if (isset($_GET['id'])) {
             $name = $DBconnection->real_escape_string($_POST['name']);
             $phone = $DBconnection->real_escape_string($_POST['number']);
 
-            if(empty($name) || empty($phone)) {
+            if (empty($name) || empty($phone)) {
                 header("Location: ../viewGym.php?error=emptyfields");
                 exit();
             } else {
@@ -149,10 +192,10 @@ function reserveResource($DBconnection) {
                 $query = "SELECT * FROM gyms 
                     INNER JOIN resource_schedule ON gyms.resource_id = resource_schedule.resource_id";
                 $sequel = $DBconnection->query($query);
-                if($sequel->num_rows > 0) {
-                    while($row = $sequel->fetch_assoc()) {
+                if ($sequel->num_rows > 0) {
+                    while ($row = $sequel->fetch_assoc()) {
                         var_dump($row['gym_id']);
-                        if($_GET['id'] == $row['gym_id']) {
+                        if ($_GET['id'] == $row['gym_id']) {
                             $gotID = $_GET['id'];
                             $resourceid = $row['resource_id'];
                             echo $resourceid;
@@ -168,34 +211,6 @@ function reserveResource($DBconnection) {
                 } else {
                     echo "no sessions found!";
                 }
-            }
-        }
-    }
-}
-
-function reserveCapacity($DBconnection) {
-    if(isset($_POST['submit_capacity'])) {
-        
-        if(isset($_GET['id'])) {
-            $name = $DBconnection->real_escape_string($_POST['uid']);
-            $date = $DBconnection->real_escape_string($_POST['date']);
-
-            // TODO: 
-                // A query that selects all employers then grab the employer id and store in a variable
-                // a query that inserts the values to capacity members including the employerid
-                // the same logic should be done in resource_schedule
-                // what about capacity_id, how will we get it
-
-    
-            $sql = "SELECT * FROM employees";
-            $result = $DBconnection->query($sql);
-            if($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    $employerid = $row['employer_id'];
-                    $query = "INSERT INTO capacity_members() VALUES()";
-                }
-            } else {
-                echo "No employer records found";
             }
         }
     }

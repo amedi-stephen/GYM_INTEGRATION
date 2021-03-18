@@ -92,6 +92,7 @@ date_default_timezone_set('Africa/Nairobi');
                                 if(isset($_SESSION['userID'])) {
                                     // TODO: in resource sessions, put default values of usernames just as this
                                     // TODO: put a date created column in capacity_schedule for users booking
+                                    // TODO: add user phone numbers, but for now lets submit the following details
                                     if($_SESSION['userID'] == $row['user_id']) {
                                         echo "
                                         <input type='hidden' name='uid' value='".$row['user_name']."'>
