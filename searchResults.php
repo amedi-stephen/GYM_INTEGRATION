@@ -3,11 +3,11 @@ require "navbar.php";
 ?>
 
 <div class="container mt-4">
-    <h2 class="display-4 text-center text-primary">Search Results</h2>
+    <h2 class="display-4 text-center text-uppercase" style="margin-bottom: 40px;">Services</h2>
     <form action="searchResults.php" method="post" class="mb-4">
         <h4>Search Again</h4>
         <div class="form-inline">
-            <input type="text" name="" id="" class="form-control form-control-lg">
+            <input type="text" name="search" class="form-control form-control-lg" placeholder="Search Again">
             <button class="btn btn-outline-primary btn-lg" name="btn_search">Search</button>
         </div>
     </form>
@@ -23,7 +23,7 @@ require "navbar.php";
                         </button>
                     </h3>
                 </div>
-                <div class="card-body filter-section ">
+                <div class="card-body filter-section">
                     <form action="" method="post">
                         <div class="gender-based">
                             <h6 class="badge-primary p-2">Gender Based</h6>
@@ -164,8 +164,6 @@ require "navbar.php";
 
         <div class="search col-lg-8">
             <?php
-
-
             include "includes/dbh.inc.php";
 
             if (isset($_POST["btn_search"])) {
@@ -174,80 +172,19 @@ require "navbar.php";
                 $result_search = $DBconnection->query($QUERY_search);
                 $row_results = $result_search->num_rows;
 
+                echo '<h3 class="badge-light p-4">There are ' . $row_results . ' result(s)</h3>';
 
-                echo '<h3 class="text-primary badge-light p-4">There are ' . $row_results . ' results</h3>';
-
-                echo '<div class="container bg-dark p-2 d-flex flex-wrap justify-content-between">';
+                echo '<div class="container bg-light p-2 d-flex flex-wrap justify-content-between">';
                 if ($row_results > 0) {
                     while ($row = $result_search->fetch_assoc()) {
                         echo '    
                                 <div class="card mb-4 " style = "flex-grow: 4;">
                                     <div class="card-header">
-                                        <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
+                                        <div class="card-title">' . strtoupper($row["gym_name"]) . ' - <span class="text-muted">' . strtoupper($row["town"]) . '</span></div>
                                     </div>
                                     <div class="card-body">
-                                        <p>' . $row["address"] . '</p>
-                                        <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary">View Gym</a>
-                                    </div>
-                                </div>';
-                        echo '    
-                                <div class="card mb-4 " style = "flex-grow: 4;">
-                                    <div class="card-header">
-                                        <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>' . $row["address"] . '</p>
-                                        <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary">View Gym</a>
-                                    </div>
-                                </div>';
-                        echo '    
-                                <div class="card mb-4 " style = "flex-grow: 4;">
-                                    <div class="card-header">
-                                        <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>' . $row["address"] . '</p>
-                                        <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary">View Gym</a>
-                                    </div>
-                                </div>';
-                        echo '    
-                                <div class="card mb-4 " style = "flex-grow: 4;">
-                                    <div class="card-header">
-                                        <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>' . $row["address"] . '</p>
-                                        <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary">View Gym</a>
-                                    </div>
-                                </div>';
-                        echo '    
-                                <div class="card mb-4 " style = "flex-grow: 4;">
-                                    <div class="card-header">
-                                        <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>' . $row["address"] . '</p>
-                                        <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary">View Gym</a>
-                                    </div>
-                                </div>';
-                        echo '    
-                                <div class="card mb-4 " style = "flex-grow: 4;">
-                                    <div class="card-header">
-                                        <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>' . $row["address"] . '</p>
-                                        <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary">View Gym</a>
-                                    </div>
-                                </div>';
-                        echo '    
-                                <div class="card mb-4 " style = "flex-grow: 4;">
-                                    <div class="card-header">
-                                        <div class="card-title">' . $row["gym_name"] . ' - <span class="text-muted">' . $row["town"] . '</span></div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>' . $row["address"] . '</p>
-                                        <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary">View Gym</a>
+                                        <p>LOCATION: ' . strtoupper($row["address"]) . '</p>
+                                        <a href="viewGym.php?id='.$row['gym_id'].'" class="btn btn-outline-primary text-uppercase">View Gym <span class="ml-2">&#8594;</span></a>
                                     </div>
                                 </div>';
                     }
@@ -260,12 +197,8 @@ require "navbar.php";
                 echo "search button not executed";
             }
             ?>
-
-
         </div>
-
     </div>
-
 </div>
 
 <script>
@@ -275,6 +208,15 @@ require "navbar.php";
         // console.log(btn);
         btn.addEventListener("click", function(e) {
             e.currentTarget.parentElement.parentElement.parentElement.classList.toggle("show-filters");
+        });
+    });
+</script>
+
+<script>
+    // FIXME: make the jquery animation slidetoggle work
+    $(document).ready(function() {
+        $('.toggleBtn').click(function() {
+            $('.show-filters').slideToggle(5000);
         });
     });
 </script>

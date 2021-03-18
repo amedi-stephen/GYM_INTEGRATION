@@ -4,7 +4,7 @@ include 'includes/processSchedule.inc.php';
 date_default_timezone_set('Africa/Nairobi');
 ?>
 
-<div class="container mt-4">
+<div class="container-fluid mt-4">
     <?php
     if (isset($_GET['id'])) {
         $id = $DBconnection->real_escape_string($_GET['id']);
@@ -13,11 +13,11 @@ date_default_timezone_set('Africa/Nairobi');
 
         if ($gym = $result->fetch_assoc()) {
             echo '
-            <h2 class="display-4 text-primary text-center">' . $gym['gym_name'] . '</h2>
+            <h2 class="display-4 text-center" style="margin-bottom: 80px;">' . strtoupper($gym['gym_name']) . '</h2>
             <div class="row">
     
                 <div class="gym-section col-md-8">
-                    <div class="d-flex">
+                    <div class="d-flex justify-content-between">
                         <img src="images/dummy.jpg" style="width:300px; height: 300px;" class="mr-2">
                         <img src="images/dummy.jpg" style="width:300px; height: 300px;">
                     </div>
@@ -25,60 +25,59 @@ date_default_timezone_set('Africa/Nairobi');
                     
                     <div class="service-amenities mb-4">
                         <h3 class="badge-light p-2">Amenities</h3>';
-            $amenitiesArr = unserialize($gym['amenities']);
-            foreach ($amenitiesArr as $key => $item) {
-                echo '
-                    <ul class="list-group">
-                    <li class="list-group-item">' . $item . '</li> 
-                </ul>
-                    ';
-            }
+                        $amenitiesArr = unserialize($gym['amenities']);
+                        foreach ($amenitiesArr as $key => $item) {
+                            echo '
+                                <ul class="list-group">
+                                <li class="list-group-item">' . $item . '</li> 
+                            </ul>
+                                ';
+                        }
 
-            echo '
-                
-            </div>
-            <div class="service-classes mb-4">
-                <h3 class="badge-light p-2">Classes</h3>';
-            $classesArr = unserialize($gym['classes']);
-            foreach ($classesArr as $key => $class) {
-                echo '
-                    <ul class="list-group">
-                    <li class="list-group-item">' . $class . '</li> 
-                </ul>
-                    ';
-            }
-            echo '
-            </div>
-            <div class="service-equipments mb-4">
-                <h3 class="badge-light p-2">Equipments</h3>';
-            $equipArr = unserialize($gym['equipments']);
-            foreach ($equipArr as $key => $equip) {
-                echo '
-                    <ul class="list-group">
-                        <li class="list-group-item">' . $equip . '</li> 
-                    </ul>
-                    ';
-            }
-            echo '
-            <h3 class="badge-light p-2 mt-4">Other Details</h3>
-                <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Opening hours
-                        <span class="badge badge-primary badge-pill"> ' . $gym['opened_at'] . ' - ' . $gym['closed_at'] . '</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Maximum capacity per session
-                        <span class="badge badge-primary badge-pill">' . $gym['full_capacity'] . '</span>
-                    </li>
-                    
-                </ul>
-            </div>
-            ';
-    ?>
+                    echo '
+                        
+                    </div>
+                    <div class="service-classes mb-4">
+                        <h3 class="badge-light p-2">Classes</h3>';
+                    $classesArr = unserialize($gym['classes']);
+                    foreach ($classesArr as $key => $class) {
+                        echo '
+                            <ul class="list-group">
+                            <li class="list-group-item">' . $class . '</li> 
+                        </ul>
+                            ';
+                    }
+                    echo '
+                    </div>
+                    <div class="service-equipments mb-4">
+                        <h3 class="badge-light p-2">Equipments</h3>';
+                    $equipArr = unserialize($gym['equipments']);
+                    foreach ($equipArr as $key => $equip) {
+                        echo '
+                            <ul class="list-group">
+                                <li class="list-group-item">' . $equip . '</li> 
+                            </ul>
+                            ';
+                    }
+                    echo '
+                    <h3 class="badge-light p-2 mt-4">Other Details</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Opening hours
+                                <span class="badge badge-primary badge-pill"> ' . $gym['opened_at'] . ' - ' . $gym['closed_at'] . '</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Maximum capacity per session
+                                <span class="badge badge-primary badge-pill">' . $gym['full_capacity'] . '</span>
+                            </li>
+                            
+                        </ul>
+                    </div>';
+                    ?>
             <?php
-            echo "
-            <h3 class='badge-light p-2 mt-4'>Capacity sessions</h3>
-            <div class='float-right'>";
+                echo "
+                <h3 class='badge-light p-2 mt-4'>Capacity sessions</h3>
+                <div class='float-right'>";
                
                $query = 'SELECT * FROM capacity_schedule';
                $sequel = $DBconnection->query($query);
@@ -106,8 +105,10 @@ date_default_timezone_set('Africa/Nairobi');
                                         echo "
                                         <input type='hidden' name='uid' value='".$row['user_name']."'>
                                         <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
-                                        <button type='submit' name='submit_capacity' class='btn btn-primary'>Book</button>
+                                        <button type='submit' name='submit_capacity' class='btn btn-primary'>Book <span class='ml-2'>&#8594;</span></button>
                                         ";
+                                    }  else {
+                                        echo "<button type='button' class='btn btn-primary' disabled>Book <span class='ml-2'>&#8594;</span></button>";
                                     }
                                 }
                             }
@@ -152,7 +153,7 @@ date_default_timezone_set('Africa/Nairobi');
                                             <td>" . $row['opening_hrs'] . "</td>
                                             <td>" . $row['closing_hrs'] . "</td>
                                             <td>
-                                                <a href='javascript:void(0)' class='btn btn-primary btn-sm modal-btn'>Book session</a>
+                                                <a href='javascript:void(0)' class='btn btn-primary btn-sm modal-btn'>Book session <span class='ml-2'>&#8594;</span></a>
                                             </td>
                                         <tr>";
                             }
@@ -175,7 +176,7 @@ date_default_timezone_set('Africa/Nairobi');
         }
                 ?>
 
-                <div class="comment-section col-md-4">
+                <div class="comment-section col-md-4 float-right">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Comments</h3>
