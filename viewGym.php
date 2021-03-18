@@ -75,16 +75,22 @@ date_default_timezone_set('Africa/Nairobi');
             </div>
             ';
     ?>
-
+            <?php
+            echo "
             <h3 class='badge-light p-2 mt-4'>Capacity sessions</h3>
-            <div class="d-flex flex-wrap justify-content-around">
-               <?php
-               echo " 
-                <div class='card mb-4' style='width: 18rem;'>
+            <div class='float-right'>";
+               
+               $query = 'SELECT * FROM capacity_schedule';
+               $sequel = $DBconnection->query($query);
+               while($record = $sequel->fetch_assoc()) {
+                //    TODO: how can we make it display only an employers/gym shedule
+                if($_GET['id']) {
+                    echo "
+                    <div class='card mb-4' style='width: 18rem;'>
                     <div class='card-body'>
-                        <h5 class='card-title'>sharks sharks sharks</h5>
-                        <h6 class='card-subtitle mb-2 text-muted'>Card subtitle</h6>
-                        <p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 class='card-title'>".$record['title']."</h5>
+                        <h6 class='card-subtitle mb-2 text-muted'>ksh. ".$record['price']."</h6>
+                        <p class='card-text'>".$record['description']."</p>
                         <form method='post' action='".reserveCapacity($DBconnection)."' class='d-inline'>";
                             $sql = "SELECT * FROM users";
                             $result = $DBconnection->query($sql);
@@ -94,6 +100,8 @@ date_default_timezone_set('Africa/Nairobi');
                                     // TODO: put a date created column in capacity_schedule for users booking
                                     // TODO: add user phone numbers, but for now lets submit the following details
                                     if($_SESSION['userID'] == $row['user_id']) {
+                                        // FIXME: a lot of data redundancy during a single submission
+                                        // FIXME: also, when you book the other capacity schedules, it still submits the first id number
                                         echo "
                                         <input type='hidden' name='uid' value='".$row['user_name']."'>
                                         <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
@@ -102,17 +110,18 @@ date_default_timezone_set('Africa/Nairobi');
                                     }
                                 }
                             }
+                            // TODO: Find a way to calculate if a user books, the number gets added
+                            // ideas include using AJAX for data update without reloading the page
                             echo "
                         </form>
-                        <span class='badge badge-pill badge-primary float-right p-2'>1/300</span>
+                        <span class='badge badge-pill badge-primary float-right p-2'>1/".$record['max_pple']."</span>
                     </div>
-                </div>
-            </div>";
+                    </div>
+                    </div>";
+                    
+                }
+               }
             ?>
-
-            <!-- TODO: 
-                put a form input of hidden: username, capacity per session, 
-             -->
 
             <div class='container-fluid'>
                 <h3 class='badge-light p-2 mt-4'>Resource sessions</h3>
