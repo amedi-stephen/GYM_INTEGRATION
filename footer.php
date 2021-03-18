@@ -1,5 +1,5 @@
     <div class="container-fluid bg-dark text-center p-2 mt-4">
-        <p class="text-white">copyright</p>
+        <p class="text-white text-muted">2021 &#169; Final Year Project. All rights reserved</p>
     </div>
     
 

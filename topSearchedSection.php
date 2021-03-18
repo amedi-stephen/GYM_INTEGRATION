@@ -1,5 +1,5 @@
 <div class="container top-searched-section">
-    <h2 class="display-4 text-center" style="margin-bottom: 40px;">Top Searched Major Towns</h2>
+    <h2 class="display-4 text-center text-uppercase" style="margin-bottom: 40px;">Top Searched Major Towns</h2>
     <div class="container d-flex justify-content-between mt-4">
         <div class="card mr-2">
             <!-- FIXME:
