@@ -145,6 +145,7 @@ function reserveResource($DBconnection) {
             } else {
                 // $query = "SELECT * FROM gyms";
                 // FIXME: the form is not being submitted to the database
+                // FIXME: need to come up with a working query
                 $query = "SELECT * FROM gyms 
                     INNER JOIN resource_schedule ON gyms.resource_id = resource_schedule.resource_id";
                 $sequel = $DBconnection->query($query);
@@ -174,6 +175,28 @@ function reserveResource($DBconnection) {
 
 function reserveCapacity($DBconnection) {
     if(isset($_POST['submit_capacity'])) {
-        echo "form submitted";
+        
+        if(isset($_GET['id'])) {
+            $name = $DBconnection->real_escape_string($_POST['uid']);
+            $date = $DBconnection->real_escape_string($_POST['date']);
+
+            // TODO: 
+                // A query that selects all employers then grab the employer id and store in a variable
+                // a query that inserts the values to capacity members including the employerid
+                // the same logic should be done in resource_schedule
+                // what about capacity_id, how will we get it
+
+    
+            $sql = "SELECT * FROM employees";
+            $result = $DBconnection->query($sql);
+            if($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    $employerid = $row['employer_id'];
+                    $query = "INSERT INTO capacity_members() VALUES()";
+                }
+            } else {
+                echo "No employer records found";
+            }
+        }
     }
 }
