@@ -1,20 +1,33 @@
 .banner-cover {
-  background-image: url("../images/dummy.jpg");
+  background-image: url("../images/squats.jpg");
   height: 90vh;
   background-position: center;
   background-size: cover;
-  clip-path: polygon(0 0, 100% 0, 100% 75%, 0% 100%);
+  position: relative;
 }
 .banner-content {
-  height: 90vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .bg-fluid {
-  background-image: url("../images/dummy.jpg");
-  /* height: 90vh; */
+  background-image: url("../images/dark-gym.jpg");
+  height: 200px;
+  padding: 0 20%;
   background-position: center;
   background-size: cover;
-  /* clip-path: polygon(0 0, 100% 0, 100% 75%, 0% 100%); */
+}
+
+.top-searched-section {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.service-section {
+  margin-top: 80px;
+  margin-bottom: 80px;
 }
 
 .dropdown {

@@ -102,6 +102,7 @@ date_default_timezone_set('Africa/Nairobi');
                                     if($_SESSION['userID'] == $row['user_id']) {
                                         // FIXME: a lot of data redundancy during a single submission
                                         // FIXME: also, when you book the other capacity schedules, it still submits the first id number
+    
                                         echo "
                                         <input type='hidden' name='uid' value='".$row['user_name']."'>
                                         <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>

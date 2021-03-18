@@ -1,5 +1,5 @@
-<div class="container">
-    <h2 class="display-4 text-primary text-center">Services</h2>
+<div class="container service-section">
+    <h2 class="display-4 text-center" style="margin-bottom: 40px;">Services</h2>
     <div class="container d-flex justify-content-between">
         <div class="card mr-2">
             <div class="card-header">
