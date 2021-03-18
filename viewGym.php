@@ -1,6 +1,7 @@
 <?php
 include "navbar.php";
 include 'includes/processSchedule.inc.php';
+date_default_timezone_set('Africa/Nairobi');
 ?>
 
 <div class="container mt-4">
@@ -74,6 +75,44 @@ include 'includes/processSchedule.inc.php';
             </div>
             ';
     ?>
+
+            <h3 class='badge-light p-2 mt-4'>Capacity sessions</h3>
+            <div class="d-flex flex-wrap justify-content-around">
+               <?php
+               echo " 
+                <div class='card mb-4' style='width: 18rem;'>
+                    <div class='card-body'>
+                        <h5 class='card-title'>sharks sharks sharks</h5>
+                        <h6 class='card-subtitle mb-2 text-muted'>Card subtitle</h6>
+                        <p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <form method='post' action='".reserveCapacity($DBconnection)."' class='d-inline'>";
+                            $sql = "SELECT * FROM users";
+                            $result = $DBconnection->query($sql);
+                            while($row = $result->fetch_assoc()) {
+                                if(isset($_SESSION['userID'])) {
+                                    // TODO: in resource sessions, put default values of usernames just as this
+                                    // TODO: put a date created column in capacity_schedule for users booking
+                                    if($_SESSION['userID'] == $row['user_id']) {
+                                        echo "
+                                        <input type='hidden' name='uid' value='".$row['user_name']."'>
+                                        <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
+                                        <button type='submit' name='submit_capacity' class='btn btn-primary'>Book</button>
+                                        ";
+                                    }
+                                }
+                            }
+                            echo "
+                        </form>
+                        <span class='badge badge-pill badge-primary float-right p-2'>1/300</span>
+                    </div>
+                </div>
+            </div>";
+            ?>
+
+            <!-- TODO: 
+                put a form input of hidden: username, capacity per session, 
+             -->
+
             <div class='container-fluid'>
                 <h3 class='badge-light p-2 mt-4'>Resource sessions</h3>
                 <table class='table'>
@@ -104,44 +143,26 @@ include 'includes/processSchedule.inc.php';
                                             <td>
                                                 <a href='javascript:void(0)' class='btn btn-primary btn-sm modal-btn'>Book session</a>
                                             </td>
-                                        <tr>
-                             
-                            ";
+                                        <tr>";
                             }
                         } else {
                             echo "No record found";
                         }
                     }
                 }
-
                 echo "
             </tbody>
             </table>
+            
         </div>
         
         </div>
     </div>";
             }
-            $result->free_result();
         } else {
             echo "no got staff";
         }
                 ?>
-
-<div class='container-fluid'>
-                <h3 class='badge-light p-2 mt-4'>Sessions</h3>
-                <table class='table'>
-                    <thead>
-                        <tr>
-                            <th scope='col'>Resource Name</th>
-                            <th scope='col'>Starting Date</th>
-                            <th scope='col'>Opening hrs</th>
-                            <th scope='col'>Closing hrs</th>
-                            <th scope='col'>Book Session</th>
-                        <tr>
-                    </thead>
-                    <tbody>
-
 
                 <div class="comment-section col-md-4">
                     <div class="card">
@@ -229,6 +250,7 @@ include 'includes/processSchedule.inc.php';
 
 
 <script>
+    // FIXME: only the single button is showing the modal, we need to use querySelectorAll and loop them
     const openBtn = document.querySelector(".modal-btn");
     const modalOverlay = document.querySelector(".modal-overlay");
     const closeBtn = document.querySelector(".close-btn");

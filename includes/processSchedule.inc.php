@@ -171,3 +171,9 @@ function reserveResource($DBconnection) {
         }
     }
 }
+
+function reserveCapacity($DBconnection) {
+    if(isset($_POST['submit_capacity'])) {
+        echo "form submitted";
+    }
+}
