@@ -261,11 +261,14 @@ date_default_timezone_set('Africa/Nairobi');
 
 <script>
     // FIXME: only the single button is showing the modal, we need to use querySelectorAll and loop them
-    const openBtn = document.querySelector(".modal-btn");
+    const openBtns = document.querySelectorAll(".modal-btn");
     const modalOverlay = document.querySelector(".modal-overlay");
     const closeBtn = document.querySelector(".close-btn");
 
-    openBtn.addEventListener('click', openModal);
+    // openBtn.addEventListener('click', openModal);
+    openBtns.forEach(btn => {
+        btn.addEventListener('click', openModal);
+    });
     closeBtn.addEventListener('click', closeModal);
 
 
