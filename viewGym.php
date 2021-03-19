@@ -107,8 +107,6 @@ date_default_timezone_set('Africa/Nairobi');
                                         <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
                                         <button type='submit' name='submit_capacity' class='btn btn-primary'>Book <span class='ml-2'>&#8594;</span></button>
                                         ";
-                                    }  else {
-                                        echo "<button type='button' class='btn btn-primary' disabled>Book <span class='ml-2'>&#8594;</span></button>";
                                     }
                                 }
                             }
