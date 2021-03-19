@@ -33,8 +33,11 @@ function togglePassword() {
     const password = document.getElementById("password");
     if(password.type === "password") {
         password.type = "text";
+        document.getElementById('textPwd').textContent = 'Hide password';
+        
     } else {
         password.type = "password";
+        document.getElementById('textPwd').textContent = 'Show password';
     }
 }
 

@@ -70,7 +70,7 @@
             echo "
                 <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
                 <div class='container'>
-                    <a class='navbar-brand' href='index.php'><i class='fa fa-location-arrow'></i> Gym Navigator</a>
+                    <a class='navbar-brand brand' href='index.php'><i class='fa fa-compass'></i> Gym Navigator</a>
         
                     <ul class='navbar-nav my-2 my-lg-0'>
                         <li class='nav-item'>

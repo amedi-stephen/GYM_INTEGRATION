@@ -14,9 +14,9 @@ date_default_timezone_set('Africa/Nairobi');
         if ($gym = $result->fetch_assoc()) {
             echo '
             <h2 class="display-4 text-center" style="margin-bottom: 80px;">' . strtoupper($gym['gym_name']) . '</h2>
-            <div class="row">
+            <div class="d-flex justify-content-between align-items-center">
     
-                <div class="gym-section col-md-8">
+                <div class="gym-section">
                     <div class="d-flex justify-content-between">
                         <img src="images/dummy.jpg" style="width:300px; height: 300px;" class="mr-2">
                         <img src="images/dummy.jpg" style="width:300px; height: 300px;">
@@ -25,41 +25,41 @@ date_default_timezone_set('Africa/Nairobi');
                     
                     <div class="service-amenities mb-4">
                         <h3 class="badge-light p-2">Amenities</h3>';
-                        $amenitiesArr = unserialize($gym['amenities']);
-                        foreach ($amenitiesArr as $key => $item) {
-                            echo '
+            $amenitiesArr = unserialize($gym['amenities']);
+            foreach ($amenitiesArr as $key => $item) {
+                echo '
                                 <ul class="list-group">
                                 <li class="list-group-item">' . $item . '</li> 
                             </ul>
                                 ';
-                        }
+            }
 
-                    echo '
+            echo '
                         
                     </div>
                     <div class="service-classes mb-4">
                         <h3 class="badge-light p-2">Classes</h3>';
-                    $classesArr = unserialize($gym['classes']);
-                    foreach ($classesArr as $key => $class) {
-                        echo '
+            $classesArr = unserialize($gym['classes']);
+            foreach ($classesArr as $key => $class) {
+                echo '
                             <ul class="list-group">
                             <li class="list-group-item">' . $class . '</li> 
                         </ul>
                             ';
-                    }
-                    echo '
+            }
+            echo '
                     </div>
                     <div class="service-equipments mb-4">
                         <h3 class="badge-light p-2">Equipments</h3>';
-                    $equipArr = unserialize($gym['equipments']);
-                    foreach ($equipArr as $key => $equip) {
-                        echo '
+            $equipArr = unserialize($gym['equipments']);
+            foreach ($equipArr as $key => $equip) {
+                echo '
                             <ul class="list-group">
                                 <li class="list-group-item">' . $equip . '</li> 
                             </ul>
                             ';
-                    }
-                    echo '
+            }
+            echo '
                     <h3 class="badge-light p-2 mt-4">Other Details</h3>
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -73,54 +73,53 @@ date_default_timezone_set('Africa/Nairobi');
                             
                         </ul>
                     </div>';
-                    ?>
+    ?>
             <?php
-                echo "
+            echo "
                 <h3 class='badge-light p-2 mt-4'>Capacity sessions</h3>
                 <div class='float-right'>";
-               
-               $query = 'SELECT * FROM capacity_schedule';
-               $sequel = $DBconnection->query($query);
-               while($record = $sequel->fetch_assoc()) {
+
+            $query = 'SELECT * FROM capacity_schedule';
+            $sequel = $DBconnection->query($query);
+            while ($record = $sequel->fetch_assoc()) {
                 //    TODO: how can we make it display only an employers/gym shedule
-                if($_GET['id']) {
+                if ($_GET['id']) {
                     echo "
                     <div class='card mb-4' style='width: 18rem;'>
                     <div class='card-body'>
-                    <h5 class='card-title'>".$record['title']."</h5>
-                        <h6 class='card-subtitle mb-2 text-muted'>ksh. ".$record['price']."</h6>
-                        <p class='card-text'>".$record['description']."</p>
-                        <form method='post' action='".reserveCapacity($DBconnection)."' class='d-inline'>";
-                            $sql = "SELECT * FROM users";
-                            $result = $DBconnection->query($sql);
-                            while($row = $result->fetch_assoc()) {
-                                if(isset($_SESSION['userID'])) {
-                                    // TODO: in resource sessions, put default values of usernames just as this
-                                    // TODO: put a date created column in capacity_schedule for users booking
-                                    // TODO: add user phone numbers, but for now lets submit the following details
-                                    if($_SESSION['userID'] == $row['user_id']) {
-                                        // FIXME: a lot of data redundancy during a single submission
-                                        // FIXME: also, when you book the other capacity schedules, it still submits the first id number
-    
-                                        echo "
-                                        <input type='hidden' name='uid' value='".$row['user_name']."'>
-                                        <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
+                    <h5 class='card-title'>" . $record['title'] . "</h5>
+                        <h6 class='card-subtitle mb-2 text-muted'>ksh. " . $record['price'] . "</h6>
+                        <p class='card-text'>" . $record['description'] . "</p>
+                        <form method='post' action='" . reserveCapacity($DBconnection) . "' class='d-inline'>";
+                    $sql = "SELECT * FROM users";
+                    $result = $DBconnection->query($sql);
+                    while ($row = $result->fetch_assoc()) {
+                        if (isset($_SESSION['userID'])) {
+                            // TODO: in resource sessions, put default values of usernames just as this
+                            // TODO: put a date created column in capacity_schedule for users booking
+                            // TODO: add user phone numbers, but for now lets submit the following details
+                            if ($_SESSION['userID'] == $row['user_id']) {
+                                // FIXME: a lot of data redundancy during a single submission
+                                // FIXME: also, when you book the other capacity schedules, it still submits the first id number
+
+                                echo "
+                                        <input type='hidden' name='uid' value='" . $row['user_name'] . "'>
+                                        <input type='hidden' name='date' value='" . date('Y-m-d H:i:s') . "'>
                                         <button type='submit' name='submit_capacity' class='btn btn-primary'>Book <span class='ml-2'>&#8594;</span></button>
                                         ";
-                                    }
-                                }
                             }
-                            // TODO: Find a way to calculate if a user books, the number gets added
-                            // ideas include using AJAX for data update without reloading the page
-                            echo "
+                        }
+                    }
+                    // TODO: Find a way to calculate if a user books, the number gets added
+                    // ideas include using AJAX for data update without reloading the page
+                    echo "
                         </form>
-                        <span class='badge badge-pill badge-primary float-right p-2'>1/".$record['max_pple']."</span>
+                        <span class='badge badge-pill badge-primary float-right p-2'>1/" . $record['max_pple'] . "</span>
                     </div>
                     </div>
                     </div>";
-                    
                 }
-               }
+            }
             ?>
 
             <div class='container-fluid'>
@@ -143,7 +142,6 @@ date_default_timezone_set('Africa/Nairobi');
                     if ($result) {
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
-                                // TODO: the other buttons are not showing the modal
                                 echo "
                                         <tr>
                                             <td>" . $row['resource_name'] . "</td>
@@ -174,8 +172,8 @@ date_default_timezone_set('Africa/Nairobi');
         }
                 ?>
 
-                <div class="comment-section col-md-4 float-right">
-                    <div class="card">
+                <div class="comment-section mb-4">
+                    <div class="card" style="width: 30rem">
                         <div class="card-header">
                             <h3 class="card-title">Comments</h3>
                         </div>
@@ -194,6 +192,7 @@ date_default_timezone_set('Africa/Nairobi');
                                     </div>
                                 </li>
                                 <hr>
+                                <!-- TODO: put appropriate images from the database -->
                                 <li class="media mb-4">
                                     <a href="#" class="pull-left">
                                         <img src="images/dummy.jpg" width="45" height="45" class="mr-2">
@@ -224,9 +223,7 @@ date_default_timezone_set('Africa/Nairobi');
                             </form>
                         </div>
                     </div>
-
                 </div>
-
             </div>
 </div>
 
@@ -260,17 +257,15 @@ date_default_timezone_set('Africa/Nairobi');
 
 
 <script>
-    // FIXME: only the single button is showing the modal, we need to use querySelectorAll and loop them
     const openBtns = document.querySelectorAll(".modal-btn");
     const modalOverlay = document.querySelector(".modal-overlay");
     const closeBtn = document.querySelector(".close-btn");
 
-    // openBtn.addEventListener('click', openModal);
     openBtns.forEach(btn => {
         btn.addEventListener('click', openModal);
     });
-    closeBtn.addEventListener('click', closeModal);
 
+    closeBtn.addEventListener('click', closeModal);
 
     function openModal() {
         modalOverlay.classList.add('open-modal');
@@ -278,5 +273,9 @@ date_default_timezone_set('Africa/Nairobi');
 
     function closeModal() {
         modalOverlay.classList.remove('open-modal');
+    }
+
+    function setCapacityNumber() {
+
     }
 </script>

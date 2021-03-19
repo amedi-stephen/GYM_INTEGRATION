@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Chango&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+.brand {
+  font-family: 'Chango', cursive;
+}
 .banner-cover {
   background-image: url("../images/squats.jpg");
   height: 90vh;
