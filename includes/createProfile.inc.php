@@ -4,15 +4,14 @@ session_start();
 include "dbh.inc.php";
 
 if(isset($_POST["submitProfile"])) {
-    $gender = $_POST["gender"];
-    $userInfo = $_POST["userInfo"];
-    $fitnessGoal = $_POST["fitnessGoal"];
-    $fitnessDuration = $_POST["fitnessDuration"];
-    $fitnessActivities = serialize($_POST["fitnessActivities"]);
-    $gymLikables = serialize($_POST["gymLikables"]);
+    $gender = $DBconnection->real_escape_string($_POST["gender"]);
+    $userInfo = $DBconnection->real_escape_string($_POST["userInfo"]);
+    $fitnessGoal = $DBconnection->real_escape_string($_POST["fitnessGoal"]);
+    $fitnessActivities = $DBconnection->real_escape_string(serialize($_POST["fitnessActivities"]));
+    $gymLikables = $DBconnection->real_escape_string(serialize($_POST["gymLikables"]));
 
-    if(empty($gender) || empty($userInfo) || empty($fitnessGoal) || empty($fitnessDuration) || empty($fitnessActivities) || empty($gymLikables)) {
-        header("Location: ../userSettings.php");
+    if(empty($gender) || empty($userInfo) || empty($fitnessGoal) || empty($fitnessActivities) || empty($gymLikables)) {
+        header("Location: ../accountSettings.php");
         exit();
     } else {
         $QUERY_join = "SELECT * FROM users";
@@ -21,17 +20,17 @@ if(isset($_POST["submitProfile"])) {
             if(isset($_SESSION["userID"])) {
                 $userid = $row["user_id"];
                 if($_SESSION["userID"] == $userid) {
-                    $QUERY = "INSERT INTO userprofiles(user_id, userProfiles_goal, userProfiles_text, userProfiles_activities, userProfiles_preferrables, userProfile_gender, userProfile_goalduration)
-                        VALUES('$userid', '$fitnessGoal', '$userInfo', '$fitnessActivities', '$gymLikables', '$gender', '$fitnessDuration')";
+                    $QUERY = "INSERT INTO userprofiles(user_id, userProfiles_goal, userProfiles_text, userProfiles_activities, userProfiles_preferrables, userProfile_gender)
+                        VALUES('$userid', '$fitnessGoal', '$userInfo', '$fitnessActivities', '$gymLikables', '$gender')";
                     $result_insert = $DBconnection->query($QUERY);
-                    header("Location: ../userSettings.php?status=success");
+                    header("Location: ../accountSettings.php?status=success");
                     exit();
                 }
             }
         }
     }
 } else {
-    header("Location: ../userSettings.php");
+    header("Location: ../accountSettings.php");
     exit();
 }
 

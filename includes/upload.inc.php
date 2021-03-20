@@ -26,20 +26,20 @@ if(isset($_POST["submit_upload"])) {
                 $QUERY_UpdateImg = "UPDATE profileimg SET img_status = 0 WHERE user_id='$userSessionId'";
                 $RESULT_queryUpdateImg = $DBconnection->query($QUERY_UpdateImg);
 
-                header("Location: ../createProfile.php?upload=success");
+                header("Location: ../userSettings.php?upload=success");
                 exit();
 
                 // echo "Image uploaded successfully";
             } else {
-                header("Location: ../createProfile.php?error=checksize");
+                header("Location: ../userSettings.php?error=checksize");
                 exit();
             }
         } else {
-            header("Location: ../createProfile.php?error=fileerror");
+            header("Location: ../userSettings.php?error=fileerror");
             exit();
         }
     } else {
-        header("Location: ../createProfile.php?error=checkfiletype");
+        header("Location: ../userSettings.php?error=checkfiletype");
         exit();
     }
 }
