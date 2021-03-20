@@ -44,12 +44,15 @@
                 
                             <div class='collapse navbar-collapse' id='navbarColor01'>
                                 <ul class='navbar-nav mr-auto'>
+                                    <li class='nav-item'>
+                                        <a class='nav-link'>Hi, ".ucwords($row['user_name'])."</a>
+                                    </li>
                                     <li class='nav-item dropdown'>
                                         <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='javascript:void(0)' role='button' aria-haspopup='true' aria-expanded='false'>MENU</a>
                                         <div class='dropdown-menu'>
                                         <a class='dropdown-item' href='dashboard.php'><i class='fa fa-clipboard'></i> Dashboard</a>
-                                        <a class='dropdown-item' href='createProfile.php'><i class='far fa-user'></i> View Profile</a>
-                                        <a class='dropdown-item' href='#'><i class='fa fa-cog'></i> Settings</a>
+                                        <a class='dropdown-item' href='profile.php'><i class='far fa-user'></i> View Profile</a>
+                                        <a class='dropdown-item' href='userSettings.php'><i class='fa fa-cog'></i> Settings</a>
                                         <div class='dropdown-divider'></div>
                                         <form class='dropdown-item' action='includes/logout.inc.php' method='post'>
                                             <i class='fa fa-sign-out-alt'></i> Log Out

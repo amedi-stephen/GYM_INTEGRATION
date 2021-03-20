@@ -12,7 +12,7 @@ if(isset($_POST["submitProfile"])) {
     $gymLikables = serialize($_POST["gymLikables"]);
 
     if(empty($gender) || empty($userInfo) || empty($fitnessGoal) || empty($fitnessDuration) || empty($fitnessActivities) || empty($gymLikables)) {
-        header("Location: ../createProfile.php");
+        header("Location: ../userSettings.php");
         exit();
     } else {
         $QUERY_join = "SELECT * FROM users";
@@ -24,14 +24,14 @@ if(isset($_POST["submitProfile"])) {
                     $QUERY = "INSERT INTO userprofiles(user_id, userProfiles_goal, userProfiles_text, userProfiles_activities, userProfiles_preferrables, userProfile_gender, userProfile_goalduration)
                         VALUES('$userid', '$fitnessGoal', '$userInfo', '$fitnessActivities', '$gymLikables', '$gender', '$fitnessDuration')";
                     $result_insert = $DBconnection->query($QUERY);
-                    header("Location: ../createProfile.php?status=success");
+                    header("Location: ../userSettings.php?status=success");
                     exit();
                 }
             }
         }
     }
 } else {
-    header("Location: ../createProfile.php");
+    header("Location: ../userSettings.php");
     exit();
 }
 

@@ -30,7 +30,7 @@ require "navbar.php";
                     <a href="#" class="form-text small">Forgot your password?</a>
                 </div>
                 <small id="terms" class="form-text text-muted mb-4">By logging in, you agree to Gym Navigator's Privacy Policy and Terms of Use.</small>
-                <button type="submit" name="submitLogin" class="btn btn-primary btn-block text-uppercase mb-4">Log In</button>
+                <button type="submit" name="submitLogin" class="btn btn-primary btn-block text-uppercase mb-4">sign in</button>
                 <small id="terms" class="form-text text-muted mb-4">Not a member? <a href="signup.php">Join us</a></small>
             </form>
         </div>
