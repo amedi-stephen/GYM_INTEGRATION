@@ -4,44 +4,72 @@ require "navbar.php";
 ?>
 
 <div class="container mt-4">
-
-    <div class="card">
+    <h2>Settings</h2>
+    <div class="d-flex justify-content-between">
+        <ul class='list-group' style='width: 18rem;'>
+            <li class='list-group-item'><a href="#"><i class="fa fa-share-alt"></i> Profile Visiblility</a></li>
+            <li class='list-group-item'><a href="#"><i class="fa fa-user"></i> Account Details</a></li>
+        </ul>
         <div class="container">
-
-
+            <h2>Profile Visibility</h2>
             <form action="includes/upload.inc.php" method="post" enctype="multipart/form-data">
-                <div class="container">
-                    <?php
-                    $QUERY_allUsers = "SELECT * FROM users";
-                    $RESULT_allUsers = $DBconnection->query($QUERY_allUsers);
-                    if ($RESULT_allUsers->num_rows > 0) {
-                        while ($row = $RESULT_allUsers->fetch_assoc()) {
-                            if (isset($_SESSION["userID"])) {
-                                if ($_SESSION["userID"] == $row["user_id"]) {
-                                    $userid = $row["user_id"];
-                                    $QUERY_image = "SELECT * FROM profileimg WHERE user_id='$userid'";
-                                    $RESULT_image = $DBconnection->query($QUERY_image);
-                                    while ($row_image = $RESULT_image->fetch_assoc()) {
-                                        if ($row_image["img_status"] == 0) {
-                                            echo "<img src='uploads/profile" . $userid . ".jpg' class='p-4' style='width: 200px; height: 200px;'>";
-                                        } else {
-                                            echo "<img src='uploads/default.webp' class='p-4' style='width: 200px; height: 200px;'>";
+                <div class="d-flex align-items-center align-content-center">
+                    <div class="user-profile">
+                        <?php
+                        $QUERY_allUsers = "SELECT * FROM users";
+                        $RESULT_allUsers = $DBconnection->query($QUERY_allUsers);
+                        if ($RESULT_allUsers->num_rows > 0) {
+                            while ($row = $RESULT_allUsers->fetch_assoc()) {
+                                if (isset($_SESSION["userID"])) {
+                                    if ($_SESSION["userID"] == $row["user_id"]) {
+                                        $userid = $row["user_id"];
+                                        $QUERY_image = "SELECT * FROM profileimg WHERE user_id='$userid'";
+                                        $RESULT_image = $DBconnection->query($QUERY_image);
+                                        while ($row_image = $RESULT_image->fetch_assoc()) {
+                                            if ($row_image["img_status"] == 0) {
+                                                echo "<img src='uploads/profile" . $userid . ".jpg' class='p-4' style='width: 200px; height: 200px;'>";
+                                            } else {
+                                                echo "<img src='uploads/default.webp' class='p-4' style='width: 200px; height: 200px;'>";
+                                            }
                                         }
                                     }
                                 }
                             }
+                        } else {
+                            echo "error occured";
                         }
-                    } else {
-                        echo "error occured";
-                    }
-                    ?>
+                        ?>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label for="file">Profile Display</label> -->
+                        <p>Profile Display</p>
+                        <input type="file" class="form-control-file mb-4" id="exampleInputFile" aria-describedby="fileHelp" name="file">
+                        <button type="submit" class="btn btn-outline-primary" name="submit_upload">Edit</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
-                    <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="file">
-                    <button type="submit" class="btn btn-primary" name="submit_upload">Upload</button>
-                </div>
+
             </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container mt-4">
+    <h2 class='mb-4'>Settings</h2>
+    <div class="card">
+        <div class="container">
+
+
+            
             <form action="includes/createProfile.inc.php" method="post">
                 <h4 class="text-primary badge-light p-2">Fill in the following details</h4>
                 <div class="form-group mb-4 custom-control custom-radio">
@@ -57,13 +85,9 @@ require "navbar.php";
                 <div class="form-group mb-4">
                     <label for="fitnessGoal">What is your main goal in fitness?</label>
                     <input type="text" name="fitnessGoal" id="fitnessGoal" class="form-control">
-                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                   
                 </div>
-                <div class="form-group mb-4">
-                    <label for="fitnessDuration">You want to achieve this goal in how many months</label>
-                    <input type="number" name="fitnessDuration" id="fitnessDuration" class="form-control">
-                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                </div>
+
                 <div class="form-group mb-4">
                     <label for="fitnessActivities">Select your fitness activities. Press command or control when clicking to select multiple items</label>
                     <select multiple="multiple_activities" class="form-control" id="fitnessActivities" name="fitnessActivities[]">
@@ -89,10 +113,10 @@ require "navbar.php";
         </div>
     </div>
 </div>
-</div>
+</div> -->
 
 <script src="js/app.js"></script>
 
 <?php
-    require "footer.php";
+require "footer.php";
 ?>
