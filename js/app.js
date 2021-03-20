@@ -41,5 +41,5 @@ function togglePassword() {
     }
 }
 
-document.getElementById("formSignup").addEventListener("submit", signupValidate); 
+document.getElementById("formSignup").addEventListener("submit", signupValidate);
 document.getElementById("togglePassword").addEventListener("change", togglePassword);

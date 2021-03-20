@@ -23,6 +23,63 @@
                     <input type="email" name="email" id="email" class="form-control" placeholder="Email Address">
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
+                <div class="form-group mb-4">
+                    <label for="gender">Choose your gender</label> <br>
+                    Male: <input type="radio" id="chooseMale" name="gender" value="male" class="mr-4">
+                    Female: <input type="radio" name="gender" id="chooseFemale" value="female" class="mr-4">
+                    Prefer not to say: <input type="radio" name="gender" id="chooseFemale" value="female">
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="userInfo">Tell us a little about yourself</label>
+                    <textarea class="form-control" id="userInfo" rows="3" spellcheck="false" name="userInfo" style="resize: none;"></textarea>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="fitnessGoal">What is your main goal in fitness?</label>
+                    <select name="fitnessGoal" id="fitness-goal" class="form-control">
+                        <option>Build Strength</option>
+                        <option>Lose Weight</option>
+                        <option>Increase Stamina</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="fitnessActivities">Select the fitness classes you like.</label>
+                    <select multiple="multiple_activities" class="form-control" id="fitness-activities" name="fitnessActivities[]">
+                        <option>CARDIO CLASSES</option>
+                        <option>AB/CORE CLASSES</option>
+                        <option>YOGA</option>
+                        <option>PILATES</option>
+                        <option>KICKBOXING CLASSES</option>
+                        <option>BOXING</option>
+                        <option>SPIN CLASSES</option>
+                        <option>MARTIAL ARTS</option>
+                        <option>STRENGTH TRAINING</option>
+                        <option>STRETCHING / FLEXIBILITY CLASSES</option>
+                        <option>BOOT CAMP</option>
+                        <option>DANCE CLASSES</option>
+                        <option>ZUMBA</option>
+                        <option>WATER FITNESS</option>
+                        <option>SPORTS PERFORMANCE</option>
+                        <option>CROSSFIT</option>
+                        <option>KARATE</option>
+                        <option>TAI CHI</option>
+                    </select>
+                    <small class="text-muted form-text mt-2">Press command or control when clicking to select multiple items</small>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="gymLikables">Select your favorable Gym features</label>
+                    <select multiple="multiple_likables" class="form-control" id="gymLikables" name="gymLikables[]">
+                        <option>Boxing</option>
+                        <option>Karate</option>
+                        <option>Muai Tai</option>
+                        <option>kick boxing</option>
+                        <option>air conditioning</option>
+                    </select>
+                    <small class="text-muted form-text mt-2">Press command or control when clicking to select multiple items</small>
+                </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" class="form-control mb-2" placeholder="Password">

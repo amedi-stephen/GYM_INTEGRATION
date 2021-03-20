@@ -22,7 +22,7 @@
     if ($RESULT_selectUser->num_rows > 0) {
         if (isset($_SESSION["userID"])) {
             while ($row = $RESULT_selectUser->fetch_assoc()) {
-                if ($_SESSION["userID"] == $row["user_id"]) {
+                if ($_SESSION['userID'] == $row['user_id']) {
                     $userid = $row["user_id"];
                     $QUERY_image = "SELECT * FROM profileimg WHERE user_id='$userid'";
                     $RESULT_image = $DBconnection->query($QUERY_image);
@@ -64,8 +64,8 @@
                                     <button class='btn btn-outline-warning' type='submit' name='submit_logout'>Log out</button>
                                 </form>
                             </div>
-                    </nav>
-                    </div>";
+                        </nav>
+                        </div>";
                     }
                 }
             }
