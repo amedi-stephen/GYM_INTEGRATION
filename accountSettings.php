@@ -20,6 +20,7 @@ require "navbar.php";
                     Female: <input type="radio" name="gender" id="chooseFemale" value="female" class="mr-4">
                     Prefer not to say: <input type="radio" name="gender" id="chooseFemale" value="female">
                 </div>
+
                 <div class="form-group mb-4">
                     <label for="userInfo">Tell us a little about yourself</label>
                     <textarea class="form-control" id="userInfo" rows="3" spellcheck="false" name="userInfo" style="resize: none;"></textarea>
@@ -58,6 +59,7 @@ require "navbar.php";
                     </select>
                     <small class="text-muted form-text mt-2">Press command or control when clicking to select multiple items</small>
                 </div>
+
                 <div class="form-group mb-4">
                     <label for="gymLikables">Select your favorable Gym features</label>
                     <select multiple="multiple_likables" class="form-control" id="gymLikables" name="gymLikables[]">
@@ -69,6 +71,7 @@ require "navbar.php";
                     </select>
                     <small class="text-muted form-text mt-2">Press command or control when clicking to select multiple items</small>
                 </div>
+
                 <button type="submit" class="btn btn-primary float-right mr-4" name="submitProfile" id="btnProfile">Save</button>
             </form>
         </div>

@@ -10,10 +10,12 @@ if(isset($_POST["submitProfile"])) {
     $fitnessActivities = $DBconnection->real_escape_string(serialize($_POST["fitnessActivities"]));
     $gymLikables = $DBconnection->real_escape_string(serialize($_POST["gymLikables"]));
 
+
     if(empty($gender) || empty($userInfo) || empty($fitnessGoal) || empty($fitnessActivities) || empty($gymLikables)) {
-        header("Location: ../accountSettings.php");
+        header("Location: ../accountSettings.php?error=emptyfields");
         exit();
-    } else {
+    } 
+    else {
         $QUERY_join = "SELECT * FROM users";
         $result = $DBconnection->query($QUERY_join);
         while($row = $result->fetch_assoc()) {
@@ -29,8 +31,9 @@ if(isset($_POST["submitProfile"])) {
             }
         }
     }
+
 } else {
     header("Location: ../accountSettings.php");
-    exit();
+    exit(); 
 }
 
