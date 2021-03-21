@@ -105,7 +105,7 @@
                 </div>
                 <small id="terms" class="form-text text-muted mb-4">By creating an account, you agree to Gym Navigator's Privacy Policy and Terms of Use.</small>
                 <button type="submit" class="btn btn-primary btn-block text-uppercase mb-4" name="submitSignup" id="btnSignup">join us now</button>
-                <small id="terms" class="form-text text-muted mb-4">Already a member? <a href="login.php">Sign in</a></small>
+                <small id="terms" class="form-text text-muted mb-4">Already registered? <a href="login.php">Sign in</a></small>
             </form>
         </div>
     </div>

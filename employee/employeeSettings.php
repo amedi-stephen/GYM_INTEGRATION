@@ -47,18 +47,22 @@
                     <label for="gym_name">Name of Gym</label>
                     <input type="text" name="gym_name" id="gymName" class="form-control" placeholder="Enter name of your gym">
                 </div>
+                
                 <div class="form-group mb-4">
                     <label for="phone">Phone</label>
                     <input type="text" name="phone" id="phoneNumber" class="form-control"  placeholder="Enter your phone number">
                 </div>
+
                 <div class="form-group mb-4">
                     <label for="address">Address</label>
                     <input type="text" name="address" id="addressDetails" class="form-control"  placeholder="Enter the address of your gym">
                 </div>
+
                 <div class="form-group mb-4">
                     <label for="town_name">Town Location</label>
                     <input type="text" name="town_name" id="townName" class="form-control"  placeholder="Enter town your gym is located">
                 </div>
+
                 <div class="form-group mb-4">
                     <label for="classes">Select the classes your gym offers. Press command or control when clicking to select multiple items</label>
                     <select multiple="multiple_classes" class="form-control" id="gymClasses" name="classes[]">
@@ -80,6 +84,7 @@
                         <option>Sports Performance</option>
                     </select>
                 </div>
+
                 <div class="form-group mb-4">
                     <label for="equipments">Select the equipments your gym has. Press command or control when clicking to select multiple items</label>
                     <select multiple="multiple_equipments" class="form-control" id="gymEquipments" name="equipments[]">
@@ -98,6 +103,7 @@
                         <option>Weights</option>
                     </select>
                 </div>
+
                 <div class="form-group mb-4">
                     <label for="amenities">Select Amenities your gym offers</label>
                     <select multiple="multiple_amenities" class="form-control" id="gymAmenities" name="amenities[]">
@@ -115,18 +121,22 @@
                         <option>Towels</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label for="open">Opening Hours</label>
                     <input type="text" name="open" id="openedAt" class="form-control" placeholder="Opened At">
                 </div>
+
                 <div class="form-group">
                     <label for="close">Closing Hours</label>
                     <input type="text" name="close" id="closedAt" class="form-control" placeholder="Closed At">
                 </div>
+
                 <div class="form-group">
                     <label for="max_capacity">Full Capacity</label>
                     <input type="number" name="max_capacity" id="maxCap" class="form-control" placeholder="How many people can your gym hold per session">
                 </div>
+
                 <button type="submit" class="btn btn-primary" name="submit_gym" id="btnProfile">Submit Details <i class="fa fa-user"></i></button>
             </form>
         </div>
