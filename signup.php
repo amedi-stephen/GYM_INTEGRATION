@@ -30,6 +30,16 @@
                     Prefer not to say: <input type="radio" name="gender" id="chooseFemale" value="female">
                 </div>
 
+                <div class="form-group">
+                    <label for="town">Town</label>
+                    <input type="text" name="town" id="area" class="form-control" placeholder="e.g. Nairobi">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" name="phone" id="uidphone" class="form-control" placeholder="Phone Number">
+                </div>
+
                 <div class="form-group mb-4">
                     <label for="userInfo">Tell us a little about yourself</label>
                     <textarea class="form-control" id="userInfo" rows="3" spellcheck="false" name="userInfo" style="resize: none;"></textarea>

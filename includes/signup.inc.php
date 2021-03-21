@@ -9,20 +9,19 @@ if (isset($_POST["submitSignup"])) {
     $password = $DBconnection->real_escape_string($_POST["password"]);
     $confirmPassword = $DBconnection->real_escape_string($_POST["confirm_pwd"]);
     $gender = $DBconnection->real_escape_string($_POST["gender"]);
+    $town = $DBconnection->real_escape_string($_POST["town"]);
+    $phone = $DBconnection->real_escape_string($_POST["phone"]);
     $userInfo = $DBconnection->real_escape_string($_POST["userInfo"]);
     $fitnessGoal = $DBconnection->real_escape_string($_POST["fitnessGoal"]);
-    $fitnessActivities = $DBconnection->real_escape_string(serialize($_POST["fitnessActivities"]));
-    $gymLikables = $DBconnection->real_escape_string(serialize($_POST["gymLikables"]));
-
-
-    echo $username . " " . $email . " " . $password . " " . $confirmPassword . " " . $gender . " " . $userInfo . " " . $fitnessGoal . " " . $fitnessActivities . " " . $gymLikables;
+    $fitnessActivities = $DBconnection->real_escape_string(base64_encode(serialize($_POST["fitnessActivities"])));
+    $gymLikables = $DBconnection->real_escape_string(base64_encode(serialize($_POST["gymLikables"])));
 
     $uppercase = preg_match("@[A-Z]@", $password);
     $lowercase = preg_match("@[a-z]@", $password);
     $number = preg_match("@[0-9]@", $password);
     $specialCharacters = preg_match("@[^\w]@", $password);
 
-    if (empty($username) || empty($email) || empty($password) || empty($confirmPassword) || empty($gender) || empty($userInfo) || empty($fitnessGoal) || empty($fitnessActivities) || empty($gymLikables)) {
+    if (empty($username) || empty($email) || empty($password) || empty($confirmPassword) || empty($gender) || empty($userInfo) || empty($fitnessGoal) || empty($fitnessActivities) || empty($gymLikables) || empty($phone) || empty($town)) {
         header("Location: ../signup.php?error=emptyfields");
         exit();
     } else if (!preg_match('/^[a-zA-Z0-9]*$/', $username)) {
@@ -45,15 +44,16 @@ if (isset($_POST["submitSignup"])) {
             header("Location: ../signup.php?error=userexists");
             exit();
         } else {
-            $insertUserQuery = "INSERT INTO users(user_name, user_email, user_gender, user_goal, user_text, user_classes, user_preferrables, user_password) 
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            // TODO: add location, phone number
+            $insertUserQuery = "INSERT INTO users(user_name, user_email, user_location, user_phone, user_gender, user_goal, user_text, user_classes, user_preferrables, user_password) 
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt_insertUserQuery = $DBconnection->stmt_init();
             if (!$stmt_insertUserQuery->prepare($insertUserQuery)) {
                 header("Location: ../signup.php?error=notprepared");
                 exit();
             } else {
                 $encryptedPwd = password_hash($password, PASSWORD_DEFAULT);
-                $stmt_insertUserQuery->bind_param("ssssssss", $username, $email, $gender, $fitnessGoal, $userInfo, $fitnessActivities, $gymLikables, $encryptedPwd);
+                $stmt_insertUserQuery->bind_param("ssssssssss", $username, $email, $town, $phone, $gender, $fitnessGoal, $userInfo, $fitnessActivities, $gymLikables, $encryptedPwd);
                 $stmt_insertUserQuery->execute();
                 $stmt_insertUserQuery->close();
 

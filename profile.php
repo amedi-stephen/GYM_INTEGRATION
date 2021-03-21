@@ -14,7 +14,7 @@ require "navbar.php";
                     echo "<div class='container mt-4'>
                         <div class='profile-name' style='margin-bottom: 80px;'>
                             <h1>".ucwords($row['user_name'])."</h1>
-                            <h4 class='text-muted'>Gym Navigation Member Since ".$row['created_at']."</h4>
+                            <h4 class='text-muted'>Gym Navigator Member Since ".$row['created_at']."</h4>
                         </div>
                         
                         <div class='d-flex justify-content-between' style='margin-bottom: 80px;'>
@@ -33,25 +33,32 @@ require "navbar.php";
                                 <form>
                                     <div class='form-group'>
                                         <label for='goal'>Member's Goal</label>
-                                        <input type='text' class='form-control' value='to gain weight' readonly=''>
+                                        <input type='text' class='form-control' value='".$row['user_goal']."' readonly=''>
                                     </div>
                                     <div class='form-group'>
                                         <label for='goal'>Member's about</label>
-                                        <p class='card p-2'>lkjsf slkfj lskfjlksjflk</p>
+                                        <p class='card p-2'>".$row['user_text']."</p>
                                     </div>
-                                    <p>Member's activites</p>
-                                    <ul class='list-group'>
-                                        <li class='list-group-item'>skjfl</li>
-                                    </ul>
+                                    <p>Member's activites</p>";
+                                    $activitiesArr = @unserialize(base64_decode($row['user_classes']));
+                                    foreach ($activitiesArr as $key => $activity) {
+                                        echo "<ul class='list-group'>
+                                            <li class='list-group-item'>".strtolower($activity)."</li>
+                                        </ul>
+                                        ";
+                                    }
 
-                                    <p>Member's prefferables</p>
-                                    <ul class='list-group'>
-                                        <li class='list-group-item'>skjfl</li>
-                                    </ul>
+                                    echo "
+                                    <p>Member's prefferables</p>";
+                                    $prefArr = @unserialize(base64_decode($row['user_preferrables']));
+                                    foreach ($prefArr as $key => $pref) {
+                                        echo "<ul class='list-group'>
+                                            <li class='list-group-item'>".$pref."</li>
+                                        </ul>";
+                                    }
+                                    echo "
                                 </form>
                             
-                                <p>Member's activities</p>
-                                <p>Member's preferrables</p>
                             </div>
                         </div>
 
@@ -63,4 +70,8 @@ require "navbar.php";
             }
         }
     }
+?>
+
+<?php
+    include "footer.php";
 ?>
