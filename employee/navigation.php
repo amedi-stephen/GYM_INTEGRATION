@@ -17,23 +17,23 @@ include "../includes/dbh.inc.php";
 
 <body>
     <?php
-    $query = "SELECT * FROM employees";
+    $query = "SELECT * FROM gyms";
     $result = $DBconnection->query($query);
     if ($result->num_rows > 0) {
-        if (isset($_SESSION['employerID'])) {
+        if (isset($_SESSION['gymID'])) {
             while ($row = $result->fetch_assoc()) {
-                if ($_SESSION['employerID'] == $row['employer_id']) {
-                    $employerid = $row['employer_id'];
-                    $imageQuery = "SELECT * FROM employerimage WHERE employer_id='$employerid'";
+                if ($_SESSION['gymID'] == $row['gym_id']) {
+                    $gymid = $row['gym_id'];
+                    $imageQuery = "SELECT * FROM employerimage WHERE gym_id='$gymid'";
                     $imageResult = $DBconnection->query($imageQuery);
                     while ($rowImage = $imageResult->fetch_assoc()) {
                         echo '
                         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                             <div class="container">';
                         if ($rowImage["eimage_status"] == 0) {
-                            echo "<img src='../uploads/employer/profile" . $employerid . ".jpg' style='width: 50px; height: 50px; border-radius: 50%;'>";
+                            echo "<img src='../uploads/employer/profile" . $gymid . ".jpg' style='width: 50px; height: 50px; border-radius: 50%;' class='mr-2'>";
                         } else {
-                            echo "<img src='../uploads/default.webp' style='width: 50px; height: 50px; border-radius: 50%;'>";
+                            echo "<img src='../uploads/default.webp' style='width: 50px; height: 50px; border-radius: 50%;' class='mr-2'>";
                         }
                         echo '
                             <a class="navbar-brand" href="#">' . ucwords($row['gym_name']) . '</a>
@@ -47,8 +47,9 @@ include "../includes/dbh.inc.php";
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">MENU</a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="employeeDashboard.php">Dashboard</a>
-                                            <a class="dropdown-item" href="employeeSettings.php">Settings</a>
+                                            <a class="dropdown-item" href="employeeDashboard.php"><i class="fa fa-clipboard mr-1"></i>Dashboard</a>
+                                            <a class="dropdown-item" href="employeeProfile.php"><i class="fa fa-user mr-1"></i> Profile</a>
+                                            <a class="dropdown-item" href="employeeSettings.php"><i class="fa fa-cog mr-1"></i>Settings</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Log Out</a>
                                         </div>

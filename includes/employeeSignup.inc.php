@@ -11,7 +11,7 @@ if (isset($_POST["submit_signup"])) {
     $phone = $DBconnection->real_escape_string($_POST["phone"]);
     $address = $DBconnection->real_escape_string($_POST["address"]);
     $town = $DBconnection->real_escape_string($_POST["town"]);
-    $classes = $DBconnection->real_escape_string(serialize($_POST["classes"]));
+    $classes = $DBconnection->real_escape_string(base64_encode(serialize($_POST["classes"])));
     $equipments = $DBconnection->real_escape_string(base64_encode(serialize($_POST["equipments"])));
     $amenities = $DBconnection->real_escape_string(base64_encode(serialize($_POST["amenities"])));
     $openedAt = $DBconnection->real_escape_string($_POST["open"]);

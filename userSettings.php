@@ -75,67 +75,6 @@ require "navbar.php";
 </div>
 
 
-
-
-
-
-
-
-
-
-
-<!-- <div class="container mt-4">
-    <h2 class='mb-4'>Settings</h2>
-    <div class="card">
-        <div class="container">
-
-
-            
-            <form action="includes/createProfile.inc.php" method="post">
-                <h4 class="text-primary badge-light p-2">Fill in the following details</h4>
-                <div class="form-group mb-4 custom-control custom-radio">
-                    <label for="gender">Choose your gender</label> <br>
-                    Male: <input type="radio" id="chooseMale" name="gender" value="male">
-                    Female: <input type="radio" name="gender" id="chooseFemale" value="female">
-                </div>
-                <div class="form-group mb-4">
-                    <label for="userInfo">Tell us a little about yourself</label>
-                    <textarea class="form-control" id="userInfo" rows="3" spellcheck="false" name="userInfo"></textarea>
-                </div>
-
-                <div class="form-group mb-4">
-                    <label for="fitnessGoal">What is your main goal in fitness?</label>
-                    <input type="text" name="fitnessGoal" id="fitnessGoal" class="form-control">
-                   
-                </div>
-
-                <div class="form-group mb-4">
-                    <label for="fitnessActivities">Select your fitness activities. Press command or control when clicking to select multiple items</label>
-                    <select multiple="multiple_activities" class="form-control" id="fitnessActivities" name="fitnessActivities[]">
-                        <option>Cardio</option>
-                        <option>Jogging</option>
-                        <option>Riding bike</option>
-                        <option>Dancing</option>
-                        <option>5</option>
-                    </select>
-                </div>
-                <div class="form-group mb-4">
-                    <label for="gymLikables">Select your favorable Gym features</label>
-                    <select multiple="multiple_likables" class="form-control" id="gymLikables" name="gymLikables[]">
-                        <option>Boxing</option>
-                        <option>Karate</option>
-                        <option>Muai Tai</option>
-                        <option>kick boxing</option>
-                        <option>air conditioning</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary" name="submitProfile" id="btnProfile">Create <i class="fa fa-user"></i></button>
-            </form>
-        </div>
-    </div>
-</div>
-</div> -->
-
 <script src="js/app.js"></script>
 
 <?php
