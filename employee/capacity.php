@@ -53,6 +53,11 @@ include '../includes/processSchedule.inc.php';
                 <input type='number' name='capacity' class='form-control' placeholder='People per session'>
             </div>
 
+            <div class='form-group mb-4'>
+                <label for='instructor'>Instructor</label>
+                <input type='text' name='instructor' class='form-control' placeholder='People per session'>
+            </div>
+
             <button type='submit' name='submit_capacity' class='btn btn-primary'>Create Capacity</button>
                 </form>";
             ?>

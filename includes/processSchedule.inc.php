@@ -42,31 +42,43 @@ function setResource($DBconnection)
 function setCapacity($DBconnection)
 {
     if (isset($_POST['submit_capacity'])) {
-        $title = $_POST['title'];
-        $capacitFrom = $_POST['capacity_from'];
-        $capacityTo = $_POST['capacity_to'];
-        $price = $_POST['price'];
-        $description = $_POST['description'];
-        $repeat = $_POST['repeat'];
-        $capacity = $_POST['capacity'];
+        $title = $DBconnection->real_escape_string($_POST['title']);
+        $capacityFrom = $DBconnection->real_escape_string($_POST['capacity_from']);
+        $capacityTo = $DBconnection->real_escape_string($_POST['capacity_to']);
+        $price = $DBconnection->real_escape_string($_POST['price']);
+        $description = $DBconnection->real_escape_string($_POST['description']);
+        $repeat = $DBconnection->real_escape_string($_POST['repeat']);
+        $capacity = $DBconnection->real_escape_string($_POST['capacity']);
+        $instructor = $DBconnection->real_escape_string($_POST['instructor']);
 
-        if (empty($title) || empty($capacitFrom) || empty($capacityTo) || empty($price) || empty($description) || empty($repeat) || empty($capacity)) {
-            header('Location: ../employee/capacity.php');
-            exit();
-        } else {
-            $sql = "SELECT * FROM employees";
-            $result = $DBconnection->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    if (isset($_SESSION['employerID'])) {
-                        if (isset($_SESSION['employerID']) == $row['employer_id']) {
-                            $employerNo = $row['employer_id'];
-                            $insertQuery = "INSERT INTO capacity_schedule(employer_id, title, from_date, to_date, price, description, repeat_date, max_pple)
-                                VALUES('$employerNo', '$title', '$capacitFrom', '$capacityTo', '$price', '$description', '$repeat', '$capacity')";
-                            $insertResult = $DBconnection->query($insertQuery);
-                            header('Location: ../employee/resource.php?status=success');
-                            exit();
-                        }
+        // echo $title."<br>";
+        // echo $capacityFrom."<br>";
+        // echo $capacityTo."<br>";
+        // echo $price."<br>";
+        // echo $description."<br>";
+        // echo $repeat."<br>";
+        // echo $capacity."<br>";
+        // echo $instructor."<br>";
+
+        // echo "<p class='alert-success'>Form submitted</p>";
+
+        $sql = "SELECT * FROM gyms";
+        $result = $DBconnection->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            $gymSession = $_SESSION['gymID'];
+            if (isset($gymSession)) {
+                if ($gymSession == $row['gym_id']) {
+                    $query = "SELECT DISTINCT gym_id FROM capacity_schedule WHERE gym_id='$gymSession'";
+                    $sequel = $DBconnection->query($query);
+                    if($record = $sequel->fetch_assoc()) {
+                        $insert = "INSERT INTO capacity_schedule(gym_id, title, from_date, to_date, price, description, repeat_date, max_pple, appointer) 
+                            VALUES('$gymSession', '$title', '$capacityFrom', '$capacityTo', '$price', '$description', '$repeat', '$capacity', '$instructor')";
+                        $DBconnection->query($insert);
+                        exit();
+                    } else {
+                        $queryInsert = "INSERT INTO capacity_schedule(gym_id, title, from_date, to_date, price, description, repeat_date, max_pple, appointer) 
+                            VALUES('$gymSession', '$title', '$capacityFrom', '$capacityTo', '$price', '$description', '$repeat', '$capacity', '$instructor')";
+                            $DBconnection->query($queryInsert);
                     }
                 }
             }
@@ -205,16 +217,3 @@ function reserveResource($DBconnection)
         }
     }
 }
-
-
-
-// echo "
-//                     <div class='card mb-4' style='width: 18rem;'>
-//                         <div class='card-body'>
-//                             <h5 class='card-title'>" . $row['title'] . "</h5>
-//                             <h6 class='card-subtitle mb-2 text-muted'>ksh." . $row['price'] . "</h6>
-//                             <p class='card-text'>" . $row['description'] . "</p>
-//                             <a href='#' class='card-link'>View More</a>
-//                             <span class=' badge badge-pill badge-primary float-right'>1/" . $row['max_pple'] . "</span>
-//                         </div>
-//                     </div>";
