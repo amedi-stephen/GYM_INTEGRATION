@@ -4,31 +4,42 @@ include "dbh.inc.php";
 
 function setResource($DBconnection)
 {
-    if (isset($_POST['resource_submit'])) {
+    if (isset($_POST['resource_submit'])) {    
 
         $scheduleName = $DBconnection->real_escape_string($_POST['schedule_name']);
-        $checkWeek = $DBconnection->real_escape_string(serialize($_POST['checkWeek']));
+        $checkWeek = $DBconnection->real_escape_string(base64_encode(serialize($_POST['checkWeek'])));
         $scheduleFrom = $DBconnection->real_escape_string($_POST['schedule_from']);
         $scheduleTo = $DBconnection->real_escape_string($_POST['schedule_to']);
         $date = $DBconnection->real_escape_string($_POST['date']);
+        $appointer = $DBconnection->real_escape_string($_POST['appointer']);
 
-        if (empty($scheduleName) || empty($checkWeek) || empty($scheduleFrom) || empty($scheduleTo) || empty($date)) {
-            header('Location: ../employee/resource.php?error=emptyfields');
-            exit();
-        } else {
-            $sql = "SELECT * FROM employees";
+        // echo $scheduleName."<br>";
+        // echo $checkWeek."<br>";
+        // echo $scheduleFrom."<br>";
+        // echo $scheduleTo."<br>";
+        // echo $date."<br>";
+        // echo $appointer."<br>";
+
+        // if (empty($scheduleName) || empty($checkWeek) || empty($scheduleFrom) || empty($scheduleTo) || empty($date) || empty($appointer)) {
+        //     header('Location: ../employee/employeeSchedule.php?error=emptyfields');
+        //     exit();
+        // } 
+        // else {
+            $sql = "SELECT * FROM gyms";
             $result = $DBconnection->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    if (isset($_SESSION['employerID'])) {
-                        if (isset($_SESSION['employerID']) == $row['employer_id']) {
-                            $employerNo = $row['employer_id'];
+                    if (isset($_SESSION['gymID'])) {
+                        if (isset($_SESSION['gymID']) == $row['gym_id']) {
+                            $gymid = $row['gym_id'];
 
-                            $query = "INSERT INTO resource_schedule (employer_id, resource_name, resource_workdays, opening_hrs, closing_hrs, start_appointment) 
-                                VALUES ('$employerNo', '$scheduleName', '$checkWeek', '$scheduleFrom', '$scheduleTo', '$date')";
+                            $query = "INSERT INTO resource_schedule (gym_id, resource_name, resource_workdays, opening_hrs, closing_hrs, start_appointment, appointer) 
+                                VALUES ('$gymid', '$scheduleName', '$checkWeek', '$scheduleFrom', '$scheduleTo', '$date', '$appointer')";
                             $DBconnection->query($query);
-                            header('Location: ../employee/resource.php?status=success');
-                            exit();
+
+                            echo "<p class='alert-primary'>Reservation created</p>";
+                            // header('Location: ../employee/employeeSchedule.php?status=success');
+                            // exit();
                         }
                     } else {
                         echo "Not set";
@@ -37,7 +48,7 @@ function setResource($DBconnection)
             } else {
                 echo "no result";
             }
-        }
+        // }
     }
 }
 

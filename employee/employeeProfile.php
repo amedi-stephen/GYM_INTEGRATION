@@ -19,10 +19,12 @@ include "navigation.php";
                             <div>
                                 <h2>Employer Benefits</h2>
                                 <ul class='list-group' style='width: 25rem;'>
-                                    <li class='list-group-item'><i class='fa fa-check-circle text-success'></i> Easy access to gyms around your town</li>
-                                    <li class='list-group-item'><i class='fa fa-check-circle text-success'></i> Reserve sessions and appointments with ease</li>
-                                    <li class='list-group-item'><i class='fa fa-check-circle text-success'></i> Gym Navigator events</li>
-                                    <li class='list-group-item'><i class='fa fa-check-circle text-success'></i> We help keep track of your exercise journey</li>
+                                    <li class='list-group-item'><i class='fa fa-check-circle text-success'></i> Accept secure, easy payments</li>
+                                    <li class='list-group-item'><i class='fa fa-check-circle text-success'></i> Fill your classes</li>
+                                    <li class='list-group-item'><i class='fa fa-check-circle text-success'></i> Keep track of your members</li>
+                                    <li class='list-group-item'><i class='fa fa-check-circle text-success'></i> Manage rooms and trainers</li>
+                                    <li class='list-group-item'><i class='fa fa-check-circle text-success'></i> Get real-time notifications on new, rescheduled, or cancelled bookings</li>
+                                    <li class='list-group-item'><i class='fa fa-check-circle text-success'></i> Your gym schedule software helps maximize class capacity and enables new visitors to book inductions 24/7.</li>
                                 </ul>
                             </div>
 

@@ -6,7 +6,7 @@ include '../includes/processSchedule.inc.php';
 <div class="container">
     <div class="capacity-header text-center mt-4 mb-4">
         <h2 class="display-4 text-primary">Capacity Planning</h2>
-        <h4>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias, a.</h4>
+        <h4>You define ‘slots’ on the schedule that can hold multiple bookings. This schedule is intended for group events such as classes. For example, clients can choose a class and sign up until it’s full</h4>
     </div>
     <div class="capacity-body">
         <div class="d-flex justify-content-center align-items-center">
