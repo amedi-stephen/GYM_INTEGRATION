@@ -7,7 +7,7 @@ include '../includes/processSchedule.inc.php';
     <h2 style="margin-bottom: 50px;">Schedules</h2>
     <div class="d-flex justify-content-between">
         <ul class='list-group' style='width: 18rem;'>
-            <li class='list-group-item'><a href="resource.php">resource schedule</a></li>
+            <li class='list-group-item'><a href="employeeSchedule.php">resource schedule</a></li>
             <li class='list-group-item'><a href="capacity.php">capacity schedule</a></li>
             <li class='list-group-item'><a href="viewSchedule.php">view your schedules</a></li>
         </ul>
