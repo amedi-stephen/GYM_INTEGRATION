@@ -4,7 +4,7 @@
 ?>
 
 <?php
-    getCapacityEmployee($DBconnection);
+    // getCapacityEmployee($DBconnection);
     getResourceEmployee($DBconnection);
-    getResourceUser($DBconnection);
+    // getResourceUser($DBconnection);
 ?>
