@@ -34,7 +34,26 @@ require "navbar.php";
                         <h5 class="card-title">Current Capacity Sessions</h5>
                     </div>
                     <div class="card-body">
-                        kdjgksjg;jkjsfgl
+                        <?php
+                            $sql = "SELECT * FROM users";
+                            $result = $DBconnection->query($sql) or die("Error message: ".$DBconnection->error);
+                            while($row = $result->fetch_assoc()) {
+                                if(isset($_SESSION['userID'])) {
+                                    if($_SESSION['userID'] == $row['user_id']) {
+                                        $query = "SELECT * FROM capacity_schedule 
+                                            INNER JOIN capacity_members ON capacity_schedule.capacity_id = capacity_members.capacity_id";
+                                        $sequel = $DBconnection->query($query) or die("Error message: ".$DBconnection->error);
+                                        while($record = $sequel->fetch_assoc()) {
+                                            if($record['user_id'] == $_SESSION['userID']) {
+                                                echo "<p class='d-inline'>".$record['title']."</p>
+                                                <p class='float-right'>Active</p>
+                                                <hr>";
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ?>
                     </div>
                 </div>
             </div>

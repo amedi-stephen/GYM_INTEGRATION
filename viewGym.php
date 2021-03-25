@@ -4,7 +4,7 @@ include 'includes/processSchedule.inc.php';
 date_default_timezone_set('Africa/Nairobi');
 ?>
 
-<div class="container-fluid mt-4">
+<div class="container mt-4">
     <?php
     if (isset($_GET['id'])) {
         $id = $DBconnection->real_escape_string($_GET['id']);
@@ -14,7 +14,7 @@ date_default_timezone_set('Africa/Nairobi');
         if ($gym = $result->fetch_assoc()) {
             echo '
             <h2 class="display-4 text-center" style="margin-bottom: 80px;">' . strtoupper($gym['gym_name']) . '</h2>
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center"> 
     
                 <div class="gym-section">
                     <div class="d-flex justify-content-between">
@@ -25,98 +25,106 @@ date_default_timezone_set('Africa/Nairobi');
                     
                         <div class="service-amenities mb-4">
                             <h3 class="badge-light p-2">Amenities</h3>';
-            $amenitiesArr = unserialize(base64_decode($gym['amenities']));
-            foreach ($amenitiesArr as $key => $item) {
-                echo ' <ul class="list-group">
+                            $amenitiesArr = unserialize(base64_decode($gym['amenities']));
+                            foreach ($amenitiesArr as $key => $item) {
+                                echo ' <ul class="list-group">
                                     <li class="list-group-item">' . $item . '</li> 
                                 </ul>';
-            }
+                            }
 
-            echo '</div>
-                            <div class="service-classes mb-4">
+                            echo '
+                        </div>
+
+                        <div class="service-classes mb-4">
                             <h3 class="badge-light p-2">Classes</h3>';
-            $classesArr = base64_decode(unserialize($gym['classes']));
-            // $str = base64_encode("a:5:{i:0;s:14:\"CARDIO CLASSES\";i:1;s:15:\"AB/CORE CLASSES\";i:2;s:17:\"STRENGTH TRAINING\";i:3;s:32:\"STRETCHING / FLEXIBILITY CLASSES\";i:4;s:8:\"CROSSFIT\";}");
-            // $unser = base64_decode(unserialize($str));
-            echo $classesArr;
-            // echo $str;
-            // foreach ($classesArr as $key => $class) {
-            //     echo '<ul class="list-group">
-            //         <li class="list-group-item">' . $class . '</li> 
-            //     </ul>';
-            // }
-            echo '</div>
-                            <div class="service-equipments mb-4">
+                                $classesArr = base64_decode(unserialize($gym['classes']));
+                                echo $classesArr;
+                                // echo $str;
+                                // foreach ($classesArr as $key => $class) {
+                                //     echo '<ul class="list-group">
+                                //         <li class="list-group-item">' . $class . '</li> 
+                                //     </ul>';
+                                // }
+                            echo '
+                        </div>
+
+                        <div class="service-equipments mb-4">
                             <h3 class="badge-light p-2">Equipments</h3>';
-            $equipArr = unserialize(base64_decode($gym['equipments']));
-            foreach ($equipArr as $key => $equip) {
-                echo '<ul class="list-group">
-                                    <li class="list-group-item">' . $equip . '</li> 
+                            $equipArr = unserialize(base64_decode($gym['equipments']));
+                            foreach ($equipArr as $key => $equip) {
+                                echo '<ul class="list-group">
+                                        <li class="list-group-item">' . $equip . '</li> 
                                 </ul>';
-            }
-            //TODO: added div here
-            echo '
+                            }
+                            echo '
+                        </div>
+
+                        <div class="service-others mb-4">
                             <h3 class="badge-light p-2 mt-4">Other Details</h3>
-                                <ul class="list-group">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Opening hours
-                                        <span class="badge badge-primary badge-pill"> ' . $gym['opened_at'] . ' - ' . $gym['closed_at'] . '</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Maximum capacity per session
-                                        <span class="badge badge-primary badge-pill">' . $gym['full_capacity'] . '</span>
-                                    </li>   
-                                </ul>
-                            </div>';
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Opening hours
+                                    <span class="badge badge-primary badge-pill"> ' . $gym['opened_at'] . ' - ' . $gym['closed_at'] . '</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Maximum capacity per session
+                                    <span class="badge badge-primary badge-pill">' . $gym['full_capacity'] . '</span>
+                                </li>   
+                            </ul>
+                        </div>';
     ?>
             <?php
-            echo "<h3 class='badge-light p-2 mt-4'>Capacity sessions</h3>
-                            <div class='float-right'>";
-
-            $query = 'SELECT * FROM capacity_schedule';
-            $sequel = $DBconnection->query($query);
-            while ($record = $sequel->fetch_assoc()) {
-                // TODO: how can we make it display only an employers/gym shedule
-                if ($_GET['id']) {
-                    echo "<div class='card mb-4' style='width: 18rem;'>
+            echo " <div class='capacity-sessions'>
+                <h3 class='badge-light p-2 mt-4'>Capacity sessions</h3>";
+                
+                if (isset($_GET['id'])) {
+                $sql = "SELECT * FROM gyms";
+                $result = $DBconnection->query($sql) or die($DBconnection->error);
+                while($row = $result->fetch_assoc()) {
+                    $gymPage = $_GET['id'];
+                    $gymid = $row['gym_id'];
+                    if($gymid == $gymPage) {
+                        $query = "SELECT * FROM capacity_schedule WHERE gym_id = '$gymPage'";
+                        $sequel = $DBconnection->query($query);
+                        while ($record = $sequel->fetch_assoc()) {
+                            echo "<div class='card mb-4' style='width: 18rem;'>
                                     <div class='card-body'>
                                         <h5 class='card-title'>" . $record['title'] . "</h5>
                                         <h6 class='card-subtitle mb-2 text-muted'>ksh. " . $record['price'] . "</h6>
                                         <p class='card-text'>" . $record['description'] . "</p>
                                         <form method='post' action='" . reserveCapacity($DBconnection) . "' class='d-inline'>";
-                    $sql = "SELECT * FROM users";
-                    $result = $DBconnection->query($sql);
-                    while ($row = $result->fetch_assoc()) {
-                        if (isset($_SESSION['userID'])) {
-                            // TODO: in resource sessions, put default values of usernames just as this
-                            // TODO: put a date created column in capacity_schedule for users booking
-                            // TODO: add user phone numbers, but for now lets submit the following details
-                            if ($_SESSION['userID'] == $row['user_id']) {
-                                // FIXME: a lot of data redundancy during a single submission
-                                // FIXME: also, when you book the other capacity schedules, it still submits the first id number
-                                echo "
-                                                        <input type='hidden' name='uid' value='" . $row['user_name'] . "'>
-                                                        <input type='hidden' name='date' value='" . date('Y-m-d H:i:s') . "'>
-                                                        <button type='submit' name='submit_capacity' class='btn btn-primary'>Book <span class='ml-2'>&#8594;</span></button>
-                                                        ";
-                            }
+                                            $sql = "SELECT * FROM users";
+                                            $result = $DBconnection->query($sql);
+                                            while ($row = $result->fetch_assoc()) {
+                                                if (isset($_SESSION['userID'])) {
+                                                    if ($_SESSION['userID'] == $row['user_id']) {
+                                                        echo "
+                                                            <input type='hidden' name='uid' value='" . $row['user_name'] . "'>
+                                                            <input type='hidden' name='date' value='" . date('Y-m-d H:i:s') . "'>
+                                                            <button type='submit' name='submit_capacity' class='btn btn-primary'>Book <span class='ml-2'>&#8594;</span></button>";
+                                                    }
+                                                }
+                                            }
+                                        echo "</form>";
+                                            $countQuery = "SELECT gym_id FROM capacity_members";
+                                            $queryResult = $DBconnection->query($countQuery);
+                                            $rowResult = $queryResult->num_rows;
+                                            echo "
+                                            <span class='badge badge-pill badge-primary float-right p-2'>".$rowResult."/" . $record['max_pple'] . "</span>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>";
                         }
                     }
-                    // TODO: Find a way to calculate if a user books, the number gets added
-                    // ideas include using AJAX for data update without reloading the page
-                    echo "
-                                    </form>
-                                    <span class='badge badge-pill badge-primary float-right p-2'>1/" . $record['max_pple'] . "</span>
-                                </div>
-                            </div>
-                    </div>";
                 }
             }
+      
             ?>
 
-            <div class='container-fluid'>
+            <div class='container-fluid mt-4'>
                 <h3 class='badge-light p-2 mt-4'>Resource sessions</h3>
-                <table class='table'>
+                <table class='table mt-4'>
                     <thead>
                         <tr>
                             <th scope='col'>Resource Name</th>
@@ -129,27 +137,6 @@ date_default_timezone_set('Africa/Nairobi');
                     <tbody>
                 <?php
                 if (isset($_GET['id'])) {
-                    // $sql = "SELECT * FROM resource_schedule";
-                    // $result = $DBconnection->query($sql);
-                    // if ($result) {
-                    //     if ($result->num_rows > 0) {
-                    //         while ($row = $result->fetch_assoc()) {
-                    //             echo "
-                    //                     <tr>
-                    //                         <td>" . $row['resource_name'] . "</td>
-                    //                         <td>" . $row['start_appointment'] . "</td>
-                    //                         <td>" . $row['opening_hrs'] . "</td>
-                    //                         <td>" . $row['closing_hrs'] . "</td>
-                    //                         <td>
-                    //                             <a href='javascript:void(0)' class='btn btn-primary btn-sm modal-btn'>Book session <span class='ml-2'>&#8594;</span></a>
-                    //                         </td>
-                    //                     <tr>";
-                    //         }
-                    //     } 
-                    //     else {
-                    //         echo "No record found";
-                    //     }
-                    // }
                     $sql = "SELECT * FROM gyms";
                     $result = $DBconnection->query($sql) or die($DBconnection->error);
                     if ($result->num_rows > 0) {
@@ -160,7 +147,7 @@ date_default_timezone_set('Africa/Nairobi');
                             $query = "SELECT * FROM resource_schedule WHERE gym_id = '$gymPage'";
                             $sequel = $DBconnection->query($query) or die("Error message: " . $DBconnection->error);
                             while ($record = $sequel->fetch_assoc()) {
-                                if($gymid == $gymPage) {
+                                if ($gymid == $gymPage) {
                                     echo "<tr>
                                     <td>" . $record['resource_name'] . "</td>
                                     <td>" . $record['start_appointment'] . "</td>
@@ -171,7 +158,6 @@ date_default_timezone_set('Africa/Nairobi');
                                     </td>
                                 <tr>";
                                 }
-                                
                             }
                         }
                     } else {

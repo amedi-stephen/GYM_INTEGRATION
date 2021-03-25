@@ -145,41 +145,28 @@ function getResourceEmployee($DBconnection)
 function reserveCapacity($DBconnection)
 {
     if (isset($_POST['submit_capacity'])) {
-        if (isset($_GET['id'])) {
-            $name = $DBconnection->real_escape_string($_POST['uid']);
-            $date = $DBconnection->real_escape_string($_POST['date']);
-
-            // TODO: 
-            // A query that selects all employers then grab the employer id and store in a variable
-            // a query that inserts the values to capacity members including the employerid
-            // the same logic should be done in resource_schedule
-            // what about capacity_id, how will we get it
-
-            $sql = "SELECT * FROM employees INNER JOIN capacity_schedule ON employees.employer_id = capacity_schedule.capacity_id";
-            $result = $DBconnection->query($sql) or die($DBconnection->error);
-            if ($result->num_rows > 0) {
-                while ($record = $result->fetch_assoc()) {
-                    $usersql = "SELECT * FROM users";
-                    $sequel = $DBconnection->query($usersql);
-                    while ($row = $sequel->fetch_assoc()) {
-                        if (isset($_SESSION['userID'])) {
-                            if ($_SESSION['userID'] == $row['user_id']) {
-                                $employerid = $record['employer_id'];
+        if(isset($_GET['id'])) {
+            $sql = "SELECT * FROM users";
+            $result = $DBconnection->query($sql) or die("Error message: ".$DBconnection->error);
+            while($row = $result->fetch_assoc()) {
+                $userid = $row['user_id'];
+                if(isset($_SESSION['userID'])) {
+                    if($_SESSION['userID'] == $userid) {
+                        $query = "SELECT * FROM capacity_schedule INNER JOIN gyms ON capacity_schedule.gym_id = gyms.gym_id";
+                        $sequel = $DBconnection->query($query) or die("Error message: ".$DBconnection->error);
+                        while($record = $sequel->fetch_assoc()) {
+                            if($record['gym_id'] == $_GET['id']) {
+                                $gymid = $record['gym_id'];
                                 $capacityid = $record['capacity_id'];
-                                $query = "INSERT INTO capacity_members(employer_id, capacity_id, member_name, date) 
-                                    VALUES('$employerid', '$capacityid', '$name', '$date')";
-                                $DBconnection->query($query);
-
-                                echo "successfully reserved";
-                            } else {
-                                // echo "not logged in as user #" . $_SESSION['userID'];
-                            }
-                        } else {
-                            echo "not logged in at all";
+                                $insert = "INSERT INTO capacity_members(gym_id, capacity_id, user_id) VALUES('$gymid', '$capacityid', '$userid')";
+                                $outcome = $DBconnection->query($insert);
+                            } 
                         }
                     }
                 }
+
             }
+
         }
     }
 }
@@ -196,27 +183,20 @@ function reserveResource($DBconnection)
                 header("Location: ../viewGym.php?error=emptyfields");
                 exit();
             } else {
-                // $query = "SELECT * FROM gyms";
-                // FIXME: the form is not being submitted to the database
-                // FIXME: need to come up with a working query
-                $query = "SELECT * FROM gyms 
-                    INNER JOIN resource_schedule ON gyms.resource_id = resource_schedule.resource_id";
+                
+                $query = "SELECT * FROM resource_schedule";
                 $sequel = $DBconnection->query($query);
                 if ($sequel->num_rows > 0) {
                     while ($row = $sequel->fetch_assoc()) {
-                        var_dump($row['gym_id']);
-                        if ($_GET['id'] == $row['gym_id']) {
-                            $gotID = $_GET['id'];
-                            $resourceid = $row['resource_id'];
-                            echo $resourceid;
-                            $sql = "INSERT INTO resource_members(gym_id, resource_id, booked_members, phone) VALUES('$gotID', '$resourceid', '$name', '$phone')";
-                            $result = $DBconnection->query($sql);
-                            var_export($result);
-
-                            echo "success";
-                        } else {
-                            echo "can't figure it out";
+                        var_dump($row);
+                        $gymPage = $_GET['id'];
+                        $resourceid = $row['resource_id'];
+                        if($gymPage == $row['gym_id']) {
+                            echo true;
+                            $sql = "INSERT INTO resource_members(gym_id, resource_id, booked_members, phone) VALUES('$gymPage', '$resourceid', '$name', '$phone')";
+                            $result = $DBconnection->query($sql) or die("Error message: ".$DBconnection->error);
                         }
+                        
                     }
                 } else {
                     echo "no sessions found!";
