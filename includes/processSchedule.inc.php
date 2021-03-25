@@ -1,11 +1,9 @@
 <?php
 include "dbh.inc.php";
 
-
 function setResource($DBconnection)
 {
     if (isset($_POST['resource_submit'])) {
-        // echo "<p class='alert-success'>Button clicked</p>";
 
         $schedule_name = $DBconnection->real_escape_string($_POST['schedule_name']);
         $checkWeek = $DBconnection->real_escape_string(base64_encode(serialize($_POST['checkWeek'])));
@@ -51,35 +49,18 @@ function setCapacity($DBconnection)
         $capacity = $DBconnection->real_escape_string($_POST['capacity']);
         $instructor = $DBconnection->real_escape_string($_POST['instructor']);
 
-        // echo $title."<br>";
-        // echo $capacityFrom."<br>";
-        // echo $capacityTo."<br>";
-        // echo $price."<br>";
-        // echo $description."<br>";
-        // echo $repeat."<br>";
-        // echo $capacity."<br>";
-        // echo $instructor."<br>";
-
-        // echo "<p class='alert-success'>Form submitted</p>";
-
         $sql = "SELECT * FROM gyms";
         $result = $DBconnection->query($sql);
         while ($row = $result->fetch_assoc()) {
             $gymSession = $_SESSION['gymID'];
             if (isset($gymSession)) {
                 if ($gymSession == $row['gym_id']) {
-                    $query = "SELECT DISTINCT gym_id FROM capacity_schedule WHERE gym_id='$gymSession'";
-                    $sequel = $DBconnection->query($query);
-                    if($record = $sequel->fetch_assoc()) {
-                        $insert = "INSERT INTO capacity_schedule(gym_id, title, from_date, to_date, price, description, repeat_date, max_pple, appointer) 
-                            VALUES('$gymSession', '$title', '$capacityFrom', '$capacityTo', '$price', '$description', '$repeat', '$capacity', '$instructor')";
-                        $DBconnection->query($insert);
-                        exit();
-                    } else {
-                        $queryInsert = "INSERT INTO capacity_schedule(gym_id, title, from_date, to_date, price, description, repeat_date, max_pple, appointer) 
-                            VALUES('$gymSession', '$title', '$capacityFrom', '$capacityTo', '$price', '$description', '$repeat', '$capacity', '$instructor')";
-                            $DBconnection->query($queryInsert);
-                    }
+                    $insert = "INSERT INTO capacity_schedule(gym_id, title, from_date, to_date, price, description, repeat_date, max_pple, appointer) 
+                        VALUES('$gymSession', '$title', '$capacityFrom', '$capacityTo', '$price', '$description', '$repeat', '$capacity', '$instructor')";
+                    $DBconnection->query($insert);
+                    
+                    header("Location: ../employee/viewSchedule.php");
+                    exit();
                 }
             }
         }
@@ -89,14 +70,41 @@ function setCapacity($DBconnection)
 function getCapacityEmployee($DBconnection)
 {
     $sql = "SELECT * FROM gyms";
-    $result = $DBconnection->query($sql);
-    echo "<div class='container d-flex justify-content-around flex-wrap p-2 bg-dark mt-4 mb-4'>";
-    while ($row = $result->fetch_assoc()) {
-        if (isset($_SESSION['gymID'])) {
-            if ($_SESSION['gymID'] == $row['employer_id']) {
-                # code...
+    $result = $DBconnection->query($sql) or die("Error occured");
+    echo "<div class='container d-flex justify-content-around flex-wrap p-2 bg-light mt-4 mb-4'>";
+    if($result->num_rows > 0) {
+        
+        while($row = $result->fetch_assoc()) {
+            $gymSession = $_SESSION['gymID'];
+            if(isset($_SESSION['gymID'])) {
+                if($_SESSION['gymID'] == $row['gym_id']) {
+                    $query = "SELECT * FROM capacity_schedule WHERE gym_id = '$gymSession'";
+                    $sequel = $DBconnection->query($query);
+                    if($sequel->num_rows > 0) {
+                        while($record = $sequel->fetch_assoc()) {
+                            var_dump($record);
+                            echo "<div class='card'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>".$record['title']."</h5>
+                                    <h6>".$record['from_date']." - ".$record['to_date']."</h6>
+                                    <small class='text-primary'>".$record['price']."</small>
+                                    <hr>
+                                    <p>".$record['description']."</p>
+                                    <div class='card-footer'>
+                                        <p class='text-muted d-inline'>".$record['appointer']."</p>
+                                        <p class='badge-primary float-right'>1/200</p>
+                                    </div>
+                                </div>
+                            </div>";
+                        }
+                    } else {
+                        echo "No records from capacity_schedule";
+                    }
+                }
             }
         }
+    } else {
+        echo "No records";
     }
     echo "</div>";
 }

@@ -59,7 +59,7 @@ include '../includes/processSchedule.inc.php';
             </div>
 
             <button type='submit' name='submit_capacity' class='btn btn-primary'>Create Capacity</button>
-                </form>";
+            </form>";
             ?>
         </div>
     </div>
