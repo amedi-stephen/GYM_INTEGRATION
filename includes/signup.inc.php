@@ -44,7 +44,6 @@ if (isset($_POST["submitSignup"])) {
             header("Location: ../signup.php?error=userexists");
             exit();
         } else {
-            // TODO: add location, phone number
             $insertUserQuery = "INSERT INTO users(user_name, user_email, user_location, user_phone, user_gender, user_goal, user_text, user_classes, user_preferrables, user_password) 
                 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt_insertUserQuery = $DBconnection->stmt_init();

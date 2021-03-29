@@ -1,42 +1,6 @@
 <?php
 include "dbh.inc.php";
 
-function setResource($DBconnection)
-{
-    if (isset($_POST['resource_submit'])) {
-
-        $schedule_name = $DBconnection->real_escape_string($_POST['schedule_name']);
-        $checkWeek = $DBconnection->real_escape_string(base64_encode(serialize($_POST['checkWeek'])));
-        $schedule_from = $DBconnection->real_escape_string($_POST['schedule_from']);
-        $schedule_to = $DBconnection->real_escape_string($_POST['schedule_to']);
-        $date = $DBconnection->real_escape_string($_POST['date']);
-        $appointer = $DBconnection->real_escape_string($_POST['appointer']);
-
-        $sql = "SELECT * FROM gyms";
-        $result = $DBconnection->query($sql);
-        while ($row = $result->fetch_assoc()) {
-            $gymSession = $_SESSION['gymID'];
-            if (isset($gymSession)) {
-                if ($gymSession == $row['gym_id']) {
-                    $gymid = $row['gym_id'];
-                    $query = "SELECT DISTINCT gym_id FROM resource_schedule WHERE gym_id='$gymSession'";
-                    $sequel = $DBconnection->query($query);
-                    if ($record = $sequel->fetch_assoc()) {
-
-                        $insert = "INSERT INTO resource_schedule(gym_id, resource_name, resource_workdays, opening_hrs, closing_hrs, start_appointment, appointer) 
-                            VALUES('$gymSession', '$schedule_name', '$checkWeek', '$schedule_from', '$schedule_to', '$date', '$appointer')";
-                        $DBconnection->query($insert);
-
-                        echo "<p class='alert-success'>Reserved Created!</p>";
-
-                        exit();
-                    }
-                }
-            }
-        }
-    }
-}
-
 function setCapacity($DBconnection)
 {
     if (isset($_POST['submit_capacity'])) {
@@ -113,39 +77,6 @@ function getCapacityEmployee($DBconnection)
     echo "</div>";
 }
 
-function getResourceEmployee($DBconnection)
-{
-    $sql = "SELECT * FROM gyms";
-    $result = $DBconnection->query($sql);
-    echo "<div class='container d-flex justify-content-around flex-wrap p-2 bg-light mt-4 mb-4'>";
-    while ($row = $result->fetch_assoc()) {
-        if (isset($_SESSION['gymID'])) {
-            if ($_SESSION['gymID'] == $row['gym_id']) {
-                $gymSession = $_SESSION['gymID'];
-                $query = "SELECT * FROM resource_schedule WHERE gym_id='$gymSession'";
-                $sequel = $DBconnection->query($query);
-                while ($record = $sequel->fetch_assoc()) {
-                    echo "
-                    <div class='card mb-4' style='width: 18rem;'>
-                        <div class='card-body'>
-                            <h5 class='card-title'>" . $record['resource_name'] . "</h5>
-                            <h6 class='card-subtitle mb-2 text-muted'>" . $record['start_appointment'] . "</h6>
-                            <p class='card-text'>" . $record['opening_hrs'] . " - " . $record['closing_hrs'] . "</p>";
-                    $daysArr = unserialize(base64_decode($record['resource_workdays']));
-                    foreach ($daysArr as $key => $day) {
-                        echo " <ul class='list-group'>
-                                <li class='list-group-item'>" . $day . "</li> 
-                            </ul>";
-                    }
-                    echo "
-                        </div>
-                    </div>";
-                }
-            }
-        }
-    }
-}
-
 function reserveCapacity($DBconnection)
 {
     if (isset($_POST['submit_capacity'])) {
@@ -168,44 +99,14 @@ function reserveCapacity($DBconnection)
                         }
                     }
                 }
-
             }
-
         }
     }
 }
 
 function reserveResource($DBconnection)
 {
-    if (isset($_POST['resource_reserve'])) {
-
-        if (isset($_GET['id'])) {
-            $name = $DBconnection->real_escape_string($_POST['name']);
-            $phone = $DBconnection->real_escape_string($_POST['number']);
-
-            if (empty($name) || empty($phone)) {
-                header("Location: ../viewGym.php?error=emptyfields");
-                exit();
-            } else {
-                
-                $query = "SELECT * FROM resource_schedule";
-                $sequel = $DBconnection->query($query);
-                if ($sequel->num_rows > 0) {
-                    while ($row = $sequel->fetch_assoc()) {
-                        var_dump($row);
-                        $gymPage = $_GET['id'];
-                        $resourceid = $row['resource_id'];
-                        if($gymPage == $row['gym_id']) {
-                            echo true;
-                            $sql = "INSERT INTO resource_members(gym_id, resource_id, booked_members, phone) VALUES('$gymPage', '$resourceid', '$name', '$phone')";
-                            $result = $DBconnection->query($sql) or die("Error message: ".$DBconnection->error);
-                        }
-                        
-                    }
-                } else {
-                    echo "no sessions found!";
-                }
-            }
-        }
+    if(isset($_POST['resource_reserve'])) {
+        echo "<p class='text-success'>Form submitted</p>";
     }
 }

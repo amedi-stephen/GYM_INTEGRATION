@@ -21,40 +21,40 @@ date_default_timezone_set('Africa/Nairobi');
                     
                         <div class="service-amenities mb-4">
                             <h3 class="badge-light p-2">Amenities</h3>';
-                            $amenitiesArr = unserialize(base64_decode($gym['amenities']));
-                            foreach ($amenitiesArr as $key => $item) {
-                                echo ' <ul class="list-group">
+            $amenitiesArr = unserialize(base64_decode($gym['amenities']));
+            foreach ($amenitiesArr as $key => $item) {
+                echo ' <ul class="list-group">
                                     <li class="list-group-item">' . $item . '</li> 
                                 </ul>';
-                            }
+            }
 
-                            echo '
+            echo '
                         </div>
 
                         <div class="service-classes mb-4">
                             <h3 class="badge-light p-2">Classes</h3>';
-                                $classesArr = unserialize(base64_decode($gym['classes']));
-                                if(is_array($classesArr) || is_object($classesArr)) {
-                                    foreach($classesArr as $class) {
-                                        echo "<ul class='list-group'>
-                                            <li class='list-group-item'>".$class."</li>
+            $classesArr = unserialize(base64_decode($gym['classes']));
+            if (is_array($classesArr) || is_object($classesArr)) {
+                foreach ($classesArr as $class) {
+                    echo "<ul class='list-group'>
+                                            <li class='list-group-item'>" . $class . "</li>
                                         </ul>";
-                                    }
-                                } else {
-                                    echo "Array conversion error: ".$DBconnection->error;
-                                }
-                            echo '
+                }
+            } else {
+                echo "Array conversion error: " . $DBconnection->error;
+            }
+            echo '
                         </div>
 
                         <div class="service-equipments mb-4">
                             <h3 class="badge-light p-2">Equipments</h3>';
-                            $equipArr = unserialize(base64_decode($gym['equipments']));
-                            foreach ($equipArr as $key => $equip) {
-                                echo '<ul class="list-group">
+            $equipArr = unserialize(base64_decode($gym['equipments']));
+            foreach ($equipArr as $key => $equip) {
+                echo '<ul class="list-group">
                                         <li class="list-group-item">' . $equip . '</li> 
                                 </ul>';
-                            }
-                            echo '
+            }
+            echo '
                         </div>
 
                         <div class="service-others mb-4">
@@ -74,14 +74,14 @@ date_default_timezone_set('Africa/Nairobi');
             <?php
             echo " <div class='capacity-sessions'>
                 <h3 class='badge-light p-2 mt-4'>Capacity sessions</h3>";
-                
-                if (isset($_GET['id'])) {
+
+            if (isset($_GET['id'])) {
                 $sql = "SELECT * FROM gyms";
                 $result = $DBconnection->query($sql) or die($DBconnection->error);
-                while($row = $result->fetch_assoc()) {
+                while ($row = $result->fetch_assoc()) {
                     $gymPage = $_GET['id'];
                     $gymid = $row['gym_id'];
-                    if($gymid == $gymPage) {
+                    if ($gymid == $gymPage) {
                         $query = "SELECT * FROM capacity_schedule WHERE gym_id = '$gymPage'";
                         $sequel = $DBconnection->query($query);
                         while ($record = $sequel->fetch_assoc()) {
@@ -91,24 +91,23 @@ date_default_timezone_set('Africa/Nairobi');
                                         <h6 class='card-subtitle mb-2 text-muted'>ksh. " . $record['price'] . "</h6>
                                         <p class='card-text'>" . $record['description'] . "</p>
                                         <form method='post' action='" . reserveCapacity($DBconnection) . "' class='d-inline'>";
-                                            $sql = "SELECT * FROM users";
-                                            $result = $DBconnection->query($sql);
-                                            while ($row = $result->fetch_assoc()) {
-                                                if (isset($_SESSION['userID'])) {
-                                                    if ($_SESSION['userID'] == $row['user_id']) {
-                                                        echo "
-                                                            <input type='hidden' name='uid' value='" . $row['user_name'] . "'>
-                                                            <input type='hidden' name='date' value='" . date('Y-m-d H:i:s') . "'>
-                                                            <button type='submit' name='submit_capacity' class='btn btn-primary'>Book <span class='ml-2'>&#8594;</span></button>";
-                                                    }
-                                                }
-                                            }
-                                        echo "</form>";
-                                            $countQuery = "SELECT gym_id FROM capacity_members";
-                                            $queryResult = $DBconnection->query($countQuery);
-                                            $rowResult = $queryResult->num_rows;
-                                            echo "
-                                            <span class='badge badge-pill badge-primary float-right p-2'>".$rowResult."/" . $record['max_pple'] . "</span>
+                            $sql = "SELECT * FROM users";
+                            $result = $DBconnection->query($sql);
+                            while ($row = $result->fetch_assoc()) {
+                                if (isset($_SESSION['userID'])) {
+                                    if ($_SESSION['userID'] == $row['user_id']) {
+                                        echo "<input type='hidden' name='uid' value='" . $row['user_name'] . "'>
+                                            <input type='hidden' name='date' value='" . date('Y-m-d H:i:s') . "'>
+                                            <button type='submit' name='submit_capacity' class='btn btn-primary'>Book <span class='ml-2'>&#8594;</span></button>";
+                                    }
+                                }
+                            }
+                            echo "</form>";
+                            $countQuery = "SELECT gym_id FROM capacity_members";
+                            $queryResult = $DBconnection->query($countQuery);
+                            $rowResult = $queryResult->num_rows;
+                            echo "
+                                            <span class='badge badge-pill badge-primary float-right p-2'>" . $rowResult . "/" . $record['max_pple'] . "</span>
                                     </div>
                                 </div>
                                 </div>
@@ -117,170 +116,13 @@ date_default_timezone_set('Africa/Nairobi');
                     }
                 }
             }
-      
+
             ?>
 
-            <div class='container-fluid mt-4'>
-                <h3 class='badge-light p-2 mt-4'>Resource sessions</h3>
-                <table class='table mt-4'>
-                    <thead>
-                        <tr>
-                            <th scope='col'>Resource Name</th>
-                            <th scope='col'>Starting Date</th>
-                            <th scope='col'>Opening hrs</th>
-                            <th scope='col'>Closing hrs</th>
-                            <th scope='col'>Book Session</th>
-                        <tr>
-                    </thead>
-                    <tbody>
-                <?php
-                if (isset($_GET['id'])) {
-                    $sql = "SELECT * FROM gyms";
-                    $result = $DBconnection->query($sql) or die($DBconnection->error);
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            $gymid = $row['gym_id'];
-                            $gymPage = $_GET['id'];
-
-                            $query = "SELECT * FROM resource_schedule WHERE gym_id = '$gymPage'";
-                            $sequel = $DBconnection->query($query) or die("Error message: " . $DBconnection->error);
-                            while ($record = $sequel->fetch_assoc()) {
-                                if ($gymid == $gymPage) {
-                                    echo "<tr>
-                                    <td>" . $record['resource_name'] . "</td>
-                                    <td>" . $record['start_appointment'] . "</td>
-                                    <td>" . $record['opening_hrs'] . "</td>
-                                    <td>" . $record['closing_hrs'] . "</td>
-                                    <td>
-                                        <a href='javascript:void(0)' class='btn btn-primary btn-sm modal-btn'>Book session <span class='ml-2'>&#8594;</span></a>
-                                    </td>
-                                <tr>";
-                                }
-                            }
-                        }
-                    } else {
-                        echo "No records";
-                    }
-                    $DBconnection->close();
-                }
-                echo "
-            </tbody>
-            </table>
-            
-        </div>
-        
-        </div>
-    </div>";
-            }
-        } else {
-            echo "no got staff";
-        }
+           
+                <?php        
+    }
+}
                 ?>
-
-                <!-- <div class='comment-section mb-4'>
-                    <div class='card' style='width: 30rem'>
-                        <div class='card-header'>
-                            <h3 class='card-title'>Comments</h3>
-                        </div>
-                        <div class='card-body'>
-                            <ul class='media-list'>
-                                <li class='media mb-2'>
-                                    <a href='#' class='pull-left'>
-                                        <img src='/uploads/caspar-camille-rubin-89xuP-XmyrA-unsplash.jpg' width='45' height='45' class='mr-2'>
-                                    </a>
-                                    <div class='media-body'>
-                                        <p>This Gym equal sucks!</p>
-                                        <strong class='media-heading'>
-                                            Steve
-                                        </strong>
-                                        <small class='text-muted'>A minute ago</small>
-                                    </div>
-                                </li>
-                                <hr>
-                                
-                                <li class='media mb-4'>
-                                    <a href='#' class='pull-left'>
-                                        <img src='images/dummy.jpg' width='45' height='45' class='mr-2'>
-                                    </a>
-                                    <div class='media-body'>
-                                        <p>Always crowded with no air conditioning</p>
-                                        <strong class='media-heading'>
-                                            Jane
-                                        </strong>
-                                        <small class='text-muted'>A minute ago</small>
-                                    </div>
-                                </li>
-                            </ul>
-                            <form action='' method='post'>
-                                <div class='form-group'>
-                                    <label for='name'><strong>Name:</strong></label>
-                                    <input type='text' name='name' class='form-control'>
-                                </div>
-                                <div class='form-group'>
-                                    <label for='name'><strong>Email:</strong></label>
-                                    <input type='email' name='email' class='form-control'>
-                                </div>
-                                <div class='form-group'>
-                                    <label for='comment'><strong>Comment:</strong></label>
-                                    <textarea name='comment' class='form-control'></textarea>
-                                </div>
-                                <button class='btn btn-primary mb-4 disabled'>Post Comment <i class='fa fa-comment'></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
-</div>
-
-<div class="modal-overlay mb-4">
-
-    <div class="modal-container container bg-light p-4" style="width: 40%;">
-        <div class="header p-2">
-            <h3 class="d-inline">Book a session</h3>
-            <button class="float-right close-btn btn btn-danger btn-sm">
-                <i class="fa fa-times"></i>
-            </button>
-        </div>
-
-        <div class="modal-content">
-            <?php
-            echo "<form class='container' method='post' action='" . reserveResource($DBconnection) . "'>
-                <div class='form-group'>
-                    <label for='name'>Full Name</label>
-                    <input type='text' name='name' id='fullName' class='form-control'>
-                </div>
-                <div class='form-group'>
-                    <label for='number'>Phone Number</label>
-                    <input type='text' name='number' id='phoneNumber' class='form-control'>
-                </div>
-                <button type='submit' name='resource_reserve' class='btn btn-primary mb-2'>Create Rerservation</button>
-            </form>";
-            ?>
-        </div>
-    </div>
-</div>
-
-
-<script>
-    const openBtns = document.querySelectorAll(".modal-btn");
-    const modalOverlay = document.querySelector(".modal-overlay");
-    const closeBtn = document.querySelector(".close-btn");
-
-    openBtns.forEach(btn => {
-        btn.addEventListener('click', openModal);
-    });
-
-    closeBtn.addEventListener('click', closeModal);
-
-    function openModal() {
-        modalOverlay.classList.add('open-modal');
-    }
-
-    function closeModal() {
-        modalOverlay.classList.remove('open-modal');
-    }
-
-    function setCapacityNumber() {
-
-    }
-</script>
+            <!-- </div>
+</div> -->
