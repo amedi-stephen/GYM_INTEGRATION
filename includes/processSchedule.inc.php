@@ -82,7 +82,6 @@ function getCapacityEmployee($DBconnection)
                     $sequel = $DBconnection->query($query);
                     if($sequel->num_rows > 0) {
                         while($record = $sequel->fetch_assoc()) {
-                            var_dump($record);
                             echo "<div class='card'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>".$record['title']."</h5>
@@ -92,7 +91,12 @@ function getCapacityEmployee($DBconnection)
                                     <p>".$record['description']."</p>
                                     <div class='card-footer'>
                                         <p class='text-muted d-inline'>".$record['appointer']."</p>
-                                        <p class='badge-primary float-right'>1/200</p>
+                                        ";
+                                        $countQuery = "SELECT gym_id FROM capacity_members";
+                                        $queryResult = $DBconnection->query($countQuery);
+                                        $rowResult = $queryResult->num_rows;
+                                        echo "
+                                        <p class='badge-primary badge-pill float-right'>".$rowResult."/".$record['max_pple']."</p>
                                     </div>
                                 </div>
                             </div>";

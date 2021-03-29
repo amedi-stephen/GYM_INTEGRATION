@@ -18,7 +18,36 @@ require "navbar.php";
         <p>Gyms according to your current location</p>
 
         <div class="d-flex justify-content-between">
-            <div>lorem</div>
+            <div>
+                <?php
+                    $sql = "SELECT * FROM users";
+                    $result = $DBconnection->query($sql);
+                    while($row = $result->fetch_assoc()) {
+                        if(isset($_SESSION['userID'])) {
+                            if($_SESSION['userID'] == $row['user_id']) {
+                                $town = $row['user_location'];
+                                $query = "SELECT * FROM gyms WHERE town = '$town'";
+                                $sequel = $DBconnection->query($query);
+                                if($sequel->num_rows > 0) {
+                                    while($record = $sequel->fetch_assoc()) {
+                                       echo " <div class='card mb-4 ' style = 'flex-grow: 4;'>
+                                       <div class='card-header'>
+                                           <div class='card-title'>" . strtoupper($record['gym_name']) . " - <span class='text-muted'>" . strtoupper($record["town"]) . "</span></div>
+                                       </div>
+                                       <div class='card-body'>
+                                           <p>LOCATION: " . strtoupper($record["address"]) . "</p>
+                                           <a href='viewGym.php?id=".$record['gym_id']."' class='btn btn-outline-primary text-uppercase'>View Gym <span class='ml-2'>&#8594;</span></a>
+                                       </div>
+                                   </div> <hr>";
+                                    }
+                                } else {
+                                    echo "There are no gyms that match your location. Go to settings and view your profile";
+                                }
+                            }
+                        }
+                    }
+                 ?>
+            </div>
             <div>
                 <div class="card mb-4">
                     <div class="card-header">

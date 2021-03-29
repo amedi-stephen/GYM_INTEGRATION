@@ -40,21 +40,28 @@ require "navbar.php";
                                         <p class='card p-2'>".$row['user_text']."</p>
                                     </div>
                                     <p>Member's activites</p>";
-                                    $activitiesArr = @unserialize(base64_decode($row['user_classes']));
-                                    foreach ($activitiesArr as $key => $activity) {
-                                        echo "<ul class='list-group'>
-                                            <li class='list-group-item'>".strtolower($activity)."</li>
-                                        </ul>
-                                        ";
+                                    $activitiesArr = unserialize(base64_decode($row['user_classes']));
+                                    if(is_array($activitiesArr) || is_object($activitiesArr)) {
+                                        foreach ($activitiesArr as $activity) {
+                                            echo "<ul class='list-group'>
+                                                <li class='list-group-item'>".strtolower($activity)."</li>
+                                            </ul>
+                                            ";
+                                        }
+                                    } else {
+                                        echo "Array conversion error: ".$DBconnection->error;
                                     }
-
                                     echo "
                                     <p>Member's prefferables</p>";
-                                    $prefArr = @unserialize(base64_decode($row['user_preferrables']));
-                                    foreach ($prefArr as $key => $pref) {
-                                        echo "<ul class='list-group'>
-                                            <li class='list-group-item'>".$pref."</li>
-                                        </ul>";
+                                    $prefArr = unserialize(base64_decode($row['user_preferrables']));
+                                    if(is_array($prefArr) || is_object($prefArr)) {
+                                        foreach($prefArr as $pref) {
+                                            echo "<ul class='list-group'>
+                                                <li class='list-group-item'>".$pref."</li>
+                                            </ul>";
+                                        }
+                                    } else {
+                                        echo "The string has not been converted to an array";
                                     }
                                     echo "
                                 </form>

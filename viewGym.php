@@ -17,10 +17,6 @@ date_default_timezone_set('Africa/Nairobi');
             <div class="d-flex justify-content-between align-items-center"> 
     
                 <div class="gym-section">
-                    <div class="d-flex justify-content-between">
-                        <img src="images/dummy.jpg" style="width:300px; height: 300px;" class="mr-2">
-                        <img src="images/dummy.jpg" style="width:300px; height: 300px;">
-                    </div>
                     <div class="services mt-4">
                     
                         <div class="service-amenities mb-4">
@@ -37,14 +33,16 @@ date_default_timezone_set('Africa/Nairobi');
 
                         <div class="service-classes mb-4">
                             <h3 class="badge-light p-2">Classes</h3>';
-                                $classesArr = base64_decode(unserialize($gym['classes']));
-                                echo $classesArr;
-                                // echo $str;
-                                // foreach ($classesArr as $key => $class) {
-                                //     echo '<ul class="list-group">
-                                //         <li class="list-group-item">' . $class . '</li> 
-                                //     </ul>';
-                                // }
+                                $classesArr = unserialize(base64_decode($gym['classes']));
+                                if(is_array($classesArr) || is_object($classesArr)) {
+                                    foreach($classesArr as $class) {
+                                        echo "<ul class='list-group'>
+                                            <li class='list-group-item'>".$class."</li>
+                                        </ul>";
+                                    }
+                                } else {
+                                    echo "Array conversion error: ".$DBconnection->error;
+                                }
                             echo '
                         </div>
 
@@ -179,7 +177,7 @@ date_default_timezone_set('Africa/Nairobi');
         }
                 ?>
 
-                <div class='comment-section mb-4'>
+                <!-- <div class='comment-section mb-4'>
                     <div class='card' style='width: 30rem'>
                         <div class='card-header'>
                             <h3 class='card-title'>Comments</h3>
@@ -199,7 +197,7 @@ date_default_timezone_set('Africa/Nairobi');
                                     </div>
                                 </li>
                                 <hr>
-                                <!-- TODO: put appropriate images from the database -->
+                                
                                 <li class='media mb-4'>
                                     <a href='#' class='pull-left'>
                                         <img src='images/dummy.jpg' width='45' height='45' class='mr-2'>
@@ -230,7 +228,7 @@ date_default_timezone_set('Africa/Nairobi');
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 </div>
 
