@@ -127,10 +127,12 @@ body {
 
 [data-component="slideshow"] .slide {
   display: none;
+  transition: ease-in-out .3s;
 }
 
 [data-component="slideshow"] .slide.active {
   display: block;
+  transition: display ase-in-out .3s;
 }
 
 
