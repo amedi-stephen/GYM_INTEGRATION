@@ -116,6 +116,12 @@ body {
   z-index: 10;
 }
 
+.modal-container {
+  background-color: white;
+  width: 50%;
+  padding: 20px 8px;
+}
+
 #slideshow-section {
   text-align: center;
 }
