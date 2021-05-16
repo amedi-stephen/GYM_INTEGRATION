@@ -177,8 +177,8 @@ require "navbar.php";
                 echo '<div class="container bg-light p-2 d-flex flex-wrap justify-content-between">';
                 if ($row_results > 0) {
                     while ($row = $result_search->fetch_assoc()) {
-                        echo '    
-                                <div class="card mb-4 " style = "flex-grow: 4;">
+                        echo '
+                                <div class="card mb-4 " style = "flex-grow: 4; width: 18rem;">
                                     <div class="card-header">
                                         <div class="card-title">' . strtoupper($row["gym_name"]) . ' - <span class="text-muted">' . strtoupper($row["town"]) . '</span></div>
                                     </div>

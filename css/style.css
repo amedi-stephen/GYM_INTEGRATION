@@ -1,24 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Chango&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 
 * {
   box-sizing: border-box;
+}
+
+body {
+  font-family: 'Playfair Display', serif;
+  line-height: 1.8;
 }
 
 .brand {
   font-family: 'Chango', cursive;
 }
 .banner-cover {
-  background-image: url("../images/squats.jpg");
-  height: 90vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url("../images/squats.jpg");
+  height: 100vh; 
   background-position: center;
   background-size: cover;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 .banner-content {
   background-color: rgba(0, 0, 0, 0.6);
-  position: absolute;
-  right: 0;
-  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .bg-fluid {
@@ -103,6 +114,23 @@
 .open-modal {
   visibility: visible;
   z-index: 10;
+}
+
+#slideshow-section {
+  text-align: center;
+}
+
+.slide > img {
+  width: 60%;
+  height: 60vh;
+}
+
+[data-component="slideshow"] .slide {
+  display: none;
+}
+
+[data-component="slideshow"] .slide.active {
+  display: block;
 }
 
 

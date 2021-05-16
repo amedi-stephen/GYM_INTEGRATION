@@ -1,6 +1,6 @@
 <?php
-    session_start();
-    include "includes/dbh.inc.php";
+session_start();
+include "includes/dbh.inc.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="fontawesome/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <title>GYM NAVIGATOR</title>
 </head>
 
@@ -45,7 +46,7 @@
                             <div class='collapse navbar-collapse' id='navbarColor01'>
                                 <ul class='navbar-nav mr-auto'>
                                     <li class='nav-item'>
-                                        <a class='nav-link'>Hi, ".ucwords($row['user_name'])."</a>
+                                        <a class='nav-link'>Hi, " . ucwords($row['user_name']) . "</a>
                                     </li>
                                     <li class='nav-item dropdown'>
                                         <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='javascript:void(0)' role='button' aria-haspopup='true' aria-expanded='false'>MENU</a>
@@ -73,17 +74,14 @@
             echo "
                 <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
                 <div class='container'>
-                    <a class='navbar-brand brand' href='index.php'><i class='fa fa-compass'></i> Gym Navigator</a>
+                    <a class='navbar-brand brand' href='index.php'><i class='fa fa-compass'></i> Gym Session Booking System</a>
         
                     <ul class='navbar-nav my-2 my-lg-0'>
-                        <li class='nav-item'>
-                            <a class='nav-link btn btn-link' href='signup.php'>Sign Up</a>
-                        </li>
                         <li class='nav-item'>
                             <a class='nav-link btn btn-link' href='login.php'>Log In</a>
                         </li>
                         <li class='nav-item'>
-                            <a class='nav-link btn btn-link' href='employee/employeeSignup.php'>Employer Benefit</a>
+                            <a class='nav-link btn btn-link' href='employee/employeeLogin.php'>Employer Benefit</a>
                         </li>
                     </ul>
                 </div>

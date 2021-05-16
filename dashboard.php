@@ -30,7 +30,7 @@ require "navbar.php";
                                 $sequel = $DBconnection->query($query);
                                 if($sequel->num_rows > 0) {
                                     while($record = $sequel->fetch_assoc()) {
-                                       echo " <div class='card mb-4 ' style = 'flex-grow: 4;'>
+                                       echo " <div class='card mb-4 ' style = 'flex-grow: 4;' style='width: 18rem;'>
                                        <div class='card-header'>
                                            <div class='card-title'>" . strtoupper($record['gym_name']) . " - <span class='text-muted'>" . strtoupper($record["town"]) . "</span></div>
                                        </div>
@@ -49,14 +49,7 @@ require "navbar.php";
                  ?>
             </div>
             <div>
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h5 class="card-title">Current Resource Sessions</h5>
-                    </div>
-                    <div class="card-body">
-                        kdjgksjg;jkjsfgl
-                    </div>
-                </div>
+                
 
                 <div class="card mb-4">
                     <div class="card-header">

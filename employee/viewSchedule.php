@@ -5,6 +5,4 @@
 
 <?php
     getCapacityEmployee($DBconnection);
-    getResourceEmployee($DBconnection);
-    // getResourceUser($DBconnection);
 ?>

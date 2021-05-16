@@ -36,37 +36,26 @@ include "../includes/dbh.inc.php";
                             echo "<img src='../uploads/default.webp' style='width: 50px; height: 50px; border-radius: 50%;' class='mr-2'>";
                         }
                         echo '
-                            <a class="navbar-brand" href="#">' . ucwords($row['gym_name']) . '</a>
+                            <a class="navbar-brand">' . ucwords($row['gym_name']) . '</a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
 
                             <div class="collapse navbar-collapse" id="navbarColor01">
                                 <ul class="navbar-nav mr-auto">
-                                    
+
                                     <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">MENU</a>
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MENU</a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="employeeDashboard.php"><i class="fa fa-clipboard mr-1"></i>Dashboard</a>
                                             <a class="dropdown-item" href="employeeProfile.php"><i class="fa fa-user mr-1"></i> Profile</a>
                                             <a class="dropdown-item" href="employeeSettings.php"><i class="fa fa-cog mr-1"></i>Settings</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Log Out</a>
+
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="employeeNotifications.php" class="nav-link">Notifications<span class="badge badge-success badge-pill nav-pills">3</span></a>
+                                        <a href="viewSchedule.php" class="nav-link">Schedules</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="employeeGallery.php" class="nav-link">Gallery</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="employeeGallery.php" class="nav-link">Your Team</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="employeeSchedule.php" class="nav-link">Schedules</a>
-                                    </li>
-                                    
+
                                 </ul>
                                 <form class="form-inline my-2 my-lg-0" action="../includes/employeeLogout.inc.php" method="post">
 
@@ -83,17 +72,17 @@ include "../includes/dbh.inc.php";
             echo '
                 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                     <div class="container">
-                    <a class="navbar-brand brand" href="index.php"><i class="fa fa-compass"></i> Gym Navigator</a>
+                    <a class="navbar-brand brand" href="../index.php"><i class="fa fa-compass"></i> Gym Session Booking System</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
 
                         <div class="collapse navbar-collapse" id="navbarColor01">
                             <ul class="navbar-nav mr-auto"></ul>
-                            <a href="employeeLogin.php" class="nav-link btn btn-secondary my-2 my-lg-0">Log in</a>
+                            <a href="employeeLogin.php" class="nav-link btn btn-outline-secondary my-2 my-lg-0">Sign Up</a>
                         </div>
                     </div>
                 </nav>';
-        } 
+        }
     }
     ?>

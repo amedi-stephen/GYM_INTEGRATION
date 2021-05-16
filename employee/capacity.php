@@ -8,8 +8,7 @@ include '../includes/processSchedule.inc.php';
     <h2 style="margin-bottom: 50px;">Schedules</h2>
     <div class="d-flex justify-content-between">
         <ul class='list-group' style='width: 18rem;'>
-            <li class='list-group-item'><a href="employeeSchedule.php">resource schedule</a></li>
-            <li class='list-group-item'><a href="capacity.php">capacity schedule</a></li>
+            <li class='list-group-item'><a href="capacity.php">Create session</a></li>
             <li class='list-group-item'><a href="viewSchedule.php">view your schedules</a></li>
         </ul>
         <div class="container border-left ml-4">
@@ -24,9 +23,9 @@ include '../includes/processSchedule.inc.php';
 
             <div class='form-inline mb-4'>
                 <label for='capacity_from'>From</label>
-                <input type='date' name='capacity_from' class='form-control mr-4'>
+                <input type='time' name='capacity_from' class='form-control mr-4'>
                 <label for='capacity_to'>To </label>
-                <input type='date' name='capacity_to' class='form-control'>
+                <input type='time' name='capacity_to' class='form-control'>
             </div>
 
             <div class='form-group mb-4'>

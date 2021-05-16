@@ -30,7 +30,7 @@ if (isset($_POST["employee_login"])) {
                     $_SESSION["gymID"] = $row["gym_id"];
                     $_SESSION["gymMail"] = $row["gym_email"];
 
-                    header("Location: ../employee/employeeDashboard.php");
+                    header("Location: ../employee/employeeAccount.php");
                     exit();
                 } else {
                     header("Location: ../employee/employeeLogin.php?error=wrongpwd");

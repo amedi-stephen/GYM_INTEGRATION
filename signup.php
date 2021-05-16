@@ -1,5 +1,5 @@
-<?php 
-    require "navbar.php";
+<?php
+require "navbar.php";
 ?>
 
 <div class="container mt-4 d-flex justify-content-center align-items-center">
@@ -76,8 +76,25 @@
                         <option>KARATE</option>
                         <option>TAI CHI</option>
                     </select>
+
                     <small class="text-muted form-text mt-2">Press command or control when clicking to select multiple items</small>
                 </div>
+
+                <fieldset class="form-group">
+                    <legend class="mt-4">Checkboxes</legend>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Default checkbox
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Checked checkbox
+                        </label>
+                    </div>
+                </fieldset>
 
                 <div class="form-group mb-4">
                     <label for="gymLikables">Select your favorable Gym features</label>
