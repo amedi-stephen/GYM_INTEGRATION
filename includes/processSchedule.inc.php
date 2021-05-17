@@ -41,26 +41,70 @@ function getCapacityEmployee($DBconnection)
             $gymSession = $_SESSION['gymID'];
             if(isset($_SESSION['gymID'])) {
                 if($_SESSION['gymID'] == $row['gym_id']) {
-                    $query = "SELECT * FROM capacity_schedule WHERE gym_id='$gymSession'";
+                    $query = "SELECT * FROM capacity_schedule ";
                     $sequel = $DBconnection->query($query);
                     if($sequel->num_rows > 0) {
                         while($record = $sequel->fetch_assoc()) {
-                            echo "<div class='card mb-4' style='width: 30rem;'>
-                                <div class='card-body'>
-                                    <h5 class='card-title'>".$record['title']."</h5>
-                                    <h6>".$record['from_date']." - ".$record['to_date']."</h6>
-                                    <small class='text-primary'>".$record['price']."</small>
-                                    <hr>
-                                    <p>".$record['description']."</p>
-                                    <div class='card-footer'>
-                                        <p class='text-muted d-inline'>".$record['appointer']."</p>
-                                        ";
-
-                                        echo "
-                                        <a href='viewSession.php?sessID=".$record['capacity_id']."' class='btn btn-sm btn-primary float-right'>View</a>
+                            if($record['period'] === "1") {
+                                echo "<div class='card mb-4' style='width: 30rem;'>
+                                    <div class='card-body'>
+                                        <h5 class='card-title'> morning session</h5>
+                                        <h6>".$record['from_date']." - ".$record['to_date']."</h6>
+                                        <small class='text-primary'>".$record['price']."</small>
+                                        <hr>
+                                        <p>".$record['description']."</p>
+                                        <div class='card-footer'>
+                                            <p class='text-muted d-inline'>".$record['appointer']."</p>
+                                            ";
+    
+                                            echo "
+                                            <a href='viewSession.php?sessID=".$record['capacity_id']."' class='btn btn-sm btn-primary float-right'>View</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>";
+                                </div>";
+                            }
+
+                            if($record['period'] === "2") {
+                                echo "<div class='card mb-4' style='width: 30rem;'>
+                                    <div class='card-body'>
+                                        <h5 class='card-title'> Mid session</h5>
+                                        <h6>".$record['from_date']." - ".$record['to_date']."</h6>
+                                        <small class='text-primary'>".$record['price']."</small>
+                                        <hr>
+                                        <p>".$record['description']."</p>
+                                        <div class='card-footer'>
+                                            <p class='text-muted d-inline'>".$record['appointer']."</p>
+                                            ";
+    
+                                            echo "
+                                            <a href='viewSession.php?sessID=".$record['capacity_id']."' class='btn btn-sm btn-primary float-right'>View</a>
+                                        </div>
+                                    </div>
+                                </div>";
+                            }
+
+                            if($record['period'] === "3") {
+                                echo "<div class='card mb-4' style='width: 30rem;'>
+                                    <div class='card-body'>
+                                        <h5 class='card-title'> Evening session</h5>
+                                        <h6>".$record['from_date']." - ".$record['to_date']."</h6>
+                                        <small class='text-primary'>".$record['price']."</small>
+                                        <hr>
+                                        <p>".$record['description']."</p>
+                                        <div class='card-footer'>
+                                            <p class='text-muted d-inline'>".$record['appointer']."</p>
+                                            ";
+    
+                                            echo "
+                                            <a href='viewSession.php?sessID=".$record['capacity_id']."' class='btn btn-sm btn-primary float-right'>View</a>
+                                        </div>
+                                    </div>
+                                </div>";
+                            }
+
+                            // else if($sequel['period'] === 2) {
+                            //     echo "2";
+                            // } else if()
                         }
                     } else {
                         echo "No records from capacity_schedule";
