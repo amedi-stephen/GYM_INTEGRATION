@@ -56,69 +56,196 @@
                         <input type="text" name="town" class="form-control" placeholder="Town">
                     </div>
 
-                    <div class="form-group mb-4">
-                        <label for="classes">Gym Available Classes</label>
-                        <select multiple="multiple_activities" class="form-control" id="fitness-activities" name="classes[]">
-                            <option>CARDIO CLASSES</option>
-                            <option>AB/CORE CLASSES</option>
-                            <option>YOGA</option>
-                            <option>PILATES</option>
-                            <option>KICKBOXING CLASSES</option>
-                            <option>BOXING</option>
-                            <option>SPIN CLASSES</option>
-                            <option>MARTIAL ARTS</option>
-                            <option>STRENGTH TRAINING</option>
-                            <option>STRETCHING / FLEXIBILITY CLASSES</option>
-                            <option>BOOT CAMP</option>
-                            <option>DANCE CLASSES</option>
-                            <option>ZUMBA</option>
-                            <option>WATER FITNESS</option>
-                            <option>SPORTS PERFORMANCE</option>
-                            <option>CROSSFIT</option>
-                            <option>KARATE</option>
-                            <option>TAI CHI</option>
-                        </select>
-                        <small class="text-muted form-text mt-2">Press command or control when clicking to select multiple items</small>
-                    </div>
+                    <fieldset class="form-group">
+                    <label class="mt-4 ">Fitness Classes you offer</label>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div id="column1">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="cardio classes" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Cardio Classes
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="ab/core classes" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Ab/Core classes
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="yoga" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Yoga
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="pilates" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Pilates
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="kickboxing classes" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Kickboxing Classes
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="boxing" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Boxing
+                                </label>
+                            </div>
 
-                    <div class="form-group mb-4">
-                        <label for="equipments">Select the equipments your gym has.</label>
-                        <select multiple="multiple_equipments" class="form-control" id="gymEquipments" name="equipments[]">
-                            <option>Rowing machine</option>
-                            <option>Elliptic machines</option>
-                            <option>Exercise bikes</option>
-                            <option>Treadmills</option>
-                            <option>Treadmills</option>
-                            <option>Stair climbers</option>
-                            <option>Cable machines</option>
-                            <option>Selectorized machines</option>
-                            <option>Stability balls</option>
-                            <option>Resistance bands</option>
-                            <option>Boxing equipment</option>
-                            <option>Pilotes Reformers</option>
-                            <option>Weights</option>
-                        </select>
-                        <small class="text-muted form-text mt-2">Press command or control when clicking to select multiple items</small>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="spin classes" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Spin Classes
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="martial arts" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Martial Arts
+                                </label>
+                            </div>
+                        </div>
+                        <div id="column2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="strength training" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Strength Training
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="stretching/flexibility classes" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Stretching/Flexibility Classes
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="boot camp" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Boot Camp
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="dance classes" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Dance Classes
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="zumba" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Zumba
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="sports performance" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Sports Performance
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="crossfit" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Crossfit
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="classes[]" value="karate" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Karate
+                                </label>
+                            </div>
+                        </div>
                     </div>
+                </fieldset>
 
-                    <div class="form-group mb-4">
-                        <label for="amenities">Select Amenities your gym offers</label>
-                        <select multiple="multiple_amenities" class="form-control" id="gymAmenities" name="amenities[]">
-                            <option>Locker rooms</option>
-                            <option>Parking</option>
-                            <option>Showers</option>
-                            <option>Personal trainer</option>
-                            <option>Steam room</option>
-                            <option>Sauna</option>
-                            <option>Laundry Service</option>
-                            <option>Child care</option>
-                            <option>Massage</option>
-                            <option>Spa services</option>
-                            <option>Air conditioning</option>
-                            <option>Towels</option>
-                        </select>
+                    <fieldset class="form-group">
+                    <label class="mt-4 ">Amenities in the gym</label>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div id="column1">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]" value="parking space" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                Parking Space
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]" value="sauna and masseuse" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                Sauna and Masseuse
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]" value="gym canteen" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Gym Canteen
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]" value="showers and locker rooms" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Showers and Locker Rooms
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]" value="treadmills" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Treadmills
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]" value="rowing machines" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Rowing Machines
+                                </label>
+                            </div>
+                        </div>
+                        <div id="column2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]" value="air conditioning" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Air Conditioning
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]" value="ellipticals" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Ellipticals
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]" value="stationary bikes" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Stationary Bikes
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]" value="stair masters" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Stair Masters
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]" value="weights" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Weights
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]" value="cardio equipments" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Cardio Equipments
+                                </label>
+                            </div>
+                        </div>
                     </div>
+                </fieldset>
 
+                   
                     <div class="form-group mb-4">
                         <label for="open">Opening Hours</label>
                         <input type="text" name="open" id="openedAt" class="form-control" placeholder="Opened At">
