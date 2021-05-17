@@ -56,6 +56,10 @@ include "../includes/dbh.inc.php";
                                         <a href="viewSchedule.php" class="nav-link">Schedules</a>
                                     </li>
 
+                                    <li class="nav-item">
+                                        <a href="send_email.php" class="nav-link">Send Email</a>
+                                    </li>
+
                                 </ul>
                                 <form class="form-inline my-2 my-lg-0" action="../includes/employeeLogout.inc.php" method="post">
 

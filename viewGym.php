@@ -20,16 +20,16 @@ date_default_timezone_set('Africa/Nairobi');
             </div>
             <div class='gym-section mb-4'>
                 <div id='slideshow-section' data-component='slideshow'>
-                    <div role='list'>
-                        <div class='slide'>
-                            <img src='images/dark-gym.jpg' />
-                        </div>
-                        <div class='slide'>
-                            <img src='images/dummy.jpg' />
-                        </div>
-                        <div class='slide'>
-                            <img src='images/mountain-climbers.jpg' />
-                        </div>
+                    <div role='list'>";
+                    $sql = "SELECT * FROM gym_images WHERE gym_id='$id'";
+                    $sequel = $DBconnection->query($sql);
+                    while($image = $sequel->fetch_assoc()) {
+                        echo "<div class='slide'>
+                            <img src='uploads/employer/".$image['image']."' />
+                        </div>";
+                    }
+                    echo "
+                        
                     </div>
                 </div>
                 <div class='gym-features-section'>
@@ -42,7 +42,7 @@ date_default_timezone_set('Africa/Nairobi');
             $amenitiesArr = unserialize(base64_decode($gym['amenities']));
             foreach ($amenitiesArr as $key => $item) {
                 echo "
-                                        <li class='list-group-item'>" . $item . "<button type='button' class='btn btn-sm btn-primary float-right' data-bs-toggle='popover' title='Popover title' data-bs-content='And heres some amazing content. Its very engaging. Right?'>View</button></li>";
+                    <li class='list-group-item'>" . $item . "<button type='button' class='btn btn-sm btn-primary float-right' data-bs-toggle='popover' title='Popover title' data-bs-content='And heres some amazing content. Its very engaging. Right?'>View</button></li>";
             }
             echo "</ul>";
             // END OF UNORDERED LIST
@@ -171,25 +171,6 @@ date_default_timezone_set('Africa/Nairobi');
             </div>
         </div>
     </div>
-
-    <script>
-        const slideshows = document.querySelectorAll("[data-component='slideshow']");
-        slideshows.forEach(initSlideShow);
-
-        function initSlideShow(slideshow) {
-            const slides = document.querySelectorAll(`#${slideshow.id} [role="list"] .slide`);
-            let index = 0,
-                time = 5000;
-            slides[index].classList.add("active");
-
-            setInterval(() => {
-                slides[index].classList.remove("active");
-                index++;
-                if (index === slides.length) index = 0;
-                slides[index].classList.add("active");
-            }, time);
-        }
-    </script>
 
     <script>
         const openBtn = document.querySelector(".open-modal");

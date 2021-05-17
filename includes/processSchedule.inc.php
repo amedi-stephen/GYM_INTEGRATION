@@ -35,7 +35,7 @@ function getCapacityEmployee($DBconnection)
 {
     $sql = "SELECT * FROM gyms";
     $result = $DBconnection->query($sql) or die("Error occured");
-    echo "<div class='container d-flex justify-content-around flex-wrap p-2 bg-light mt-4 mb-4'>";
+    echo "<div class='container d-flex justify-content-between flex-wrap p-2 bg-light mt-4 mb-4'>";
     if($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             $gymSession = $_SESSION['gymID'];
@@ -45,7 +45,7 @@ function getCapacityEmployee($DBconnection)
                     $sequel = $DBconnection->query($query);
                     if($sequel->num_rows > 0) {
                         while($record = $sequel->fetch_assoc()) {
-                            echo "<div class='card'>
+                            echo "<div class='card mb-4' style='width: 30rem;'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>".$record['title']."</h5>
                                     <h6>".$record['from_date']." - ".$record['to_date']."</h6>
