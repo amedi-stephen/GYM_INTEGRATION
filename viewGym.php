@@ -24,25 +24,31 @@ date_default_timezone_set('Africa/Nairobi');
                     $sql = "SELECT * FROM gym_images WHERE gym_id='$id'";
                     $sequel = $DBconnection->query($sql);
                     while($image = $sequel->fetch_assoc()) {
-                        echo "<div class='slide'>
-                            <img src='uploads/employer/".$image['image']."' />
-                        </div>";
+                      
                     }
                     echo "
-                        
+                        <div class='slide'>
+                        <img src='https://source.unsplash.com/featured/?{fitness},{gym}' />
+                        </div>
+                        <div class='slide'>
+                            <img src='https://source.unsplash.com/featured/?{gym},{equipments}' />
+                        </div>
+                        <div class='slide'>
+                            <img src='https://source.unsplash.com/featured/?{gym},{equipments}' />
+                        </div>
                     </div>
                 </div>
                 <div class='gym-features-section'>
                     <div class='gym-features'>
                         <h2 class='text-center text-capitalize' style='margin: 20px 0;'>gym features</h2>
-                        <div class='cards-row d-flex flex-wrap justify-content-between'>
-                            <ul class='list-group mb-4' style='width: 20rem;'>
+                        <div class='cards-row d-flex flex-wrap justify-content-center'>
+                            <ul class='list-group mb-4 mr-4' style='width: 20rem;'>
                             <h2 class='badge-light text-center p-2'>Amenities</h2>";
 
             $amenitiesArr = unserialize(base64_decode($gym['amenities']));
             foreach ($amenitiesArr as $key => $item) {
                 echo "
-                    <li class='list-group-item'>" . $item . "<button type='button' class='btn btn-sm btn-primary float-right' data-bs-toggle='popover' title='Popover title' data-bs-content='And heres some amazing content. Its very engaging. Right?'>View</button></li>";
+                                        <li class='list-group-item'>" . $item . "<button type='button' class='btn btn-sm btn-primary float-right' data-bs-toggle='popover' title='Popover title' data-bs-content='And heres some amazing content. Its very engaging. Right?'>View</button></li>";
             }
             echo "</ul>";
             // END OF UNORDERED LIST
@@ -54,13 +60,6 @@ date_default_timezone_set('Africa/Nairobi');
             }
             echo "</ul>";
             // END OF UNORDERED LIST
-            echo "<ul class='list-group mb-4' style='width: 20rem'>
-                                    <h2 class='badge-light text-center p-2'>Equipments</h2>";
-            $equipArr = unserialize(base64_decode($gym['equipments']));
-            foreach ($equipArr as $key => $equip) {
-                echo "<li class='list-group-item'>" . $equip . "<button type='button' class='btn btn-sm btn-primary float-right' data-bs-toggle='popover' title='Popover title' data-bs-content='And heres some amazing content. Its very engaging. Right?'>View</button></li>";
-            }
-            echo "</ul>";
             // END OF UNORDERED LIST
             echo "
                         </div>
@@ -119,6 +118,11 @@ date_default_timezone_set('Africa/Nairobi');
                         </div>";
                                 }
                             }
+                        } else {
+                            echo "
+                            <button type='button' class='btn btn-sm btn-primary float-right disabled' data-bs-toggle='popover' title='Popover title' data-bs-content='You must login first to register'>Become a member</button>
+                            <button type='button' class='btn btn-sm btn-primary float-right' title='You must log in first'>Become a member</button>
+                            ";
                         }
                         ?>
                     </div>
@@ -171,6 +175,25 @@ date_default_timezone_set('Africa/Nairobi');
             </div>
         </div>
     </div>
+
+    <script>
+        const slideshows = document.querySelectorAll("[data-component='slideshow']");
+        slideshows.forEach(initSlideShow);
+
+        function initSlideShow(slideshow) {
+            const slides = document.querySelectorAll(`#${slideshow.id} [role="list"] .slide`);
+            let index = 0,
+                time = 5000;
+            slides[index].classList.add("active");
+
+            setInterval(() => {
+                slides[index].classList.remove("active");
+                index++;
+                if (index === slides.length) index = 0;
+                slides[index].classList.add("active");
+            }, time);
+        }
+    </script>
 
     <script>
         const openBtn = document.querySelector(".open-modal");

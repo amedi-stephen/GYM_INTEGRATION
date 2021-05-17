@@ -11,7 +11,7 @@
     <title>Employee</title>
 </head>
 
-<body>
+<body class="withBG">
 
 
     <?php
@@ -249,6 +249,14 @@
                     <div class="form-group mb-4">
                         <label for="open">Opening Hours</label>
                         <input type="text" name="open" id="openedAt" class="form-control" placeholder="Opened At">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="per_month">Price (month)</label>
+                        <input type="text" name="per_month" id="openedAt" class="form-control" placeholder="Price per month">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="per_session">Price (daily)</label>
+                        <input type="text" name="per_session" id="openedAt" class="form-control" placeholder="Price per session">
                     </div>
                     <div class="form-group mb-4">
                         <label for="close">Closing Hours</label>

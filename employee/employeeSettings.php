@@ -12,7 +12,7 @@ include "navigation.php";
         <div class="container border-left ml-4">
             <h2 class="mb-4">Profile Visibility</h2>
             <p>Your Gym Navigator profile represents your brand.</p>
-            <form action="includes/upload.inc.php" method="post" enctype="multipart/form-data">
+            <form action="../includes/employeedp.inc.php" method="post" enctype="multipart/form-data">
                 <div class="d-flex align-items-center align-content-center">
                     <div class="gym-profile">
                         <?php

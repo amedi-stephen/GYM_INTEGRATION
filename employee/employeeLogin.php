@@ -11,7 +11,7 @@
     <title>Employee</title>
 </head>
 
-<body>
+<body class="withBG">
 
     <?php
         require "navigation.php";
@@ -30,8 +30,8 @@
     <div class="card-body">
         <form action="../includes/employeeLogin.inc.php" method="post">
             <div class="form-group">
-                <label for="mail">Username</label>
-                <input type="text" name="mail" class="form-control" placeholder="Company Email">
+                <label for="mail">Gym Center Email</label>
+                <input type="text" name="mail" class="form-control" placeholder="gymcenter@gmail.com">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>

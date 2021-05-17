@@ -1,8 +1,17 @@
 <?php
 require "navbar.php";
 ?>
+<body class="withBG">
+<div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+            <li class="breadcrumb-item"><a href="login.php">Login</a></li>
 
-<div class="container mt-4 d-flex justify-content-center align-items-center">
+            <li class="breadcrumb-item active">Sign up</li>
+        </ol>
+        
+    </div>
+<div class="container d-flex justify-content-center align-items-center">
 
     <div class="card mb-4" style="width: 30rem">
         <div class="card-header">
@@ -264,4 +273,6 @@ require "navbar.php";
     </div>
 </div>
 
+
 <script src="js/app.js"></script>
+</body>

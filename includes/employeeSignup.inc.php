@@ -12,9 +12,10 @@ if (isset($_POST["submit_signup"])) {
     $address = $DBconnection->real_escape_string($_POST["address"]);
     $town = $DBconnection->real_escape_string($_POST["town"]);
     $classes = $DBconnection->real_escape_string(base64_encode(serialize($_POST["classes"])));
-    $equipments = $DBconnection->real_escape_string(base64_encode(serialize($_POST["equipments"])));
     $amenities = $DBconnection->real_escape_string(base64_encode(serialize($_POST["amenities"])));
     $openedAt = $DBconnection->real_escape_string($_POST["open"]);
+    $perMonth = $DBconnection->real_escape_string($_POST['per_month']);
+    $perSession = $DBconnection->real_escape_string($_POST['per_session']);
     $closedAt = $DBconnection->real_escape_string($_POST["close"]);
     $maxCapacity = $DBconnection->real_escape_string($_POST["max_capacity"]);
 
@@ -35,8 +36,8 @@ if (isset($_POST["submit_signup"])) {
             exit();
         } else {
             $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-            $query = "INSERT INTO gyms(gym_email, gym_password, gym_name, phone, address, town, classes, equipments, amenities, opened_at, closed_at, full_capacity) 
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            $query = "INSERT INTO gyms(gym_email, gym_password, gym_name, phone, address, town, classes, amenities, opened_at, closed_at, full_capacity, price_per_month, price_per_session) 
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $result = $DBconnection->query($query);
 
             $stmt = $DBconnection->stmt_init();
@@ -45,7 +46,7 @@ if (isset($_POST["submit_signup"])) {
                 exit();
             } else {
                 $encryptedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-                $stmt->bind_param("ssssssssssss", $mail, $encryptedPwd, $company, $phone, $address, $town, $classes, $equipments, $amenities, $openedAt, $closedAt, $maxCapacity);
+                $stmt->bind_param("sssssssssssss", $mail, $encryptedPwd, $company, $phone, $address, $town, $classes, $amenities, $openedAt, $closedAt, $maxCapacity, $perMonth, $perSession);
                 $stmt->execute();
                 $stmt->close();
 

@@ -81,7 +81,7 @@ include "includes/dbh.inc.php";
                             <a class='nav-link btn btn-link' href='login.php'>Log In</a>
                         </li>
                         <li class='nav-item'>
-                            <a class='nav-link btn btn-link' href='employee/employeeLogin.php'>Employer Benefit</a>
+                            <a class='nav-link btn btn-link' href='employee/employeeLogin.php'>Gym Center</a>
                         </li>
                     </ul>
                 </div>

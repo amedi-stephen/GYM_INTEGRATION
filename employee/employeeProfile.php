@@ -44,14 +44,8 @@ include "navigation.php";
                                         ";
                                     }
 
-                                    echo "
-                                    <p>Gym's Classes</p>";
-                                    $equipmentsArr = unserialize(base64_decode($row['equipments']));
-                                    foreach ($equipmentsArr as $key => $equip) {
-                                        echo "<ul class='list-group mb-4'>
-                                            <li class='list-group-item'>".$equip."</li>
-                                        </ul>";
-                                    }
+                                    
+                                    
                                     echo "
                                 </form>
                             
