@@ -107,3 +107,16 @@ function reserveResource($DBconnection)
         echo "<p class='text-success'>Form submitted</p>";
     }
 }
+
+function reserveMembership($DBconnection) {
+    if(isset($_POST['submit_registration_now'])) {
+        $uid = $DBconnection->real_escape_string($_POST['uid']);
+        $uName = $DBconnection->real_escape_string($_POST['uname']);
+        $email = $DBconnection->real_escape_string($_POST['email']);
+        $payPattern = $DBconnection->real_escape_string($_POST['pay_pattern']);
+
+        if(empty($payPattern)) {
+            echo "Fill in pay pattern";
+        }
+    }
+}

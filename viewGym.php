@@ -136,23 +136,28 @@ date_default_timezone_set('Africa/Nairobi');
                                         <div class='modal-container'>
                                             <button class='close-btn btn btn-sm btn-danger float-right'><i class='fa fa-times'></i></button>
                                             <h3 class='text-center'>Payment Details</h3>
-                                            <form>
+                                            <form action='".reserveMembership($DBconnection)."' method='POST'>
+                                                <input type='hidden' name='uid' value='".$row['user_id']."' />
                                                 <div class='form-group'>
-                                                    <label htmlFor='user_name'>Username</label>
-                                                    <input type='text' name='user_name' value='".$row['user_name']."' class='form-control' />
+                                                    <label htmlFor='uid'>Username</label>
+                                                    <input type='text' name='uname' value='".$row['user_name']."' class='form-control' />
                                                 </div>
                                                 <div class='form-group'>
-                                                    <label htmlFor='user_name'>Email</label>
+                                                    <label htmlFor='email'>Email</label>
                                                     <input type='text' name='email' value='".$row['user_email']."' class='form-control' />
                                                 </div>
                                                 <div class='form-group'>
                                                     <label htmlFor='pay_pattern'>Choose Payment Period</label>
                                                     <select class='form-control' name='pay_pattern'>
+                                                        <option value=''>Select option</option>
                                                         <option value='per month'>Per Month</option>
                                                         <option value='per session/day'>Per Session/day</option>
                                                     </select>
                                                 </div>
-                                                <button type='submit' class='btn btn-primary'>Pay</button>
+                                                <div class='button-group'>
+                                                <button type='submit' name='submit_registration_now' class='btn btn-primary'>Pay Now</button>
+                                                <button type='submit' name='submit_registration_later' class='btn btn-primary'>Pay Later</button>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
