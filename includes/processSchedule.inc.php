@@ -41,7 +41,7 @@ function getCapacityEmployee($DBconnection)
             $gymSession = $_SESSION['gymID'];
             if(isset($_SESSION['gymID'])) {
                 if($_SESSION['gymID'] == $row['gym_id']) {
-                    $query = "SELECT * FROM capacity_schedule ";
+                    $query = "SELECT * FROM capacity_schedule WHERE gym_id='$gymSession'";
                     $sequel = $DBconnection->query($query);
                     if($sequel->num_rows > 0) {
                         while($record = $sequel->fetch_assoc()) {
@@ -157,10 +157,17 @@ function reserveMembership($DBconnection) {
         $uid = $DBconnection->real_escape_string($_POST['uid']);
         $uName = $DBconnection->real_escape_string($_POST['uname']);
         $email = $DBconnection->real_escape_string($_POST['email']);
-        $payPattern = $DBconnection->real_escape_string($_POST['pay_pattern']);
+        $cap_id = $DBconnection->real_escape_string($_POST['cap_id']);
+        $gym_id = $DBconnection->real_escape_string($_POST['gym_id']);
+        $gym_price = $_POST['gym_price'];
+        
+        //$gym_price =  $DBconnection->real_escape_string($_POST['gym_price']);
+        //$payPattern = $DBconnection->real_escape_string($_POST['pay_pattern']);
 
-        if(empty($payPattern)) {
-            echo "Fill in pay pattern";
-        }
-    }
+        echo $gym_price;
+
+        $sql = "INSERT INTO `capacity_members`(`capacity_members_id`, `gym_id`, `capacity_id`, `user_id`, `username`, `amount_paid`, `date`, `email`) VALUES ('', '$gym_id' , '$cap_id' ,'$uid', '$uName', '$gym_price' ,'','$email')";
+        // $sql = "INSERT INTO capacity_members(gym_id, capacity_id, user_id, username, amount_paid, email) VALUES ('$gym_id' , '$cap_id' ,'$uid', '$uName','$email')";
+        $outcome = $DBconnection->query($sql);        
+}
 }

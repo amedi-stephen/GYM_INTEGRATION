@@ -21,12 +21,11 @@ date_default_timezone_set('Africa/Nairobi');
             <div class='gym-section mb-4'>
                 <div id='slideshow-section' data-component='slideshow'>
                     <div role='list'>";
-                    $sql = "SELECT * FROM gym_images WHERE gym_id='$id'";
-                    $sequel = $DBconnection->query($sql);
-                    while($image = $sequel->fetch_assoc()) {
-                      
-                    }
-                    echo "
+            $sql = "SELECT * FROM gym_images WHERE gym_id='$id'";
+            $sequel = $DBconnection->query($sql);
+            while ($image = $sequel->fetch_assoc()) {
+            }
+            echo "
                         <div class='slide'>
                         <img src='https://source.unsplash.com/featured/?{fitness},{gym}' />
                         </div>
@@ -71,8 +70,8 @@ date_default_timezone_set('Africa/Nairobi');
     <div class='gym-features-section'>
         <div class="gym-sessions">
             <h2 class="text-center text-capitalize" style="margin: 20px 0;">gym sessions</h2>
-            <div class="cards-row d-flex flex-wrap justify-content-center align-items-stretch">
-                <div class='card mr-4' style='width: 18rem;'>
+            <div class="cards-row">
+                <div class='card mr-4'>
                     <div class='card-header'>
                         <h4 class='card-title text-primary'>Sessions</h4>
                         <div class='card-subtitle mt-2'>
@@ -80,97 +79,127 @@ date_default_timezone_set('Africa/Nairobi');
                         </div>
                     </div>
                     <div class='card-body'>
-                        <?php
-                        if (isset($_GET["id"])) {
-                            $id = $DBconnection->real_escape_string($_GET['id']);
-                            $query = "SELECT * FROM gyms WHERE gym_id='$id'";
-                            $result = $DBconnection->query($query);
-                            while ($row = $result->fetch_assoc()) {
-                                $gymPage = $_GET['id'];
-                                $gymid = $row['gym_id'];
-                                if ($gymid == $gymPage) {
-                                    $query = "SELECT * FROM capacity_schedule WHERE gym_id = '$gymPage'";
-                                    $sequel = $DBconnection->query($query);
-                                    while ($record = $sequel->fetch_assoc()) {
-                                        echo "<ul class='list-group mb-2'>
-                                            <li class='list-group-item'>" . $record["title"] . " - " . $record["repeat_date"] . "</li>";
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Start date</th>
+                                    <th scope="col">End date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (isset($_GET["id"])) {
+                                    $id = $DBconnection->real_escape_string($_GET['id']);
+                                    $query = "SELECT * FROM gyms WHERE gym_id='$id'";
+                                    $result = $DBconnection->query($query);
+                                    while ($row = $result->fetch_assoc()) {
+                                        $gymPage = $_GET['id'];
+                                        $gymid = $row['gym_id'];
+                                        if ($gymid == $gymPage) {
+                                            $query = "SELECT * FROM capacity_schedule WHERE gym_id = '$gymPage'";
+                                            $sequel = $DBconnection->query($query);
+                                            while ($record = $sequel->fetch_assoc()) {
+                                                echo "<ul class='list-group mb-2'>
+                                                        <li class='list-group-item'>" . $record["title"] . " - " . $record["repeat_date"] . "</li>";
+
+                                                            echo '
+                                                    
+                                                    <tr>
+                                
+                                                        <td> ' . $record["title"] . '</td>
+                                                        <td> ' . $record["price"] . '</td>
+                                                        <td> ' . $record["description"] . '</td>
+                                                        <td> ' . $record["from_date"] . '</td>
+                                                        <td> ' . $record["to_date"] . '</td>
+                                                        <td> <button class="btn btn-primary btn-sm open-modal">Book</button></td>
+                                                        
+                                                    </tr>
+                                
+                                       
+                                                            ';
+                                                                }
+                                                                echo "</ul>
+                                                    <p class='text-muted'>ksh.200 per session for non-members</p>
+                                                </div>
+                                            </div>
+                                            ";
+
+                                            
+                                        }
                                     }
-                                    echo "</ul>
-                                <p class='text-muted'>ksh.200 per session for non-members</p>
-                            </div>
-                        </div>
-                        ";
-                                    // START OF ANOTHER CARD
-                                    echo "<div class='card' style='width: 18rem;'>
-                            <div class='card-header'>
-                                <h4 class='card-title text-primary'>Pricing</h4>
-                                <div class='card-subtitle mt-2'>
-                                    Gym Prices
-                                </div>
-                            </div>
-                            <div class='card-body'>
-                                <p>You have an option of paying on a daily basis i.e per session. Or skip the stress and pay per month</p>
-                                <p>Per Month: ksh 2000</p>
-                                <p>Per Session: ksh 200</p>
-                                <p class='text-muted'></p>
-                                <button class='btn btn-primary float-right open-modal'>Become a Member <i class='fa fa-caret-right'></i></button>
-                            </div>
-                        </div>";
-                                }
-                            }
-                        } else {
-                            echo "
+                                } else {
+                                    echo "
                             <button type='button' class='btn btn-sm btn-primary float-right disabled' data-bs-toggle='popover' title='Popover title' data-bs-content='You must login first to register'>Become a member</button>
                             <button type='button' class='btn btn-sm btn-primary float-right' title='You must log in first'>Become a member</button>
                             ";
-                        }
-                        ?>
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
                 <?php
-                    if(isset($_GET['id'])) {
-                        $query = "SELECT * FROM users";
-                        $result = $DBconnection->query($query);
-                        if($result->num_rows > 0) {
-                            while($row = $result->fetch_assoc()) {
-                                if(isset($_SESSION['userID'])) {
-                                    if( $_SESSION["userID"] == $row['user_id']) {
-                                        echo "<div class='modal-overlay'>
-                                        <div class='modal-container'>
-                                            <button class='close-btn btn btn-sm btn-danger float-right'><i class='fa fa-times'></i></button>
-                                            <h3 class='text-center'>Payment Details</h3>
-                                            <form action='".reserveMembership($DBconnection)."' method='POST'>
-                                                <input type='hidden' name='uid' value='".$row['user_id']."' />
-                                                <div class='form-group'>
-                                                    <label htmlFor='uid'>Username</label>
-                                                    <input type='text' name='uname' value='".$row['user_name']."' class='form-control' />
+                if (isset($_GET['id'])) {
+                    $query = "SELECT * FROM users";
+                    $result = $DBconnection->query($query);
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            if (isset($_SESSION['userID'])) {
+                                if ($_SESSION["userID"] == $row['user_id']) {
+
+
+                                    $id = $DBconnection->real_escape_string($_GET['id']);
+                                    $query = "SELECT * FROM gyms WHERE gym_id='$id'";
+                                    $result = $DBconnection->query($query);
+                                    while ($row_gym = $result->fetch_assoc()) {
+                                        $gymPage = $_GET['id'];
+                                        $gymid = $row_gym['gym_id'];
+                                        if ($gymid == $gymPage) {
+                                            $query = "SELECT * FROM capacity_schedule WHERE gym_id = '$gymPage'";
+                                            $sequel = $DBconnection->query($query);
+                                            while ($record = $sequel->fetch_assoc()) {
+
+                                                echo "<div class='modal-overlay'>
+                                                    <div class='modal-container'>
+                                                        <button class='close-btn btn btn-sm btn-danger float-right'><i class='fa fa-times'></i></button>
+                                                        <h3 class='text-center'>Payment Details</h3>
+                                                        <h1>" .$gymid . "</h1>
+                                                        <form action='" . reserveMembership($DBconnection) . "' method='POST'>
+                                                            <input type='hidden' name='uid' value='" . $row['user_id'] . "' />
+                                                            <input type='hidden' name='cap_id' value='" . $record["capacity_id"] . "' />
+                                                            <input type='hidden' name='gym_id' value='" . $gymid . "' />
+                                                            <div class='form-group'>
+                                                                <label htmlFor='uid'>Username</label>
+                                                                <input type='text' name='uname' value='" . $row["user_name"] . "' class='form-control' />
+                                                            </div>
+                                                            <div class='form-group'>
+                                                                <label htmlFor='uid'>Price</label>
+                                                                <input type='text' name='gym_price' value='" . $record["price"] . "' class='form-control' />
+                                                            </div>
+                                                            <div class='form-group'>
+                                                                <label htmlFor='email'>Email</label>
+                                                                <input type='text' name='email' value='" . $row['user_email'] . "' class='form-control' />
+                                                            </div>
+                                                            <div class='button-group'>
+                                                            <button type='submit' name='submit_registration_now' class='btn btn-primary'>Pay Now</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                                <div class='form-group'>
-                                                    <label htmlFor='email'>Email</label>
-                                                    <input type='text' name='email' value='".$row['user_email']."' class='form-control' />
-                                                </div>
-                                                <div class='form-group'>
-                                                    <label htmlFor='pay_pattern'>Choose Payment Period</label>
-                                                    <select class='form-control' name='pay_pattern'>
-                                                        <option value=''>Select option</option>
-                                                        <option value='per month'>Per Month</option>
-                                                        <option value='per session/day'>Per Session/day</option>
-                                                    </select>
-                                                </div>
-                                                <div class='button-group'>
-                                                <button type='submit' name='submit_registration_now' class='btn btn-primary'>Pay Now</button>
-                                                <button type='submit' name='submit_registration_later' class='btn btn-primary'>Pay Later</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                        ";
-                                    } 
+                                                    ";
+                                            }
+                                        }
+                                    }
+                                    
                                 }
                             }
                         }
                     }
+                }
                 ?>
             </div>
         </div>
@@ -206,7 +235,7 @@ date_default_timezone_set('Africa/Nairobi');
         function openModal() {
             modalOverlay.classList.add("open-modal");
         }
-        
+
         function closeModal() {
             modalOverlay.classList.remove("open-modal");
         }

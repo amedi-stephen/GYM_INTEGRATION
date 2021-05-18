@@ -15,29 +15,27 @@ include '../includes/processSchedule.inc.php';
             if (isset($_SESSION['gymID'])) {
                 if ($_SESSION['gymID'] == $row['gym_id']) {
                     //fetch capacity id
-                    while ($cap = $res_session->fetch_assoc()) {
-                        // echo '<pre>';
-                        //    var_dump($cap['capacity_id']);
-                        // echo '</pre>';
-                        if ($cap['capacity_id'] == $sessPage) {
-                            echo '<pre>';
-                                var_dump($cap);
-                            echo '</pre>';
-                        }
+                   
+                    // while ($cap = $res_session->fetch_assoc()) {
+                    //    if($cap = $res_session->fetch_assoc()){
+                    //        echo '<pre>';
+                    //         var_dump($cap);
+                    //        echo '</pre>';
+                    //    }
+
                         
-                    }
-                    
+                    // }
                     
                     $query = "SELECT * FROM capacity_schedule WHERE capacity_id = '$sessPage'";
                     $sequel = $DBconnection->query($query) or die("Error occurred: " . $DBconnection->error);
-                     
+                    
                     while ($record = $sequel->fetch_assoc()) {
                         $sqlMembers = "SELECT * FROM capacity_members WHERE gym_id = '$gymid'";
                         $resultMembers = $DBconnection->query($sqlMembers) or die("Error occurred: " . $DBconnection->error);
                         $resultRows = $resultMembers->num_rows;
                         if ($member = $resultMembers->fetch_assoc()) {
                             echo "<div class='card mb-4 mt-4'>
-                            <div class='card-header'>
+                            <div class='card-header' style='background-color:blue'>
                                 <h5 clas='card-title'>" . $record['title'] . "</h5>
                                 <h6 class='text-muted'>" . $record['price'] . "</h6>
                             </div>
@@ -51,9 +49,6 @@ include '../includes/processSchedule.inc.php';
                         }
                     }
                     // $capacityID = $row['capacity_members_id'];
-
-
-
                 }
             } else {
                 echo "You are not logged in";
