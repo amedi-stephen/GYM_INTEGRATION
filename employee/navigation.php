@@ -53,7 +53,7 @@ include "../includes/dbh.inc.php";
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="viewSchedule.php" class="nav-link">Schedules</a>
+                                        <a href="capacity.php" class="nav-link">Schedules</a>
                                     </li>
 
                                     <li class="nav-item">

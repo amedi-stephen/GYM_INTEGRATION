@@ -12,8 +12,8 @@ include '../includes/processSchedule.inc.php';
             <li class='list-group-item'><a href="viewSchedule.php">view your schedules</a></li>
         </ul>
         <div class="container border-left ml-4">
-            <h2 class="mb-4">Capacity Scheduling</h2>
-            <p>You define ‘slots’ on the schedule that can hold multiple bookings. This schedule is intended for group events such as classes. For example, clients can choose a class and sign up until it’s full.</p>
+            <h2 class="mb-4">Create Sessions</h2>
+            <p>Create sessions for your gym that your customers can view them and book via online.</p>
             <?php
             echo "<form action='" . setCapacity($DBconnection) . "' method='post' style='width: 35rem; margin-bottom: 30px;'>
                 <div class='form-group mb-4'>
@@ -42,7 +42,7 @@ include '../includes/processSchedule.inc.php';
                 <label for='repeat'><strong>Repeat</strong></label>
                 <select name='repeat' class='form-control'>
                     <option value='daily'>Daily</option>
-                    <option value='weekly'>Weekly</option>
+                    <option value='weekends'>Weekend</option>
                     <option value='monthly'>Monthly</option>
                 </select>
             </div>
