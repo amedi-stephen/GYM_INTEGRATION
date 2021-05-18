@@ -34,6 +34,15 @@ include '../includes/processSchedule.inc.php';
             </div>
 
             <div class='form-group mb-4'>
+                <label for='period'>Period</label>
+                <select name='period' class='form-control'>
+                    <option value='morning session'>Morning Session</option>
+                    <option value='mid-day session'>Mid-day Session</option>
+                    <option value='evening session'>Evening Session</option>
+                </select>
+            </div>
+
+            <div class='form-group mb-4'>
                 <label for='description'>Description</label>
                 <textarea name='description' class='form-control' rows='3' style='resize: none'></textarea>
             </div>

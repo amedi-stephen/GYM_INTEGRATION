@@ -12,15 +12,23 @@ function setCapacity($DBconnection)
         $repeat = $DBconnection->real_escape_string($_POST['repeat']);
         $capacity = $DBconnection->real_escape_string($_POST['capacity']);
         $instructor = $DBconnection->real_escape_string($_POST['instructor']);
+        $period = $DBconnection->real_escape_string($_POST['period']);
 
         $sql = "SELECT * FROM gyms";
         $result = $DBconnection->query($sql);
         while ($row = $result->fetch_assoc()) {
             $gymSession = $_SESSION['gymID'];
+            if($period == "morning session") {
+                $period = 1;
+            } else if($period == "mid-day session") {
+                $period = 2;
+            } else if($period == "evening session") {
+                $period = 3;
+            }
             if (isset($gymSession)) {
                 if ($gymSession == $row['gym_id']) {
-                    $insert = "INSERT INTO capacity_schedule(gym_id, title, from_date, to_date, price, description, repeat_date, max_pple, appointer)
-                        VALUES('$gymSession', '$title', '$capacityFrom', '$capacityTo', '$price', '$description', '$repeat', '$capacity', '$instructor')";
+                    $insert = "INSERT INTO capacity_schedule(gym_id, title, from_date, to_date, price, description, repeat_date, max_pple, appointer, period)
+                        VALUES('$gymSession', '$title', '$capacityFrom', '$capacityTo', '$price', '$description', '$repeat', '$capacity', '$instructor', $period)";
                     $DBconnection->query($insert);
 
                     header("Location: ../employee/viewSchedule.php");
@@ -48,7 +56,8 @@ function getCapacityEmployee($DBconnection)
                             if($record['period'] === "1") {
                                 echo "<div class='card mb-4' style='width: 30rem;'>
                                     <div class='card-body'>
-                                        <h5 class='card-title'> morning session</h5>
+                                        <h5 class='card-title'> ".$record['title']."</h5>
+                                        <p class='text-muted'>Morning sessions</p>
                                         <h6>".$record['from_date']." - ".$record['to_date']."</h6>
                                         <small class='text-primary'>".$record['price']."</small>
                                         <hr>
@@ -67,7 +76,8 @@ function getCapacityEmployee($DBconnection)
                             if($record['period'] === "2") {
                                 echo "<div class='card mb-4' style='width: 30rem;'>
                                     <div class='card-body'>
-                                        <h5 class='card-title'> Mid session</h5>
+                                        <h5 class='card-title'> ".$record['title']."</h5>
+                                        <p class='text-muted'>Mid Sessions</p>
                                         <h6>".$record['from_date']." - ".$record['to_date']."</h6>
                                         <small class='text-primary'>".$record['price']."</small>
                                         <hr>
@@ -86,7 +96,8 @@ function getCapacityEmployee($DBconnection)
                             if($record['period'] === "3") {
                                 echo "<div class='card mb-4' style='width: 30rem;'>
                                     <div class='card-body'>
-                                        <h5 class='card-title'> Evening session</h5>
+                                    <h5 class='card-title'> ".$record['title']."</h5>
+                                    <p class='text-muted'>Evening Sessions</p>
                                         <h6>".$record['from_date']." - ".$record['to_date']."</h6>
                                         <small class='text-primary'>".$record['price']."</small>
                                         <hr>
