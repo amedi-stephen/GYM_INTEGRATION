@@ -102,8 +102,7 @@ date_default_timezone_set('Africa/Nairobi');
                                             $query = "SELECT * FROM capacity_schedule WHERE gym_id = '$gymPage'";
                                             $sequel = $DBconnection->query($query);
                                             while ($record = $sequel->fetch_assoc()) {
-                                                echo "<ul class='list-group mb-2'>
-                                                        <li class='list-group-item'>" . $record["title"] . " - " . $record["repeat_date"] . "</li>";
+                                               
 
                                                             echo '
                                                     
@@ -122,7 +121,7 @@ date_default_timezone_set('Africa/Nairobi');
                                                             ';
                                                                 }
                                                                 echo "</ul>
-                                                    <p class='text-muted'>ksh.200 per session for non-members</p>
+                                                   
                                                 </div>
                                             </div>
                                             ";

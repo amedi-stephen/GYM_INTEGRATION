@@ -1,6 +1,6 @@
 <?php
-include 'navigation.php';
-include '../includes/processSchedule.inc.php';
+    include 'navigation.php';
+    include '../includes/processSchedule.inc.php';
 ?>
 
 <div class="container">
@@ -25,35 +25,35 @@ include '../includes/processSchedule.inc.php';
 
                         
                     // }
+                    echo '<table class="table">
+                    <thead>
+                      <tr>
+                        
+                        <th scope="col">Username</th>
+                        <th scope="col">email</th>
+                        <th scope="col">Amount Paid</th>
+                      </tr>
+                    </thead>
+                    <tbody>';
                     
                     $query = "SELECT * FROM capacity_schedule";
                     $sequel = $DBconnection->query($query) or die("Error occurred: " . $DBconnection->error);
                     $record = $sequel->fetch_assoc();
-                
-                    echo '<span>'.$sessPage.'</span>';
-                    echo '<span>'.$gymid.'</span>';
+            
                     $sqlMembers = "SELECT * FROM capacity_members WHERE gym_id = '$gymid' AND capacity_id = '$sessPage' ";
                     $resultMembers = $DBconnection->query($sqlMembers) or die("Error occurred: " . $DBconnection->error);
                     $resultRows = $resultMembers->num_rows;
                     
                     while($my_res =  $resultMembers->fetch_assoc()){
-                        echo "<div class='card mb-4 mt-4'>
-
-                            <div class='card-header flex' style='background-color:blue;color:white;'>
-                                <h5 clas='card-title'>" . $my_res['username'] . "</h5>
-                            </div>
-                            <div class='card-body'>
-                            <h6 style='color:white'>" . $my_res['amount_paid'] . "</h6>
-                                <p>" . $my_res['email'] . "</p>
-
-                                <p> total " . $resultRows . "</p>
-                                <p> total session id " . $sessPage . "</p>
-                                <p> total " . $record['capacity_id'] . "</p>
-
-                            </div>
-
-                        
-                        </div>";
+                        echo '
+                          <tr>
+                            <td>'. $my_res['username'] .'</td>
+                            <td>'. $my_res['email'] .'</td>
+                            <td>'. $my_res['amount_paid'] .'</td>
+                          </tr>'
+                         
+                       ;
+                       
                     }
                     
                    
@@ -110,6 +110,8 @@ include '../includes/processSchedule.inc.php';
                     //     }
                     // }
                     // $capacityID = $row['capacity_members_id'];
+                    echo ' </tbody>
+                    </table>';
                 }
             } else {
                 echo "You are not logged in";
