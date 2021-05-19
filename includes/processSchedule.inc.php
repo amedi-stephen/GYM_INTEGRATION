@@ -49,7 +49,7 @@ function getCapacityEmployee($DBconnection)
             $gymSession = $_SESSION['gymID'];
             if(isset($_SESSION['gymID'])) {
                 if($_SESSION['gymID'] == $row['gym_id']) {
-                    $query = "SELECT * FROM capacity_schedule";
+                    $query = "SELECT * FROM capacity_schedule WHERE gym_id='$gymSession'";
                     $sequel = $DBconnection->query($query);
                     if($sequel->num_rows > 0) {
                         while($record = $sequel->fetch_assoc()) {

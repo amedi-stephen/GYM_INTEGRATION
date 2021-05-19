@@ -14,17 +14,7 @@
         while ($row = $result->fetch_assoc()) {
             if (isset($_SESSION['gymID'])) {
                 if ($_SESSION['gymID'] == $row['gym_id']) {
-                    //fetch capacity id
-                   
-                    // while ($cap = $res_session->fetch_assoc()) {
-                    //    if($cap = $res_session->fetch_assoc()){
-                    //        echo '<pre>';
-                    //         var_dump($cap);
-                    //        echo '</pre>';
-                    //    }
-
-                        
-                    // }
+                    
                     echo '<table class="table">
                     <thead>
                       <tr>
