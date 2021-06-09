@@ -30,6 +30,31 @@
             </div>
 
             <div class="card-body">
+                <?php
+                    if(isset($_GET['error'])) {
+                        if($_GET['error'] == 'emptyfields'){
+                            echo '<div class="alert alert-dismissible alert-danger">
+                            <strong>Please fill all the fields</strong>
+                          </div>';
+                        } else if($_GET['error'] == 'invalidemail') {
+                            echo '<div class="alert alert-dismissible alert-danger">
+                            <strong>Invalid Email!</strong>
+                          </div>';
+                        } else if($_GET['error'] == 'gymtaken') {
+                            echo '<div class="alert alert-dismissible alert-danger">
+                            <strong>Gym name already taken!</strong>
+                          </div>';
+                        } else if($_GET['error'] == 'checkpassword') {
+                            echo '<div class="alert alert-dismissible alert-danger">
+                            <strong>Passwords do not match!</strong>
+                          </div>';
+                        } else if($_GET['error'] == 'userexists') {
+                            echo '<div class="alert alert-dismissible alert-danger">
+                            <strong>User already exists!</strong>
+                          </div>';
+                        }
+                    }
+                ?>
                 <form action="../includes/employeeSignup.inc.php" method="post">
                     <div class="form-group mb-4">
                         <label for="name">Gym Email</label>

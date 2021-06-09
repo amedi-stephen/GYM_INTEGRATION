@@ -102,8 +102,6 @@ date_default_timezone_set('Africa/Nairobi');
                                             $query = "SELECT * FROM capacity_schedule WHERE gym_id = '$gymPage'";
                                             $sequel = $DBconnection->query($query);
                                             while ($record = $sequel->fetch_assoc()) {
-                                               
-
                                                             echo '
                                                     
                                                     <tr>
@@ -113,15 +111,12 @@ date_default_timezone_set('Africa/Nairobi');
                                                         <td> ' . $record["description"] . '</td>
                                                         <td> ' . $record["from_date"] . '</td>
                                                         <td> ' . $record["to_date"] . '</td>
-                                                        <td> <button class="btn btn-primary btn-sm open-modal">Book</button></td>
+                                                        <td> <button type="button" class="btn btn-primary btn-sm open-modal">Book</button></td>
                                                         
                                                     </tr>
-                                
-                                       
                                                             ';
                                                                 }
-                                                                echo "</ul>
-                                                   
+                                                                echo "
                                                 </div>
                                             </div>
                                             ";
@@ -129,11 +124,6 @@ date_default_timezone_set('Africa/Nairobi');
                                             
                                         }
                                     }
-                                } else {
-                                    echo "
-                            <button type='button' class='btn btn-sm btn-primary float-right disabled' data-bs-toggle='popover' title='Popover title' data-bs-content='You must login first to register'>Become a member</button>
-                            <button type='button' class='btn btn-sm btn-primary float-right' title='You must log in first'>Become a member</button>
-                            ";
                                 }
                                 ?>
                             </tbody>

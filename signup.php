@@ -22,6 +22,35 @@ require "navbar.php";
             <p class="text-muted">Create your Gym Navigator profile and get first access to the very best of our services, inspiration and community.</p>
         </div>
         <div class="card-body">
+            <?php
+                if(isset($_GET['error'])) {
+                    if($_GET['error'] == 'emptyfields'){
+                        echo '<div class="alert alert-dismissible alert-danger">
+                        <strong>Please fill all the fields</strong>
+                      </div>';
+                    } else if($_GET['error'] == 'invalidusername') {
+                        echo '<div class="alert alert-dismissible alert-danger">
+                        <strong>Invalid Username. Choose another name</strong>
+                      </div>';
+                    } else if($_GET['error'] == 'invalidemail') {
+                        echo '<div class="alert alert-dismissible alert-danger">
+                        <strong>Invalid Email. Choose another email</strong>
+                      </div>';
+                    } else if($_GET['error'] == 'invalidpassword'){
+                        echo '<div class="alert alert-dismissible alert-danger">
+                        <strong>Invalid Password. Use the rules written below the password field</strong>
+                      </div>';
+                    } else if($_GET['error'] == 'checkpassword') {
+                        echo '<div class="alert alert-dismissible alert-danger">
+                        <strong>Passwords do not match!</strong>
+                      </div>';
+                    } else if($_GET['error'] == 'userexists') {
+                        echo '<div class="alert alert-dismissible alert-danger">
+                        <strong>User already exists!</strong>
+                      </div>';
+                    }
+                }
+            ?>
             <form action="includes/signup.inc.php" method="post" id="formSignup">
                 <div class="form-group">
                     <label for="username">Username</label>
